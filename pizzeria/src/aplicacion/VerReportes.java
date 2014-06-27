@@ -15,6 +15,10 @@ public class VerReportes extends javax.swing.JPanel {
      */
     public VerReportes() {
         initComponents();
+        bgFiltros.add(jrbPorDia);
+        bgFiltros.add(jrbPorSemana);
+        bgFiltros.add(jrbPorMes);
+        bgFiltros.add(jrbPorAño);
     }
 
     /**
@@ -26,28 +30,95 @@ public class VerReportes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgFiltros = new javax.swing.ButtonGroup();
+        tituloReportes = new javax.swing.JLabel();
+        jrbPorDia = new javax.swing.JRadioButton();
+        jrbPorSemana = new javax.swing.JRadioButton();
+        jrbPorMes = new javax.swing.JRadioButton();
+        jrbPorAño = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
-        jLabel1.setText("VER REPORTES");
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        tituloReportes.setBackground(new java.awt.Color(51, 51, 255));
+        tituloReportes.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
+        tituloReportes.setForeground(new java.awt.Color(204, 255, 204));
+        tituloReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloReportes.setText("Reportes de Ventas");
+        tituloReportes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        tituloReportes.setOpaque(true);
+
+        jrbPorDia.setBackground(new java.awt.Color(255, 255, 255));
+        jrbPorDia.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
+        jrbPorDia.setActionCommand("porDia");
+        jrbPorDia.setLabel("Por día");
+
+        jrbPorSemana.setBackground(new java.awt.Color(255, 255, 255));
+        jrbPorSemana.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
+        jrbPorSemana.setText("Por semana");
+
+        jrbPorMes.setBackground(new java.awt.Color(255, 255, 255));
+        jrbPorMes.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
+        jrbPorMes.setText("Por mes");
+
+        jrbPorAño.setBackground(new java.awt.Color(255, 255, 255));
+        jrbPorAño.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
+        jrbPorAño.setText("Por Año");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/grafCirculo.jpg"))); // NOI18N
+        jLabel1.setToolTipText("");
+
+        jLabel2.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        jLabel2.setText("Selecciona el periodo que deseas consultar.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jrbPorAño)
+                    .addComponent(jrbPorMes)
+                    .addComponent(jrbPorSemana)
+                    .addComponent(jrbPorDia)
+                    .addComponent(jLabel2))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(111, 111, 111))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jrbPorDia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jrbPorSemana)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jrbPorMes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jrbPorAño))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel1)))
+                .addContainerGap(634, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgFiltros;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JRadioButton jrbPorAño;
+    private javax.swing.JRadioButton jrbPorDia;
+    private javax.swing.JRadioButton jrbPorMes;
+    private javax.swing.JRadioButton jrbPorSemana;
+    private javax.swing.JLabel tituloReportes;
     // End of variables declaration//GEN-END:variables
 }
