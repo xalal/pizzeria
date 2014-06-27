@@ -4,17 +4,30 @@
  */
 package aplicacion;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author Maria
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    Inicio ini = new Inicio();
+    ModificarSistema mods = new ModificarSistema();
+    TomarPedido tped = new TomarPedido();
+    VerClientes vcli = new VerClientes();
+    VerReportes vrep = new VerReportes();
+    
     public Principal() {
         initComponents();
+        jLayeredPane1.add(ini, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.add(mods, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.add(tped, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.add(vcli, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.add(vrep, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+       
     }
 
     /**
@@ -29,12 +42,13 @@ public class Principal extends javax.swing.JFrame {
         buttonPopup4 = new org.edisoncor.gui.button.ButtonPopup();
         jcMousePanel1 = new jcMousePanel.jcMousePanel();
         jcMousePanel2 = new jcMousePanel.jcMousePanel();
-        buttonPopup1 = new org.edisoncor.gui.button.ButtonPopup();
-        buttonPopup2 = new org.edisoncor.gui.button.ButtonPopup();
-        buttonPopup3 = new org.edisoncor.gui.button.ButtonPopup();
-        buttonPopup5 = new org.edisoncor.gui.button.ButtonPopup();
-        buttonPopup6 = new org.edisoncor.gui.button.ButtonPopup();
+        BtnCliente = new org.edisoncor.gui.button.ButtonPopup();
+        BtnReporte = new org.edisoncor.gui.button.ButtonPopup();
+        BtnPedido = new org.edisoncor.gui.button.ButtonPopup();
+        BtnInicio = new org.edisoncor.gui.button.ButtonPopup();
+        BtnSistema = new org.edisoncor.gui.button.ButtonPopup();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLabel1 = new javax.swing.JLabel();
 
         buttonPopup4.setText("buttonPopup1");
 
@@ -46,22 +60,48 @@ public class Principal extends javax.swing.JFrame {
 
         jcMousePanel2.setModo(2);
 
-        buttonPopup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Man_Icon_64.png"))); // NOI18N
-        buttonPopup1.setText("CLIENTE");
-        buttonPopup1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        buttonPopup2.setText("REPORTE");
-
-        buttonPopup3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Edit_Male_User_Icon_64 (2).png"))); // NOI18N
-        buttonPopup3.setText("PEDIDO");
-        buttonPopup3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        buttonPopup5.setText("INICIO");
-
-        buttonPopup6.setText("SISTEMA");
-        buttonPopup6.addActionListener(new java.awt.event.ActionListener() {
+        BtnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Man_Icon_64.png"))); // NOI18N
+        BtnCliente.setText("CLIENTE");
+        BtnCliente.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPopup6ActionPerformed(evt);
+                BtnClienteActionPerformed(evt);
+            }
+        });
+
+        BtnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Column_chart_Icon_64.png"))); // NOI18N
+        BtnReporte.setText("REPORTE");
+        BtnReporte.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReporteActionPerformed(evt);
+            }
+        });
+
+        BtnPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Edit_Male_User_Icon_64 (2).png"))); // NOI18N
+        BtnPedido.setText("PEDIDO");
+        BtnPedido.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPedidoActionPerformed(evt);
+            }
+        });
+
+        BtnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/User_Files_Icon_64.png"))); // NOI18N
+        BtnInicio.setText("INICIO");
+        BtnInicio.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnInicioActionPerformed(evt);
+            }
+        });
+
+        BtnSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Woody_user_Icon_64.png"))); // NOI18N
+        BtnSistema.setText("SISTEMA");
+        BtnSistema.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSistemaActionPerformed(evt);
             }
         });
 
@@ -72,49 +112,57 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jcMousePanel2Layout.createSequentialGroup()
                 .addContainerGap(89, Short.MAX_VALUE)
                 .addGroup(jcMousePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonPopup6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPopup5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPopup3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPopup2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPopup1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75))
+                    .addComponent(BtnSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61))
         );
         jcMousePanel2Layout.setVerticalGroup(
             jcMousePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jcMousePanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(buttonPopup5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(BtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonPopup3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonPopup1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(buttonPopup2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(buttonPopup6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(BtnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/images.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jcMousePanel1Layout = new javax.swing.GroupLayout(jcMousePanel1);
         jcMousePanel1.setLayout(jcMousePanel1Layout);
         jcMousePanel1Layout.setHorizontalGroup(
             jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jcMousePanel1Layout.createSequentialGroup()
+            .addGroup(jcMousePanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jcMousePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jcMousePanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1064, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
         jcMousePanel1Layout.setVerticalGroup(
             jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jcMousePanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane1)
-                    .addComponent(jcMousePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jcMousePanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jcMousePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLayeredPane1))
                 .addContainerGap())
         );
 
@@ -132,9 +180,54 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonPopup6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPopup6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonPopup6ActionPerformed
+    private void BtnSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSistemaActionPerformed
+        ini.setVisible(false);
+        mods.setVisible(true);
+        tped.setVisible(false);
+        vcli.setVisible(false);
+        vrep.setVisible(false);
+        mods.setBounds(10, 10, 860, 610);
+        
+    }//GEN-LAST:event_BtnSistemaActionPerformed
+
+    private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
+        ini.setVisible(true);
+        mods.setVisible(false);
+        tped.setVisible(false);
+        vcli.setVisible(false);
+        vrep.setVisible(false);
+       ini.setBounds(10, 10, 860, 610);
+    }//GEN-LAST:event_BtnInicioActionPerformed
+
+    private void BtnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPedidoActionPerformed
+        ini.setVisible(false);
+        mods.setVisible(false);
+        tped.setVisible(true);
+        vcli.setVisible(false);
+        vrep.setVisible(false);
+        tped.setBounds(10, 10, 860, 610);
+        
+    }//GEN-LAST:event_BtnPedidoActionPerformed
+
+    private void BtnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClienteActionPerformed
+        ini.setVisible(false);
+        mods.setVisible(false);
+        tped.setVisible(false);
+        vcli.setVisible(true);
+        vrep.setVisible(false);
+        vcli.setBounds(10, 10, 860, 610);
+        
+    }//GEN-LAST:event_BtnClienteActionPerformed
+
+    private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
+        ini.setVisible(false);
+        mods.setVisible(false);
+        tped.setVisible(false);
+        vcli.setVisible(false);
+        vrep.setVisible(true);
+       vrep.setBounds(10, 10, 860, 610);
+        
+    }//GEN-LAST:event_BtnReporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,12 +264,13 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.button.ButtonPopup buttonPopup1;
-    private org.edisoncor.gui.button.ButtonPopup buttonPopup2;
-    private org.edisoncor.gui.button.ButtonPopup buttonPopup3;
+    private org.edisoncor.gui.button.ButtonPopup BtnCliente;
+    private org.edisoncor.gui.button.ButtonPopup BtnInicio;
+    private org.edisoncor.gui.button.ButtonPopup BtnPedido;
+    private org.edisoncor.gui.button.ButtonPopup BtnReporte;
+    private org.edisoncor.gui.button.ButtonPopup BtnSistema;
     private org.edisoncor.gui.button.ButtonPopup buttonPopup4;
-    private org.edisoncor.gui.button.ButtonPopup buttonPopup5;
-    private org.edisoncor.gui.button.ButtonPopup buttonPopup6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private jcMousePanel.jcMousePanel jcMousePanel1;
     private jcMousePanel.jcMousePanel jcMousePanel2;
