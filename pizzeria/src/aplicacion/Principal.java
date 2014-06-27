@@ -177,7 +177,7 @@ public class Principal extends javax.swing.JFrame {
         tped.setVisible(false);
         vcli.setVisible(false);
         vrep.setVisible(false);
-        mods.setBounds(10, 10, 860, 610);
+        mods.setBounds(10, 10, 860, 545);
         
     }//GEN-LAST:event_BtnSistemaActionPerformed
 
@@ -187,7 +187,7 @@ public class Principal extends javax.swing.JFrame {
         tped.setVisible(false);
         vcli.setVisible(false);
         vrep.setVisible(false);
-       ini.setBounds(10, 10, 860, 610);
+       ini.setBounds(10, 10, 860, 545);
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPedidoActionPerformed
@@ -196,7 +196,7 @@ public class Principal extends javax.swing.JFrame {
         tped.setVisible(true);
         vcli.setVisible(false);
         vrep.setVisible(false);
-        tped.setBounds(10, 10, 860, 610);
+        tped.setBounds(10, 10, 860, 545);
         
     }//GEN-LAST:event_BtnPedidoActionPerformed
 
@@ -206,7 +206,7 @@ public class Principal extends javax.swing.JFrame {
         tped.setVisible(false);
         vcli.setVisible(true);
         vrep.setVisible(false);
-        vcli.setBounds(10, 10, 860, 610);
+        vcli.setBounds(10, 10, 860, 545);
         
     }//GEN-LAST:event_BtnClienteActionPerformed
 
@@ -216,7 +216,7 @@ public class Principal extends javax.swing.JFrame {
         tped.setVisible(false);
         vcli.setVisible(false);
         vrep.setVisible(true);
-       vrep.setBounds(10, 10, 860, 610);
+       vrep.setBounds(10, 10, 860, 545);
         
     }//GEN-LAST:event_BtnReporteActionPerformed
 
