@@ -28,6 +28,7 @@ public class EjemploGIT extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         button1 = new java.awt.Button();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -66,7 +67,7 @@ public class EjemploGIT extends javax.swing.JFrame {
                         .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(173, 173, 173))))
+                        .addGap(265, 265, 265))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,11 +79,17 @@ public class EjemploGIT extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jCheckBox1)))
+<<<<<<< HEAD
+                .addGap(55, 55, 55)
+=======
                 .addGap(88, 88, 88)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+>>>>>>> origin/master
                 .addComponent(jButton2)
-                .addGap(46, 46, 46))
+                .addGap(10, 10, 10)
+                .addComponent(jButton1)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,6 +136,7 @@ public class EjemploGIT extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button button1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
