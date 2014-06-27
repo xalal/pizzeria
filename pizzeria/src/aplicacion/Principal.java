@@ -1,15 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package aplicacion;
 
-import java.awt.BorderLayout;
-
-/**
- *
- * @author Maria
- */
 public class Principal extends javax.swing.JFrame {
 
     Inicio ini = new Inicio();
