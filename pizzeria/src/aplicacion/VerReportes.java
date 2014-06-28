@@ -1,7 +1,12 @@
 
 package aplicacion;
 
+import java.awt.FlowLayout;
 import java.util.Calendar;
+import javax.swing.JFrame;
+import org.jfree.chart.*;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -12,10 +17,12 @@ public class VerReportes extends javax.swing.JPanel {
     /**
      * Creates new form VerReportes
      */
+    JFreeChart grafica;
+    DefaultCategoryDataset datos= new DefaultCategoryDataset();
+    
     public VerReportes() {
         initComponents();
         initComponentsByUser();
-        
     }
     private void initComponentsByUser(){
         bgFiltros.add(jrbPorDia);
@@ -35,7 +42,23 @@ public class VerReportes extends javax.swing.JPanel {
         jspNumeroSemana.setMaximum(cal.getActualMaximum(Calendar.WEEK_OF_MONTH));
     }
     private void graficar(){
-        System.out.println("Listo para graficar "+bgFiltros.getSelection().getActionCommand() );
+        datos.addValue(1, "Negocio 1", "Lunes");
+        datos.addValue(2, "Negocio 1", "Martes");
+        datos.addValue(3, "Negocio 1", "Miercoles");
+        datos.addValue(1, "Negocio 1", "Jueves");
+        datos.addValue(5, "Negocio 1", "Viernes");
+        datos.addValue(6, "Negocio 1", "Sabado");
+        datos.addValue(1, "Negocio 1", "Domingo");
+        grafica=ChartFactory.createBarChart("Vista Ejemplo", "dias", "visitas", datos, PlotOrientation.VERTICAL,true,true,false );
+        ChartPanel panelAux=new ChartPanel(grafica);
+        jPanelDatosGraf.removeAll();
+        jPanelDatosGraf.setLayout(new FlowLayout(FlowLayout.TRAILING));
+        jPanelDatosGraf.add(panelAux);
+//        JFrame fram=new JFrame("Grafica");
+//        fram.getContentPane().add(panelAux);
+//        fram.pack();
+//        fram.setVisible(true);
+//        fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -427,11 +450,4 @@ public class VerReportes extends javax.swing.JPanel {
     private javax.swing.JLabel lblTituloPedidos;
     private javax.swing.JLabel tituloReportes;
     // End of variables declaration//GEN-END:variables
-    private final int enero=1;
-    private final int febrero=2;
-    private final int marzo=5;
-    private final int abril=7;
-    private final int mayo=2;
-    private final int junio=12;
-    private final int julio=7;
 }
