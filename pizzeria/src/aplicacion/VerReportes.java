@@ -1,6 +1,7 @@
 
 package aplicacion;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.Calendar;
 import javax.swing.JFrame;
@@ -52,8 +53,15 @@ public class VerReportes extends javax.swing.JPanel {
         grafica=ChartFactory.createBarChart("Vista Ejemplo", "dias", "visitas", datos, PlotOrientation.VERTICAL,true,true,false );
         ChartPanel panelAux=new ChartPanel(grafica);
         jPanelDatosGraf.removeAll();
-        jPanelDatosGraf.setLayout(new FlowLayout(FlowLayout.TRAILING));
-        jPanelDatosGraf.add(panelAux);
+        //jPanelDatosGraf.setLayout(new FlowLayout(FlowLayout.TRAILING));
+        //jPanelDatosGraf.add(panelAux);
+        
+        //solo aqui metiendo mi cucharota jejeje solo remplaze las lineas de abjajo por las de arriba  
+        
+        jPanelDatosGraf.add(panelAux,BorderLayout.CENTER);
+        jPanelDatosGraf.validate();
+        
+        
 //        JFrame fram=new JFrame("Grafica");
 //        fram.getContentPane().add(panelAux);
 //        fram.pack();
@@ -230,17 +238,7 @@ public class VerReportes extends javax.swing.JPanel {
 
         jPanelDatosGraf.setBackground(new java.awt.Color(255, 255, 255));
         jPanelDatosGraf.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        javax.swing.GroupLayout jPanelDatosGrafLayout = new javax.swing.GroupLayout(jPanelDatosGraf);
-        jPanelDatosGraf.setLayout(jPanelDatosGrafLayout);
-        jPanelDatosGrafLayout.setHorizontalGroup(
-            jPanelDatosGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanelDatosGrafLayout.setVerticalGroup(
-            jPanelDatosGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jPanelDatosGraf.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanelGraficasLayout = new javax.swing.GroupLayout(jPanelGraficas);
         jPanelGraficas.setLayout(jPanelGraficasLayout);
