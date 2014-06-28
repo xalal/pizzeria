@@ -25,56 +25,64 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Component id="lblImagen" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="lblImagen" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jrbPorDia" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jrbPorMes" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jrbPorAño" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jrbPorSemana" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jdcElegirDia" alignment="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jycElegirAñoSemana" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jmcElegirMesSemana" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jspNumeroSemana" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jrbPorDia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrbPorMes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrbPorAño" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrbPorSemana" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="jycElegirAñoMes" min="-2" pref="92" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jmcElegirMes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jdcElegirDia" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jycElegirAñoSemana" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jmcElegirMesSemana" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jspNumeroSemana" min="-2" pref="39" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jycElegirAñoMes" min="-2" pref="92" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jmcElegirMes" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jycElegirAño" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jycElegirAño" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="lblSubtitulo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="tituloReportes" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="tituloReportes" min="-2" pref="491" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="lblSubtitulo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="107" max="32767" attributes="0"/>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <Component id="tituloReportes" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="lblImagen" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="tituloReportes" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="lblSubtitulo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -109,7 +117,9 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="271" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="190" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -161,6 +171,7 @@
           <Font name="Book Antiqua" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Por semana"/>
+        <Property name="actionCommand" type="java.lang.String" value="porSemana"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbPorSemanaActionPerformed"/>
@@ -175,6 +186,7 @@
           <Font name="Book Antiqua" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Por mes"/>
+        <Property name="actionCommand" type="java.lang.String" value="porMes"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbPorMesActionPerformed"/>
@@ -189,6 +201,7 @@
           <Font name="Book Antiqua" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Por A&#xf1;o"/>
+        <Property name="actionCommand" type="java.lang.String" value="porAnio"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbPorA&#xf1;oActionPerformed"/>
@@ -216,16 +229,25 @@
           <Connection code="new java.util.Date()" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdcElegirDiaPropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JMonthChooser" name="jmcElegirMes">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jmcElegirMesPropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JYearChooser" name="jycElegirA&#xf1;o">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jycElegirA&#xf1;oPropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JYearChooser" name="jycElegirA&#xf1;oSemana">
       <Properties>
@@ -239,6 +261,9 @@
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jmcElegirMesSemanaPropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.components.JSpinField" name="jspNumeroSemana">
       <Properties>
@@ -247,10 +272,21 @@
         <Property name="minimum" type="int" value="1"/>
         <Property name="value" type="int" value="1"/>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jspNumeroSemanaPropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JYearChooser" name="jycElegirA&#xf1;oMes">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jycElegirA&#xf1;oMesPropertyChange"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
     </Component>
   </SubComponents>

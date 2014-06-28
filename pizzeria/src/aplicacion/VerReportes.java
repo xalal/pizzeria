@@ -22,14 +22,20 @@ public class VerReportes extends javax.swing.JPanel {
         bgFiltros.add(jrbPorSemana);
         bgFiltros.add(jrbPorMes);
         bgFiltros.add(jrbPorAño);
-        setWeekofMonth();
+        setWeeksofMonth();
     }
-    void setWeekofMonth(){
+    private void setWeeksofMonth(){
         java.util.Calendar cal= java.util.Calendar.getInstance();
         cal.set(Calendar.YEAR, jycElegirAñoSemana.getYear());
         cal.set(Calendar.MONTH, jmcElegirMesSemana.getMonth());
         cal.set(Calendar.DAY_OF_MONTH,1);
+        if(jspNumeroSemana.getValue() > cal.getActualMaximum(Calendar.WEEK_OF_MONTH)){
+            jspNumeroSemana.setValue(cal.getActualMaximum(Calendar.WEEK_OF_MONTH));
+        }
         jspNumeroSemana.setMaximum(cal.getActualMaximum(Calendar.WEEK_OF_MONTH));
+    }
+    private void graficar(){
+        jLabel1.setText("Listo para graficar "+bgFiltros.getSelection().getActionCommand() );
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,6 +61,7 @@ public class VerReportes extends javax.swing.JPanel {
         jmcElegirMesSemana = new com.toedter.calendar.JMonthChooser();
         jspNumeroSemana = new com.toedter.components.JSpinField();
         jycElegirAñoMes = new com.toedter.calendar.JYearChooser();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -80,6 +87,7 @@ public class VerReportes extends javax.swing.JPanel {
         jrbPorSemana.setBackground(new java.awt.Color(255, 255, 255));
         jrbPorSemana.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
         jrbPorSemana.setText("Por semana");
+        jrbPorSemana.setActionCommand("porSemana");
         jrbPorSemana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbPorSemanaActionPerformed(evt);
@@ -89,6 +97,7 @@ public class VerReportes extends javax.swing.JPanel {
         jrbPorMes.setBackground(new java.awt.Color(255, 255, 255));
         jrbPorMes.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
         jrbPorMes.setText("Por mes");
+        jrbPorMes.setActionCommand("porMes");
         jrbPorMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbPorMesActionPerformed(evt);
@@ -98,6 +107,7 @@ public class VerReportes extends javax.swing.JPanel {
         jrbPorAño.setBackground(new java.awt.Color(255, 255, 255));
         jrbPorAño.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
         jrbPorAño.setText("Por Año");
+        jrbPorAño.setActionCommand("porAnio");
         jrbPorAño.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbPorAñoActionPerformed(evt);
@@ -111,10 +121,25 @@ public class VerReportes extends javax.swing.JPanel {
         lblSubtitulo.setText("Selecciona el periodo que deseas consultar.");
 
         jdcElegirDia.setDate(new java.util.Date());
+        jdcElegirDia.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcElegirDiaPropertyChange(evt);
+            }
+        });
 
         jmcElegirMes.setEnabled(false);
+        jmcElegirMes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jmcElegirMesPropertyChange(evt);
+            }
+        });
 
         jycElegirAño.setEnabled(false);
+        jycElegirAño.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jycElegirAñoPropertyChange(evt);
+            }
+        });
 
         jycElegirAñoSemana.setEnabled(false);
         jycElegirAñoSemana.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -124,58 +149,80 @@ public class VerReportes extends javax.swing.JPanel {
         });
 
         jmcElegirMesSemana.setEnabled(false);
+        jmcElegirMesSemana.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jmcElegirMesSemanaPropertyChange(evt);
+            }
+        });
 
         jspNumeroSemana.setEnabled(false);
         jspNumeroSemana.setMaximum(10);
         jspNumeroSemana.setMinimum(1);
         jspNumeroSemana.setValue(1);
+        jspNumeroSemana.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jspNumeroSemanaPropertyChange(evt);
+            }
+        });
 
         jycElegirAñoMes.setEnabled(false);
+        jycElegirAñoMes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jycElegirAñoMesPropertyChange(evt);
+            }
+        });
+
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(lblImagen)
-                .addGap(68, 68, 68)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(lblImagen)
+                        .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jrbPorDia)
-                            .addComponent(jrbPorMes)
-                            .addComponent(jrbPorAño)
-                            .addComponent(jrbPorSemana))
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jdcElegirDia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jycElegirAño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jrbPorDia)
+                                    .addComponent(jrbPorMes)
+                                    .addComponent(jrbPorAño)
+                                    .addComponent(jrbPorSemana))
+                                .addGap(137, 137, 137)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jdcElegirDia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jycElegirAño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(lblSubtitulo))
+                            .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblSubtitulo)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel1)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblImagen)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
                         .addComponent(lblSubtitulo)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -201,7 +248,9 @@ public class VerReportes extends javax.swing.JPanel {
                                         .addGap(2, 2, 2)))
                                 .addComponent(jrbPorAño))
                             .addComponent(jycElegirAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(jLabel1)
+                .addContainerGap(190, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -252,11 +301,44 @@ public class VerReportes extends javax.swing.JPanel {
 
     private void jycElegirAñoSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoSemanaPropertyChange
         // TODO add your handling code here:
-        setWeekofMonth();
+        setWeeksofMonth();
+        graficar();
     }//GEN-LAST:event_jycElegirAñoSemanaPropertyChange
+
+    private void jmcElegirMesSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesSemanaPropertyChange
+        // TODO add your handling code here:
+        setWeeksofMonth();
+        graficar();
+    }//GEN-LAST:event_jmcElegirMesSemanaPropertyChange
+
+    private void jdcElegirDiaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcElegirDiaPropertyChange
+        // TODO add your handling code here:
+        graficar();
+    }//GEN-LAST:event_jdcElegirDiaPropertyChange
+
+    private void jspNumeroSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jspNumeroSemanaPropertyChange
+        // TODO add your handling code here:
+        graficar();
+    }//GEN-LAST:event_jspNumeroSemanaPropertyChange
+
+    private void jycElegirAñoMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoMesPropertyChange
+        // TODO add your handling code here:
+        graficar();
+    }//GEN-LAST:event_jycElegirAñoMesPropertyChange
+
+    private void jmcElegirMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesPropertyChange
+        // TODO add your handling code here:
+        graficar();
+    }//GEN-LAST:event_jmcElegirMesPropertyChange
+
+    private void jycElegirAñoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoPropertyChange
+        // TODO add your handling code here:
+        graficar();
+    }//GEN-LAST:event_jycElegirAñoPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgFiltros;
+    private javax.swing.JLabel jLabel1;
     private com.toedter.calendar.JDateChooser jdcElegirDia;
     private com.toedter.calendar.JMonthChooser jmcElegirMes;
     private com.toedter.calendar.JMonthChooser jmcElegirMesSemana;
