@@ -1,8 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package aplicacion;
+
+import java.util.Calendar;
 
 /**
  *
@@ -15,12 +14,23 @@ public class VerReportes extends javax.swing.JPanel {
      */
     public VerReportes() {
         initComponents();
+        initComponentsByUser();
+        
+    }
+    private void initComponentsByUser(){
         bgFiltros.add(jrbPorDia);
         bgFiltros.add(jrbPorSemana);
         bgFiltros.add(jrbPorMes);
         bgFiltros.add(jrbPorAño);
+        setWeekofMonth();
     }
-
+    void setWeekofMonth(){
+        java.util.Calendar cal= java.util.Calendar.getInstance();
+        cal.set(Calendar.YEAR, jycElegirAñoSemana.getYear());
+        cal.set(Calendar.MONTH, jmcElegirMesSemana.getMonth());
+        cal.set(Calendar.DAY_OF_MONTH,1);
+        jspNumeroSemana.setMaximum(cal.getActualMaximum(Calendar.WEEK_OF_MONTH));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +54,7 @@ public class VerReportes extends javax.swing.JPanel {
         jycElegirAñoSemana = new com.toedter.calendar.JYearChooser();
         jmcElegirMesSemana = new com.toedter.calendar.JMonthChooser();
         jspNumeroSemana = new com.toedter.components.JSpinField();
+        jycElegirAñoMes = new com.toedter.calendar.JYearChooser();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -99,27 +110,37 @@ public class VerReportes extends javax.swing.JPanel {
         lblSubtitulo.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
         lblSubtitulo.setText("Selecciona el periodo que deseas consultar.");
 
+        jdcElegirDia.setDate(new java.util.Date());
+
         jmcElegirMes.setEnabled(false);
 
         jycElegirAño.setEnabled(false);
 
         jycElegirAñoSemana.setEnabled(false);
+        jycElegirAñoSemana.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jycElegirAñoSemanaPropertyChange(evt);
+            }
+        });
 
         jmcElegirMesSemana.setEnabled(false);
 
         jspNumeroSemana.setEnabled(false);
+        jspNumeroSemana.setMaximum(10);
+        jspNumeroSemana.setMinimum(1);
+        jspNumeroSemana.setValue(1);
+
+        jycElegirAñoMes.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(59, 59, 59)
                 .addComponent(lblImagen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSubtitulo)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jrbPorDia)
@@ -127,25 +148,34 @@ public class VerReportes extends javax.swing.JPanel {
                             .addComponent(jrbPorAño)
                             .addComponent(jrbPorSemana))
                         .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jdcElegirDia, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(jycElegirAño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jdcElegirDia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jycElegirAño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblSubtitulo)))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblImagen)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addComponent(lblSubtitulo)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -165,14 +195,13 @@ public class VerReportes extends javax.swing.JPanel {
                                             .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(2, 2, 2)))
                                 .addComponent(jrbPorAño))
-                            .addComponent(jycElegirAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(lblImagen)))
-                .addContainerGap(634, Short.MAX_VALUE))
+                            .addComponent(jycElegirAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,6 +212,7 @@ public class VerReportes extends javax.swing.JPanel {
         jmcElegirMesSemana.setEnabled(true);
         jspNumeroSemana.setEnabled(true);
         jmcElegirMes.setEnabled(false);
+        jycElegirAñoMes.setEnabled(false);
         jycElegirAño.setEnabled(false);
         
     }//GEN-LAST:event_jrbPorSemanaActionPerformed
@@ -194,6 +224,7 @@ public class VerReportes extends javax.swing.JPanel {
         jmcElegirMesSemana.setEnabled(false);
         jspNumeroSemana.setEnabled(false);
         jmcElegirMes.setEnabled(false);
+        jycElegirAñoMes.setEnabled(false);
         jycElegirAño.setEnabled(false);
     }//GEN-LAST:event_jrbPorDiaActionPerformed
 
@@ -204,6 +235,7 @@ public class VerReportes extends javax.swing.JPanel {
         jmcElegirMesSemana.setEnabled(false);
         jspNumeroSemana.setEnabled(false);
         jmcElegirMes.setEnabled(true);
+        jycElegirAñoMes.setEnabled(true);
         jycElegirAño.setEnabled(false);
     }//GEN-LAST:event_jrbPorMesActionPerformed
 
@@ -214,8 +246,14 @@ public class VerReportes extends javax.swing.JPanel {
         jmcElegirMesSemana.setEnabled(false);
         jspNumeroSemana.setEnabled(false);
         jmcElegirMes.setEnabled(false);
+        jycElegirAñoMes.setEnabled(false);
         jycElegirAño.setEnabled(true);
     }//GEN-LAST:event_jrbPorAñoActionPerformed
+
+    private void jycElegirAñoSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoSemanaPropertyChange
+        // TODO add your handling code here:
+        setWeekofMonth();
+    }//GEN-LAST:event_jycElegirAñoSemanaPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgFiltros;
@@ -228,6 +266,7 @@ public class VerReportes extends javax.swing.JPanel {
     private javax.swing.JRadioButton jrbPorSemana;
     private com.toedter.components.JSpinField jspNumeroSemana;
     private com.toedter.calendar.JYearChooser jycElegirAño;
+    private com.toedter.calendar.JYearChooser jycElegirAñoMes;
     private com.toedter.calendar.JYearChooser jycElegirAñoSemana;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblSubtitulo;
