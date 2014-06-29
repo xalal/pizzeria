@@ -34,36 +34,43 @@
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="lblSubtitulo" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Component id="tituloReportes" min="-2" pref="546" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jrbPorDia" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jrbPorMes" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jrbPorAño" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jrbPorSemana" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jdcElegirDia" alignment="0" min="-2" pref="197" max="-2" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jycElegirAñoSemana" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jmcElegirMesSemana" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jspNumeroSemana" min="-2" pref="39" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jycElegirAñoMes" min="-2" pref="92" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jmcElegirMes" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jycElegirAñoSemana" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jmcElegirMesSemana" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jspNumeroSemana" min="-2" pref="39" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jycElegirAñoMes" min="-2" pref="92" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jmcElegirMes" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="jycElegirAño" min="-2" pref="197" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jdcElegirDia" alignment="1" min="-2" pref="197" max="-2" attributes="0"/>
+                                  <Component id="jycElegirAño" alignment="1" min="-2" pref="197" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <Component id="tituloReportes" min="-2" pref="546" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
           </Group>
           <Component id="jsPanelGraficas" alignment="1" pref="851" max="32767" attributes="0"/>
       </Group>
@@ -71,48 +78,45 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <Component id="tituloReportes" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jycElegirAño" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="tituloReportes" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lblSubtitulo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblSubtitulo" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jrbPorDia" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jrbPorDia" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jrbPorSemana" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jrbPorMes" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jdcElegirDia" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jycElegirAñoSemana" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jmcElegirMesSemana" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jspNumeroSemana" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jmcElegirMes" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jycElegirAñoMes" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="jrbPorAño" min="-2" max="-2" attributes="0"/>
+                              <Component id="jrbPorSemana" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jrbPorMes" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lblImagen" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jdcElegirDia" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jycElegirAñoSemana" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jmcElegirMesSemana" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jspNumeroSemana" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jmcElegirMes" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jycElegirAñoMes" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jrbPorAño" min="-2" max="-2" attributes="0"/>
+                          <Component id="jycElegirAño" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="lblImagen" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jsPanelGraficas" pref="356" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jsPanelGraficas" min="-2" pref="363" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -323,7 +327,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanelDatosGraf" max="32767" attributes="0"/>
-                          <Component id="jPanelDatos" pref="303" max="32767" attributes="0"/>
+                          <Component id="jPanelDatos" pref="310" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -375,7 +379,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="301" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="308" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
