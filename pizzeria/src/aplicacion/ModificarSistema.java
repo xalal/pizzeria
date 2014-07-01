@@ -4,6 +4,8 @@
  */
 package aplicacion;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Maria
@@ -55,6 +57,11 @@ public class ModificarSistema extends javax.swing.JPanel {
         jbPaquete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pack.jpg"))); // NOI18N
         jbPaquete1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jbPaquete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbPaquete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPaquete1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("addCatalogo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +126,14 @@ public class ModificarSistema extends javax.swing.JPanel {
         // TODO add your handling code here:
         jPanel2.add(new Catalogo("new Paquete","/Imagenes/pack.jpg"));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jbPaquete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPaquete1ActionPerformed
+        // TODO add your handling code here:
+        JFrame frame=new JFrame(lblPaquete1.getText());
+        frame.add(new VisualizarCatalogo(lblPaquete1.getText()));
+        frame.setSize(849,651);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jbPaquete1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

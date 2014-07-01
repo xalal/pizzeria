@@ -12,9 +12,11 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
 
     /**
      * Creates new form VisualizarCatalogo
+     * @param title
      */
-    public VisualizarCatalogo() {
+    public VisualizarCatalogo(String title) {
         initComponents();
+        tituloCatalogo.setText(title);
     }
 
     /**
@@ -26,17 +28,35 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tituloCatalogo = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(851, 549));
+
+        tituloCatalogo.setBackground(new java.awt.Color(51, 51, 255));
+        tituloCatalogo.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
+        tituloCatalogo.setForeground(new java.awt.Color(204, 255, 204));
+        tituloCatalogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloCatalogo.setText("XXXXXXXX");
+        tituloCatalogo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        tituloCatalogo.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(252, Short.MAX_VALUE)
+                .addComponent(tituloCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tituloCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 459, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel tituloCatalogo;
     // End of variables declaration//GEN-END:variables
 }

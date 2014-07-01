@@ -15,8 +15,8 @@ import java.awt.*;
  */
 public class Catalogo extends JPanel{
     GroupLayout jPanelLayout;
-    private JButton jbPaquete;
-    private JLabel lblPaquete;
+    JButton jbPaquete;
+    JLabel lblPaquete;
     public Catalogo(String texto, String urlImage) {
         jPanelLayout=new GroupLayout(this);
         this.setLayout(jPanelLayout);
@@ -27,6 +27,12 @@ public class Catalogo extends JPanel{
         jbPaquete.setBackground(new Color(255, 255, 255));
         jbPaquete.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 3, true));
         jbPaquete.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jbPaquete.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPaqueteActionPerformed(evt);
+            }
+        });
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
@@ -51,4 +57,11 @@ public class Catalogo extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
     }
+    private void jbPaqueteActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        JFrame frame=new JFrame(lblPaquete.getText());
+        frame.add(new VisualizarCatalogo(lblPaquete.getText()));
+        frame.setSize(849,651);
+        frame.setVisible(true);
+    }    
 }
