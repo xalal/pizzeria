@@ -4,7 +4,11 @@
  */
 package aplicacion;
 
+import com.mysql.jdbc.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,9 +18,24 @@ public class ModificarSistema extends javax.swing.JPanel {
 
     /**
      * Creates new form ModificarSistema
+     * @throws java.sql.SQLException
      */
-    public ModificarSistema() {
+    @SuppressWarnings("null")
+    public ModificarSistema() throws SQLException {
         initComponents();
+        BD.ConexionBD connect=new BD.ConexionBD();
+        java.sql.Connection jsc= connect.conectar();
+        if(jsc!=null){
+            Statement st;
+            ResultSet rs ;
+            st=(Statement) jsc.createStatement();
+            rs=st.executeQuery("select * from Catalogo");
+            while (rs.next()) {
+                jPanel2.add(new Catalogo(rs.getString("descripcion"),rs.getString("imagen")));
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Conexion fallida");
+        }
     }
 
     /**
@@ -33,7 +52,6 @@ public class ModificarSistema extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         lblPaquete1 = new javax.swing.JLabel();
         jbPaquete1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(851, 549));
 
@@ -50,23 +68,17 @@ public class ModificarSistema extends javax.swing.JPanel {
         jPanel3.setPreferredSize(new java.awt.Dimension(130, 134));
 
         lblPaquete1.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
-        lblPaquete1.setText("Paquete");
+        lblPaquete1.setLabelFor(jbPaquete1);
+        lblPaquete1.setText("Agregar");
         lblPaquete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jbPaquete1.setBackground(new java.awt.Color(255, 255, 255));
-        jbPaquete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pack.jpg"))); // NOI18N
+        jbPaquete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add.png"))); // NOI18N
         jbPaquete1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jbPaquete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbPaquete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbPaquete1ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("addCatalogo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -77,23 +89,19 @@ public class ModificarSistema extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbPaquete1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPaquete1)
-                    .addComponent(jButton1))
-                .addContainerGap(593, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(lblPaquete1)
+                .addContainerGap(599, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jbPaquete1)
-                .addGap(0, 4, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(lblPaquete1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jbPaquete1)
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel3);
@@ -118,25 +126,20 @@ public class ModificarSistema extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tituloConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        jPanel2.add(new Catalogo("new Paquete","/Imagenes/pack.jpg"));
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jbPaquete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPaquete1ActionPerformed
         // TODO add your handling code here:
-        JFrame frame=new JFrame(lblPaquete1.getText());
-        frame.add(new VisualizarCatalogo(lblPaquete1.getText()));
-        frame.setSize(849,651);
+        JFrame frame=new JFrame("Nuevo Catalogo");
+        frame.add(new NewCatalogo());
+        frame.setSize(750,220);
         frame.setVisible(true);
+        frame.setResizable(false);
     }//GEN-LAST:event_jbPaquete1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbPaquete1;

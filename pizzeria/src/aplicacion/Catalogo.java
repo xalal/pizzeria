@@ -63,5 +63,6 @@ public class Catalogo extends JPanel{
         frame.add(new VisualizarCatalogo(lblPaquete.getText()));
         frame.setSize(849,651);
         frame.setVisible(true);
+        frame.setResizable(false);
     }    
 }
