@@ -3,11 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package aplicacion;
 
+import com.mysql.jdbc.Statement;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -16,6 +24,8 @@ import javax.swing.JOptionPane;
  * @author Abimael
  */
 public class NewCatalogo extends javax.swing.JPanel {
+
+    private BD.ConexionBD con = new BD.ConexionBD();
 
     /**
      * Creates new form NewCatalogo
@@ -139,19 +149,66 @@ public class NewCatalogo extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    File selectedFile;
+    File selectedFile=null;
     private void jbPaquete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPaquete1ActionPerformed
         // TODO add your handling code here:
         int status = jFileChooser1.showOpenDialog(null);
-        if (status== JFileChooser.APPROVE_OPTION) {
+        if (status == JFileChooser.APPROVE_OPTION) {
             selectedFile = jFileChooser1.getSelectedFile();
             //jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/save.png"))); // NOI18N
             jbPaquete2.setIcon(new javax.swing.ImageIcon(selectedFile.getPath())); // NOI18N
         }
     }//GEN-LAST:event_jbPaquete1ActionPerformed
-
+    private boolean validaCatalogo() {
+        boolean retorno = true;
+        if (jTextField1.getText().trim() == "") {
+            retorno = false;
+        }else if (selectedFile==null) {
+            retorno = false;
+        }
+        return retorno;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:implementar esta accion
+        if (validaCatalogo()) {
+            InputStream in = null;
+            OutputStream ou = null;
+            try {
+                File oldImagen = new File(selectedFile.getPath());
+                File newImagen = new File("src/Imagenes/Catalogo" + selectedFile.getName());
+                in = new FileInputStream(oldImagen);
+                ou = new FileOutputStream(newImagen);
+                byte[] moveBuff = new byte[1024];
+                int butesRead;
+                while ((butesRead = in.read(moveBuff)) > 0) {
+                    ou.write(moveBuff, 0, butesRead);
+                }
+                in.close();
+                ou.close();
+                java.sql.Connection jsc = con.conectar();
+                if (jsc != null) {
+                    try {
+                        Statement st;
+                        st = (Statement) jsc.createStatement();
+                        if (st.executeUpdate("insert into Catalogo(descripcion,imagen) values ('"
+                                + jTextField1.getText()
+                                + "','/Imagenes/Catalogo"
+                                + selectedFile.getName() + "') ") != 0) {
+                            JOptionPane.showMessageDialog(this, "El nuevo Catalogo se creó con exito.");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ModificarSistema.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Conexion fallida");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Es necesario seleccionar una imagen y un nombre.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

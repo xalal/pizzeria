@@ -7,6 +7,8 @@ package aplicacion;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,22 +18,22 @@ import javax.swing.JOptionPane;
  */
 public class ModificarSistema extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ModificarSistema
-     * @throws java.sql.SQLException
-     */
-    @SuppressWarnings("null")
-    public ModificarSistema() throws SQLException {
+   
+    public ModificarSistema(){
         initComponents();
         BD.ConexionBD connect=new BD.ConexionBD();
         java.sql.Connection jsc= connect.conectar();
         if(jsc!=null){
-            Statement st;
-            ResultSet rs ;
-            st=(Statement) jsc.createStatement();
-            rs=st.executeQuery("select * from Catalogo");
-            while (rs.next()) {
-                jPanel2.add(new Catalogo(rs.getString("descripcion"),rs.getString("imagen")));
+            try {
+                Statement st;
+                ResultSet rs ;
+                st=(Statement) jsc.createStatement();
+                rs=st.executeQuery("select * from Catalogo");
+                while (rs.next()) {
+                    jPanel2.add(new Catalogo(rs.getString("descripcion"),rs.getString("imagen")));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ModificarSistema.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
             JOptionPane.showMessageDialog(this, "Conexion fallida");
