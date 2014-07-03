@@ -9,7 +9,7 @@ public class DatosPedidos extends javax.swing.JPanel {
 
     public DatosPedidos() {
         initComponents();
-        
+        Datos();
     }
     
     private void Datos(){
