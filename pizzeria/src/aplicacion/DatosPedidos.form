@@ -143,7 +143,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="EtiHora">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hora:"/>
+        <Property name="text" type="java.lang.String" value="Fecha y Hora:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="EtiCliente">
@@ -183,7 +183,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="EtiDescripcion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Descripcion:"/>
+        <Property name="text" type="java.lang.String" value="Hora de Entrega:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="JDescripcion">

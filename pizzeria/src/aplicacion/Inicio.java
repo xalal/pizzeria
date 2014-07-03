@@ -37,35 +37,35 @@ public class Inicio extends javax.swing.JPanel {
     public void CargarBD(){
         Connection cn = con.conectar();
         String[] registros = new String[10];
-        String sql = "select Cliente.*,Pedido.fechaPedido,hrPedido,hrEntrega from Cliente,Pedido where Cliente.idCliente = Pedido.idCliente ORDER BY Cliente.idCliente ASC";
+        String sql = "select Cliente.*,Pedido.fechaPedido,hrPedido,hrEntrega from Cliente,Pedido where Cliente.idCliente = Pedido.idCliente ORDER BY Pedido.hrPedido ASC";
         
-//        DatosPedidos obj = new DatosPedidos();
-//        jPanel1.add(new DatosPedidos());
+
         try {
-             DatosPedidos form = new DatosPedidos();
-             jPanel1.add(form);
+            
              
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                registros[0] = rs.getString("Cliente.nombre"); //se obtiene la hora
-                registros[1] = rs.getString("Cliente.telefono");//se obtiene el cliente
-                registros[2] = rs.getString("Cliente.calle");//se obtiene la direccion
-                registros[3] = rs.getString("Cliente.numero"); //se obtiene la descripcion
-                registros[4] = rs.getString("Cliente.colonia");//se obtiene otro dato
-                registros[5] = rs.getString("Cliente.municipio");//se obtiene otro dato
-                registros[6] = rs.getString("Cliente.estado");//se obtiene otro dato
-                registros[7] = rs.getString("Pedido.fechaPedido");//se obtiene otro dato
-                registros[8] = rs.getString("Pedido.hrPedido");//se obtiene otro dato
-                registros[9] = rs.getString("Pedido.hrEntrega");
-                
-                form.Cliente = registros[0];
-                form.Telefono = registros[1];
-                form.Direccion = registros[2-6];
-                form.Descripcion = registros[7];
-                form.hora = registros[8-9];
-                System.out.println(registros[0-9]);
+               String nombre = registros[0] = rs.getString("Cliente.nombre"); //se obtiene la hora
+               String telefono = registros[1] = rs.getString("Cliente.telefono");//se obtiene el cliente
+               String calle = registros[2] = rs.getString("Cliente.calle");//se obtiene la direccion
+               String numero = registros[3] = rs.getString("Cliente.numero"); //se obtiene la descripcion
+               String colonia = registros[4] = rs.getString("Cliente.colonia");//se obtiene otro dato
+               String municipio = registros[5] = rs.getString("Cliente.municipio");//se obtiene otro dato
+               String estado = registros[6] = rs.getString("Cliente.estado");//se obtiene otro dato
+               String fechaPedido = registros[7] = rs.getString("Pedido.fechaPedido");//se obtiene otro dato
+               String hrPedido = registros[8] = rs.getString("Pedido.hrPedido");//se obtiene otro dato
+               String hrEntrega = registros[9] = rs.getString("Pedido.hrEntrega");
+                DatosPedidos form = new DatosPedidos();
+                form.Datos(nombre,telefono,calle,numero,colonia,municipio,estado,fechaPedido,hrPedido,hrEntrega);
+                jPanel1.add(form);
+//              form.Cliente = registros[0];
+//              form.Telefono = registros[1];
+//                form.Direccion = registros[2-6];
+//                form.Descripcion = registros[7];
+//                form.hora = registros[8-9];
+//                System.out.println(registros[0-9]);
                 
                 
             }

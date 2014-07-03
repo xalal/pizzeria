@@ -1,25 +1,24 @@
 package aplicacion;
 
 public class DatosPedidos extends javax.swing.JPanel {
-    String hora;
-    String Cliente;
-    String Telefono;
-    String Direccion;
-    String Descripcion;
+//    String hora;
+//    String Cliente;
+//    String Telefono;
+//    String Direccion;
+//    String Descripcion;
 
     public DatosPedidos() {
         initComponents();
-        Datos();
+        //Datos();
     }
     
-    private void Datos(){
+    public void Datos(String Cliente,String Telefono,String Calle,String Numero,String Colonia,String Municipio,String Estado,String Fecha,String HrPed,String HrEnt){
 
         JCliente.setText(Cliente);
-        JDescripcion.setText(Descripcion);
-        JDireccion.setText(Direccion);
-        JHora.setText(hora);
+        JDescripcion.setText(HrEnt);
+        JDireccion.setText("Calle: "+Calle+"Numero: "+Numero+"Colonia: "+Colonia+"Municipio: "+Municipio+"Estado: "+Estado);
+        JHora.setText(Fecha+" "+HrPed);
         JTelefono.setText(Telefono);
-    
     
     }
             
@@ -63,7 +62,7 @@ public class DatosPedidos extends javax.swing.JPanel {
 
         Pedido.setText("Pedido # X");
 
-        EtiHora.setText("Hora:");
+        EtiHora.setText("Fecha y Hora:");
 
         EtiCliente.setText("Cliente:");
 
@@ -79,7 +78,7 @@ public class DatosPedidos extends javax.swing.JPanel {
 
         JDireccion.setText("Avenida siempre viva 123 ");
 
-        EtiDescripcion.setText("Descripcion:");
+        EtiDescripcion.setText("Hora de Entrega:");
 
         JDescripcion.setText("aqui por ejemplo poner el pedido realizado: ");
 
