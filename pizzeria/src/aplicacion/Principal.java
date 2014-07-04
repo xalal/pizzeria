@@ -11,11 +11,12 @@ public class Principal extends javax.swing.JFrame {
     Calendar calendario; 
     int dia, mes, año, hora, minutos, segundos;
     
-    Inicio ini = new Inicio();
+    static Inicio ini = new Inicio();
     ModificarSistema mods = new ModificarSistema();
     TomarPedido tped = new TomarPedido();
     VerClientes vcli = new VerClientes();
     VerReportes vrep = new VerReportes();
+    
 
     
     public Principal() {

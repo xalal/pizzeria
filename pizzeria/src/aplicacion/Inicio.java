@@ -7,42 +7,24 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Inicio extends javax.swing.JPanel {
-    ConexionBD con = new ConexionBD();
     
     public Inicio() {
         initComponents();
-//        jPanel1.add(new DatosPedidos());
-//        jPanel1.add(new DatosPedidos());
-//        jPanel1.add(new DatosPedidos());
-        
         CargarBD();
      }
-
-//    private void CargarElementos(){
-//      
-//    JLabel orden = new JLabel();
-//    JButton bo = new JButton();
-//    JButton bu = new JButton();
-//    orden.setText("pedido # x \n descripcion: \t producto 1 \n\t producto numero 2");
-//    orden.setBounds(10, 10, 200,20);
-//    bo.setBounds(300,10,50,20);
-//    bu.setBounds(300,30,50,20);
-//    orden.setVisible(true); 
-//    jPanel1.add(orden);
-//    jPanel1.add(bo);
-//    jPanel1.add(bu);
-//    
-//    }
     
     public void CargarBD(){
+        ConexionBD con = new ConexionBD();
         Connection cn = con.conectar();
-        String[] registros = new String[10];
-        String sql = "select Cliente.*,Pedido.fechaPedido,hrPedido,hrEntrega from Cliente,Pedido where Cliente.idCliente = Pedido.idCliente ORDER BY Pedido.hrPedido ASC";
-        
+        String[] registros = new String[11];
+        String sql = "select Cliente.*,Pedido.fechaPedido,hrPedido,hrEntrega,idPedido "
+                + "from Cliente,Pedido "
+                + "where Cliente.idCliente = Pedido.idCliente "
+                +"and Pedido.estatus = '0'"
+                + "ORDER BY Pedido.hrPedido ASC";  
 
         try {
-            
-             
+            int contador = 0;          
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -57,29 +39,26 @@ public class Inicio extends javax.swing.JPanel {
                String fechaPedido = registros[7] = rs.getString("Pedido.fechaPedido");//se obtiene otro dato
                String hrPedido = registros[8] = rs.getString("Pedido.hrPedido");//se obtiene otro dato
                String hrEntrega = registros[9] = rs.getString("Pedido.hrEntrega");
-                DatosPedidos form = new DatosPedidos();
-                form.Datos(nombre,telefono,calle,numero,colonia,municipio,estado,fechaPedido,hrPedido,hrEntrega);
+               String ped = registros[10] = rs.getString("Pedido.idPedido");
+                DatosPedidos form = new DatosPedidos(); 
+                contador++;
+                form.Datos(nombre,telefono,calle,numero,colonia,municipio,estado,fechaPedido,hrPedido,hrEntrega,contador,ped);
                 jPanel1.add(form);
-//              form.Cliente = registros[0];
-//              form.Telefono = registros[1];
-//                form.Direccion = registros[2-6];
-//                form.Descripcion = registros[7];
-//                form.hora = registros[8-9];
-//                System.out.println(registros[0-9]);
-                
-                
+                       
             }
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en la conexion ", "Error", JOptionPane.ERROR_MESSAGE);
           } finally{
-            //con.desconectar();
+            con.desconectar();
             }
             
-   // con.desconectar();
+    
     }
     
     @SuppressWarnings("unchecked")
+    
+
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
