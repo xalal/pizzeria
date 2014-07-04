@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 public class ConexionBD {
 
     public String puerto = "3306";
-    public String nomservidor = "sql2.freemysqlhosting.net";
-    public String db = "sql245039";// poner el nombre de la base de datos y listo para usar
-    public String user = "sql245039";
-    public String pass = "uI2*uT6*";
+    public String nomservidor = "www.db4free.net";
+    public String db = "pizzeria";// poner el nombre de la base de datos y listo para usar
+    public String user = "xalal1234";
+    public String pass = "uI2xalal1234uT6*";
     Connection conn = null;
 
 //metodo que realiza la conexion a la base de datos

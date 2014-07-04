@@ -11,9 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -161,9 +159,9 @@ public class NewCatalogo extends javax.swing.JPanel {
     }//GEN-LAST:event_jbPaquete1ActionPerformed
     private boolean validaCatalogo() {
         boolean retorno = true;
-        if (jTextField1.getText().trim() == "") {
+        if (jTextField1.getText().trim().length() == 0) {
             retorno = false;
-        }else if (selectedFile==null) {
+        }else if (selectedFile == null) {
             retorno = false;
         }
         return retorno;

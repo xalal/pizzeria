@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import sun.security.krb5.Config;
 
 /**
  *
@@ -18,24 +19,23 @@ import javax.swing.JOptionPane;
  */
 public class ModificarSistema extends javax.swing.JPanel {
 
-   
-    public ModificarSistema(){
+    public ModificarSistema() {
         initComponents();
-        BD.ConexionBD connect=new BD.ConexionBD();
-        java.sql.Connection jsc= connect.conectar();
-        if(jsc!=null){
+        BD.ConexionBD connect = new BD.ConexionBD();
+        java.sql.Connection jsc = connect.conectar();
+        if (jsc != null) {
             try {
                 Statement st;
-                ResultSet rs ;
-                st=(Statement) jsc.createStatement();
-                rs=st.executeQuery("select * from Catalogo");
+                ResultSet rs;
+                st = (Statement) jsc.createStatement();
+                rs = st.executeQuery("select * from Catalogo");
                 while (rs.next()) {
-                    jPanel2.add(new Catalogo(rs.getString("descripcion"),rs.getString("imagen")));
+                    jPanel2.add(new Catalogo(rs.getString("descripcion"), rs.getString("imagen")));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ModificarSistema.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Conexion fallida");
         }
     }
@@ -134,13 +134,22 @@ public class ModificarSistema extends javax.swing.JPanel {
 
     private void jbPaquete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPaquete1ActionPerformed
         // TODO add your handling code here:
-        JFrame frame=new JFrame("Nuevo Catalogo");
+        JFrame frame = new JFrame("Nuevo Catalogo");
         frame.add(new NewCatalogo());
-        frame.setSize(750,220);
+        frame.setSize(750, 220);
         frame.setVisible(true);
         frame.setResizable(false);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e){
+                refreshPantalla();
+            }
+        });
     }//GEN-LAST:event_jbPaquete1ActionPerformed
 
+    private void refreshPantalla(){
+        this.revalidate();
+        this.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
