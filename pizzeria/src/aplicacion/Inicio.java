@@ -51,9 +51,7 @@ public class Inicio extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error en la conexion ", "Error", JOptionPane.ERROR_MESSAGE);
           } finally{
             con.desconectar();
-            }
-            
-    
+            }     
     }
     
     @SuppressWarnings("unchecked")

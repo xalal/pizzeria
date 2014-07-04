@@ -209,6 +209,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSistemaActionPerformed
+        
         ini.setVisible(false);
         mods.setVisible(true);
         tped.setVisible(false);
@@ -216,9 +217,11 @@ public class Principal extends javax.swing.JFrame {
         vrep.setVisible(false);
         mods.setBounds(10, 10, 860, 545);
         
+        
     }//GEN-LAST:event_BtnSistemaActionPerformed
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
+        
         ini.setVisible(true);
         mods.setVisible(false);
         tped.setVisible(false);

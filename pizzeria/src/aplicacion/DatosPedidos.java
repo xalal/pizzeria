@@ -3,6 +3,8 @@ package aplicacion;
 import BD.ConexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class DatosPedidos extends javax.swing.JPanel {
@@ -10,6 +12,15 @@ public class DatosPedidos extends javax.swing.JPanel {
     public DatosPedidos() {
         initComponents();
        idPed.setVisible(false);
+       
+btnCancelar.setOpaque(false);
+btnCancelar.setContentAreaFilled(false);
+btnCancelar.setBorderPainted(false);
+
+BtnFinalizar.setOpaque(false);
+BtnFinalizar.setContentAreaFilled(false);
+BtnFinalizar.setBorderPainted(false);
+       
     }
     
     public void Datos(String Cliente,String Telefono,String Calle,String Numero,String Colonia,String Municipio,String Estado,String Fecha,String HrPed,String HrEnt,int contador,String idPedido){
@@ -32,76 +43,108 @@ public class DatosPedidos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnFinalizar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        Pedido = new org.edisoncor.gui.label.LabelHeader();
-        EtiHora = new javax.swing.JLabel();
-        EtiCliente = new javax.swing.JLabel();
-        JCliente = new javax.swing.JLabel();
+        panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         JHora = new javax.swing.JLabel();
-        EtiTelefono = new javax.swing.JLabel();
-        JTelefono = new javax.swing.JLabel();
-        EtiDireccion = new javax.swing.JLabel();
-        JDireccion = new javax.swing.JLabel();
-        EtiDescripcion = new javax.swing.JLabel();
         JDescripcion = new javax.swing.JLabel();
+        JCliente = new javax.swing.JLabel();
+        JTelefono = new javax.swing.JLabel();
+        JDireccion = new javax.swing.JLabel();
+        EtiDireccion = new javax.swing.JLabel();
+        EtiTelefono = new javax.swing.JLabel();
+        EtiCliente = new javax.swing.JLabel();
+        EtiDescripcion = new javax.swing.JLabel();
+        EtiHora = new javax.swing.JLabel();
+        Pedido = new org.edisoncor.gui.label.LabelHeader();
+        btnCancelar = new javax.swing.JButton();
+        BtnFinalizar = new javax.swing.JButton();
         idPed = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        BtnFinalizar.setBackground(new java.awt.Color(0, 255, 204));
-        BtnFinalizar.setText("Finalizar");
-        BtnFinalizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnFinalizarActionPerformed(evt);
-            }
-        });
-        add(BtnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 74, 92, 30));
+        panelImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoInicio.png"))); // NOI18N
+        panelImage1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCancelar.setBackground(new java.awt.Color(255, 0, 0));
+        JHora.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        JHora.setForeground(new java.awt.Color(255, 255, 255));
+        JHora.setText("12:00");
+        panelImage1.add(JHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 200, -1));
+
+        JDescripcion.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        JDescripcion.setForeground(new java.awt.Color(255, 255, 255));
+        JDescripcion.setText("1:00 ");
+        panelImage1.add(JDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 70, -1));
+
+        JCliente.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        JCliente.setForeground(new java.awt.Color(255, 255, 255));
+        JCliente.setText("lusito Perez");
+        panelImage1.add(JCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 250, -1));
+
+        JTelefono.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        JTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        JTelefono.setText("044-55-12-34-56-78");
+        panelImage1.add(JTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 250, -1));
+
+        JDireccion.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        JDireccion.setForeground(new java.awt.Color(255, 255, 255));
+        JDireccion.setText("Avenida siempre viva 123 ");
+        panelImage1.add(JDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 400, -1));
+
+        EtiDireccion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        EtiDireccion.setForeground(new java.awt.Color(255, 255, 255));
+        EtiDireccion.setText("Direccion:");
+        panelImage1.add(EtiDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 70, -1));
+
+        EtiTelefono.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        EtiTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        EtiTelefono.setText("Telefono:");
+        panelImage1.add(EtiTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 70, -1));
+
+        EtiCliente.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        EtiCliente.setForeground(new java.awt.Color(255, 255, 255));
+        EtiCliente.setText("Cliente:");
+        panelImage1.add(EtiCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 70, -1));
+
+        EtiDescripcion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        EtiDescripcion.setForeground(new java.awt.Color(255, 255, 255));
+        EtiDescripcion.setText("Hora de Entrega:");
+        panelImage1.add(EtiDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 120, -1));
+
+        EtiHora.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        EtiHora.setForeground(new java.awt.Color(255, 255, 255));
+        EtiHora.setText("Fecha y Hora:");
+        panelImage1.add(EtiHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 100, -1));
+
+        Pedido.setText("Pedido # X");
+        panelImage1.add(Pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 179, 21));
+
+        btnCancelar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setOpaque(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 29, 92, 34));
+        panelImage1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 150, 34));
 
-        Pedido.setText("Pedido # X");
-        add(Pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 179, 21));
+        BtnFinalizar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        BtnFinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OK.png"))); // NOI18N
+        BtnFinalizar.setText("Finalizar");
+        BtnFinalizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnFinalizar.setOpaque(false);
+        BtnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnFinalizarActionPerformed(evt);
+            }
+        });
+        panelImage1.add(BtnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 150, 30));
+        panelImage1.add(idPed, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 11, 36, 12));
 
-        EtiHora.setText("Fecha y Hora:");
-        add(EtiHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
-
-        EtiCliente.setText("Cliente:");
-        add(EtiCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 68, -1));
-
-        JCliente.setText("lusito Perez");
-        add(JCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 282, -1));
-
-        JHora.setText("12:00");
-        add(JHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 265, -1));
-
-        EtiTelefono.setText("Telefono:");
-        add(EtiTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
-
-        JTelefono.setText("044-55-12-34-56-78");
-        add(JTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 126, -1));
-
-        EtiDireccion.setText("Direccion:");
-        add(EtiDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-
-        JDireccion.setText("Avenida siempre viva 123 ");
-        add(JDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
-
-        EtiDescripcion.setText("Hora de Entrega:");
-        add(EtiDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        JDescripcion.setText("aqui por ejemplo poner el pedido realizado: ");
-        add(JDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
-        add(idPed, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 11, 36, 12));
+        add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 260));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinalizarActionPerformed
@@ -137,7 +180,7 @@ public class DatosPedidos extends javax.swing.JPanel {
         }
      
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnFinalizar;
     private javax.swing.JLabel EtiCliente;
@@ -153,5 +196,6 @@ public class DatosPedidos extends javax.swing.JPanel {
     private org.edisoncor.gui.label.LabelHeader Pedido;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel idPed;
+    private org.edisoncor.gui.panel.PanelImage panelImage1;
     // End of variables declaration//GEN-END:variables
 }
