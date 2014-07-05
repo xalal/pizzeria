@@ -17,11 +17,11 @@ public class Inicio extends javax.swing.JPanel {
         ConexionBD con = new ConexionBD();
         Connection cn = con.conectar();
         String[] registros = new String[11];
-        String sql = "select Cliente.*,Pedido.fechaPedido,hrPedido,hrEntrega,idPedido "
-                + "from Cliente,Pedido "
-                + "where Cliente.idCliente = Pedido.idCliente "
-                +"and Pedido.estatus = '0'"
-                + "ORDER BY Pedido.hrPedido ASC";  
+        String sql = "select cliente.*,pedido.fechaPedido,hrPedido,hrEntrega,idPedido "
+                + "from cliente,pedido "
+                + "where cliente.idCliente = pedido.idCliente "
+                +"and pedido.estatus = '0'"
+                + "ORDER BY pedido.hrPedido ASC";  
 
         try {
             int contador = 0;          
@@ -29,17 +29,17 @@ public class Inicio extends javax.swing.JPanel {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-               String nombre = registros[0] = rs.getString("Cliente.nombre"); //se obtiene la hora
-               String telefono = registros[1] = rs.getString("Cliente.telefono");//se obtiene el cliente
-               String calle = registros[2] = rs.getString("Cliente.calle");//se obtiene la direccion
-               String numero = registros[3] = rs.getString("Cliente.numero"); //se obtiene la descripcion
-               String colonia = registros[4] = rs.getString("Cliente.colonia");//se obtiene otro dato
-               String municipio = registros[5] = rs.getString("Cliente.municipio");//se obtiene otro dato
-               String estado = registros[6] = rs.getString("Cliente.estado");//se obtiene otro dato
-               String fechaPedido = registros[7] = rs.getString("Pedido.fechaPedido");//se obtiene otro dato
-               String hrPedido = registros[8] = rs.getString("Pedido.hrPedido");//se obtiene otro dato
-               String hrEntrega = registros[9] = rs.getString("Pedido.hrEntrega");
-               String ped = registros[10] = rs.getString("Pedido.idPedido");
+               String nombre = registros[0] = rs.getString("cliente.nombre"); //se obtiene la hora
+               String telefono = registros[1] = rs.getString("cliente.telefono");//se obtiene el cliente
+               String calle = registros[2] = rs.getString("cliente.calle");//se obtiene la direccion
+               String numero = registros[3] = rs.getString("cliente.numero"); //se obtiene la descripcion
+               String colonia = registros[4] = rs.getString("cliente.colonia");//se obtiene otro dato
+               String municipio = registros[5] = rs.getString("cliente.municipio");//se obtiene otro dato
+               String estado = registros[6] = rs.getString("cliente.estado");//se obtiene otro dato
+               String fechaPedido = registros[7] = rs.getString("pedido.fechaPedido");//se obtiene otro dato
+               String hrPedido = registros[8] = rs.getString("pedido.hrPedido");//se obtiene otro dato
+               String hrEntrega = registros[9] = rs.getString("pedido.hrEntrega");
+               String ped = registros[10] = rs.getString("pedido.idPedido");
                 DatosPedidos form = new DatosPedidos(); 
                 contador++;
                 form.Datos(nombre,telefono,calle,numero,colonia,municipio,estado,fechaPedido,hrPedido,hrEntrega,contador,ped);

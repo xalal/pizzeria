@@ -152,7 +152,7 @@ BtnFinalizar.setBorderPainted(false);
         Connection cn = con.conectar();
         int valor = 1; //el valor 1 indica q se concluyo el pedido exitosamente
         try {
-        PreparedStatement pst = cn.prepareStatement("UPDATE Pedido SET estatus='"+valor+"' WHERE idPedido='"+idPed.getText()+"'");
+        PreparedStatement pst = cn.prepareStatement("UPDATE pedido SET estatus='"+valor+"' WHERE idPedido='"+idPed.getText()+"'");
         pst.executeUpdate();
         JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
         this.removeAll();
@@ -169,7 +169,7 @@ BtnFinalizar.setBorderPainted(false);
         Connection cn = con.conectar();
         int valor = 2;//el valor 2 indica que se concluyo el pedido pero no exitosamente (orden cancelada,no se encontro la direccion, fue una broma)
         try {
-        PreparedStatement pst = cn.prepareStatement("UPDATE Pedido SET estatus='"+valor+"' WHERE idPedido='"+idPed.getText()+"'");
+        PreparedStatement pst = cn.prepareStatement("UPDATE pedido SET estatus='"+valor+"' WHERE idPedido='"+idPed.getText()+"'");
         pst.executeUpdate();
         this.removeAll();
         
