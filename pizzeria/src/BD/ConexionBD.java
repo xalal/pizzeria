@@ -15,7 +15,7 @@ public class ConexionBD {
     public String nomservidor = "www.db4free.net";
     public String db = "pizzeria";// poner el nombre de la base de datos y listo para usar
     public String user = "xalal1234";
-    public String pass = "uI2xalal1234uT6*";
+    public String pass = "xalal1234";
     Connection conn = null;
 
 //metodo que realiza la conexion a la base de datos

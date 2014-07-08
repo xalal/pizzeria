@@ -28,7 +28,7 @@ public class ModificarSistema extends javax.swing.JPanel {
                 Statement st;
                 ResultSet rs;
                 st = (Statement) jsc.createStatement();
-                rs = st.executeQuery("select * from Catalogo");
+                rs = st.executeQuery("select * from catalogo");
                 while (rs.next()) {
                     jPanel2.add(new Catalogo(rs.getString("descripcion"), rs.getString("imagen")));
                 }
