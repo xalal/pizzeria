@@ -5,8 +5,7 @@
 package aplicacion;
 
 import BD.ConexionBD;
-import java.awt.event.MouseEvent;
-import java.sql.Connection;
+import com.mysql.jdbc.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,13 +35,16 @@ public class VerClientes extends javax.swing.JPanel {
                 Statement st;
                 ResultSet rs;
                 st=(Statement) jsc.createStatement();
-                rs=st.executeQuery("select * from cliente");
-                DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
+                CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_mostrarClientes() }");
+                cStmt.execute();
+                rs = cStmt.getResultSet();
+                DefaultTableModel tempModelo=(DefaultTableModel) jTable1.getModel();
                 while(rs.next()){
-                    modelo.addRow(new Object[]{rs.getString("nombre"),rs.getString("telefono"),
+                    tempModelo.addRow(new Object[]{rs.getString("nombre"),rs.getString("telefono"),
                     rs.getString("calle"),rs.getString("numero"),rs.getString("colonia"),
-                    rs.getString("municipio"),rs.getString("Estado")});
+                    rs.getString("municipio"),rs.getString("estado")});
                 }
+                
             } catch(SQLException ex){
                 Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE,null,ex);
             }
