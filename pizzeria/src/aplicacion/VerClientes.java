@@ -32,24 +32,27 @@ public class VerClientes extends javax.swing.JPanel {
     public VerClientes() {
         initComponents();
         cargarDatos();
+        capturarSeleccion();
+    }
+    private void capturarSeleccion(){
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                @Override
-                public void valueChanged(ListSelectionEvent event) {
-                    if( event.getSource() == jTable1.getSelectionModel() && event.getFirstIndex() >= 0 ){
-                        // Determine the selected item
-                        fs=jTable1.getSelectedRow();
-			textNombre.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),0 ));
-                        textTelefono.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),1 ));
-                        textCalle.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),2 ));
-                        textNumero.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),3 ));
-                        textColonia.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),4 ));
-                        textMunicipio.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),5 ));
-                        textEstado.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),6 ));
-                        Agregar.setEnabled(false);
-                        Actualizar.setEnabled(true);
-                    }
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if( event.getSource() == jTable1.getSelectionModel() && event.getFirstIndex() >= 0 ){
+                    // Determine the selected item
+                    fs=jTable1.getSelectedRow();
+                    textNombre.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),0 ));
+                    textTelefono.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),1 ));
+                    textCalle.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),2 ));
+                    textNumero.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),3 ));
+                    textColonia.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),4 ));
+                    textMunicipio.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),5 ));
+                    textEstado.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),6 ));
+                    Agregar.setEnabled(false);
+                    Actualizar.setEnabled(true);
                 }
-            });
+            }
+        });
     }
     private void cargarDatos(){
         if(jsc!=null){
@@ -64,7 +67,6 @@ public class VerClientes extends javax.swing.JPanel {
                     rs.getString("calle"),rs.getString("numero"),rs.getString("colonia"),
                     rs.getString("municipio"),rs.getString("estado")});
                 }
-                
             } catch(SQLException ex){
                 Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE,null,ex);
             }
@@ -297,7 +299,6 @@ public class VerClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_AgregarActionPerformed
    
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        ResultSet rs;
         if (fs >= 0){
              try {
                  if(JOptionPane.showConfirmDialog(this, 
@@ -306,9 +307,9 @@ public class VerClientes extends javax.swing.JPanel {
                     CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_eliminarClientePorTelefono( ? ) }"); 
                     cStmt.setString(1, phone);
                     if(cStmt.executeUpdate()!=CallableStatement.EXECUTE_FAILED){
-                        limpiarCampos();
                         JOptionPane.showMessageDialog(this, "El cliente se elimino correctamente");
-                        modelo.removeRow(fs);
+                        limpiarCampos();
+                        modelo.removeRow(jTable1.getSelectedRow());
                     }else{
                         JOptionPane.showMessageDialog(this, "No se pudo eliminar el cliente");
                     }

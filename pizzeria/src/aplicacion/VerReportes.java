@@ -1,22 +1,22 @@
-
 package aplicacion;
-
 
 import BD.ConexionBD;
 import com.mysql.jdbc.CallableStatement;
 import java.awt.BorderLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import java.text.DateFormat;
+
 /**
  *
  * @author Maria
@@ -26,65 +26,62 @@ public class VerReportes extends javax.swing.JPanel {
     /**
      * Creates new form VerReportes
      */
-    
-    JFreeChart grafica;
-    DefaultCategoryDataset datos= new DefaultCategoryDataset();    
+    BD.ConexionBD con = new ConexionBD();
+    DefaultCategoryDataset datos ; 
+    Date date = new Date();
+    java.sql.Connection jsc = con.conectar();
     public VerReportes() {
         initComponents();
         initComponentsByUser();
-        
-        DefaultCategoryDataset datos=new DefaultCategoryDataset();
-        final String pedidos;
-        final String clientes;
-        
-       
-        
     }
-    private void initComponentsByUser(){
+
+    private void initComponentsByUser() {
         bgFiltros.add(jrbPorDia);
         bgFiltros.add(jrbPorSemana);
         bgFiltros.add(jrbPorMes);
         bgFiltros.add(jrbPorAño);
         setWeeksofMonth();
     }
-    private void setWeeksofMonth(){
-        java.util.Calendar cal= java.util.Calendar.getInstance();
+
+    private void setWeeksofMonth() {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.set(Calendar.YEAR, jycElegirAñoSemana.getYear());
         cal.set(Calendar.MONTH, jmcElegirMesSemana.getMonth());
-        cal.set(Calendar.DAY_OF_MONTH,1);
-        if(jspNumeroSemana.getValue() > cal.getActualMaximum(Calendar.WEEK_OF_MONTH)){
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        if (jspNumeroSemana.getValue() > cal.getActualMaximum(Calendar.WEEK_OF_MONTH)) {
             jspNumeroSemana.setValue(cal.getActualMaximum(Calendar.WEEK_OF_MONTH));
         }
         jspNumeroSemana.setMaximum(cal.getActualMaximum(Calendar.WEEK_OF_MONTH));
     }
-    private void graficar(){
-       BD.ConexionBD con=new ConexionBD();
-       java.sql.Connection jsc=con.conectar();
-       DefaultTableModel modelo;
-       if(jsc!=null){
-            try{
-                
-                Statement st;
+
+    private void graficar(String store) {
+        JFreeChart grafica;
+        Object [] columns={"Nombre del Producto","Ventas"};
+        Object [][] data=new Object[5][2];
+        if (jsc != null) {
+            try {
                 ResultSet rs;
-                st=(Statement) jsc.createStatement();
-                DateFormat df = DateFormat.getDateInstance();
-                String fechastr=df.format(jdcElegirDia.getDate());
-                CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_mostrarEstadisticaPorDia('"+fechastr+"') }");
+                CallableStatement cStmt = (CallableStatement) jsc.prepareCall(store);
                 cStmt.execute();
                 rs = cStmt.getResultSet();
-                while(rs.next()){
-                    datos.addValue(rs.getInt("ventas"),"Pizzeria",rs.getString("nombreProducto"));
- 
+                datos=new DefaultCategoryDataset();
+                int i=0;
+                while (rs.next()) {
+                    data[i][0]=(Object)rs.getString("nombreProducto");
+                    data[i][1]=(Object)rs.getString("ventas");
+                    i++;
+                    datos.addValue(rs.getInt("ventas"), "Pizzeria", rs.getString("nombreProducto"));
                 }
-                
-            } catch(SQLException ex){
-                Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE,null,ex);
+                DefaultTableModel temp = new DefaultTableModel(data, columns);
+                jTable2.setModel(temp);
+            } catch (SQLException ex) {
+                Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        grafica=ChartFactory.createBarChart("Vista Ejemplo", "Negocio 1", "Vistas", datos, PlotOrientation.VERTICAL,true,true,false );
-        ChartPanel panelAux=new ChartPanel(grafica);
-        jPanelDatosGraf.removeAll();        
-        jPanelDatosGraf.add(panelAux,BorderLayout.CENTER);
+        grafica = ChartFactory.createBarChart("Vista Ejemplo", "Negocio 1", "Vistas", datos, PlotOrientation.VERTICAL, true, true, false);
+        ChartPanel panelAux = new ChartPanel(grafica);
+        jPanelDatosGraf.removeAll();
+        jPanelDatosGraf.add(panelAux, BorderLayout.CENTER);
         jPanelDatosGraf.validate();
         
     }
@@ -111,10 +108,9 @@ public class VerReportes extends javax.swing.JPanel {
         jsPanelGraficas = new javax.swing.JScrollPane();
         jPanelGraficas = new javax.swing.JPanel();
         lblTituloPedidos = new javax.swing.JLabel();
-        jPanelDatos = new javax.swing.JPanel();
+        jPanelDatosGraf = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jPanelDatosGraf = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -238,9 +234,34 @@ public class VerReportes extends javax.swing.JPanel {
         lblTituloPedidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         lblTituloPedidos.setOpaque(true);
 
-        jPanelDatos.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelDatos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanelDatos.setPreferredSize(new java.awt.Dimension(403, 2));
+        jPanelDatosGraf.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelDatosGraf.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanelDatosGraf.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout jPanelGraficasLayout = new javax.swing.GroupLayout(jPanelGraficas);
+        jPanelGraficas.setLayout(jPanelGraficasLayout);
+        jPanelGraficasLayout.setHorizontalGroup(
+            jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelGraficasLayout.createSequentialGroup()
+                .addGroup(jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelGraficasLayout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(lblTituloPedidos))
+                    .addGroup(jPanelGraficasLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanelGraficasLayout.setVerticalGroup(
+            jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelGraficasLayout.createSequentialGroup()
+                .addComponent(lblTituloPedidos)
+                .addGap(18, 18, 18)
+                .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        jsPanelGraficas.setViewportView(jPanelGraficas);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,90 +273,48 @@ public class VerReportes extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
-        jPanelDatos.setLayout(jPanelDatosLayout);
-        jPanelDatosLayout.setHorizontalGroup(
-            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDatosLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        jPanelDatosLayout.setVerticalGroup(
-            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
-        );
-
-        jPanelDatosGraf.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelDatosGraf.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanelDatosGraf.setLayout(new java.awt.BorderLayout());
-
-        javax.swing.GroupLayout jPanelGraficasLayout = new javax.swing.GroupLayout(jPanelGraficas);
-        jPanelGraficas.setLayout(jPanelGraficasLayout);
-        jPanelGraficasLayout.setHorizontalGroup(
-            jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelGraficasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
-            .addGroup(jPanelGraficasLayout.createSequentialGroup()
-                .addGap(251, 251, 251)
-                .addComponent(lblTituloPedidos)
-                .addContainerGap(272, Short.MAX_VALUE))
-        );
-        jPanelGraficasLayout.setVerticalGroup(
-            jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelGraficasLayout.createSequentialGroup()
-                .addComponent(lblTituloPedidos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                    .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-
-        jsPanelGraficas.setViewportView(jPanelGraficas);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(lblImagen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblSubtitulo))
-                    .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jrbPorAño)
-                            .addComponent(jrbPorSemana)
-                            .addComponent(jrbPorMes)
-                            .addComponent(jrbPorDia))
-                        .addGap(212, 212, 212)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jdcElegirDia, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jycElegirAño, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(112, Short.MAX_VALUE))
             .addComponent(jsPanelGraficas, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(lblImagen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 65, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jrbPorAño)
+                                    .addComponent(jrbPorSemana)
+                                    .addComponent(jrbPorMes)
+                                    .addComponent(jrbPorDia))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jdcElegirDia, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jycElegirAño, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(30, 30, 30))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lblSubtitulo)
+                                .addGap(18, 18, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tituloReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,39 +323,37 @@ public class VerReportes extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblSubtitulo)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSubtitulo)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jrbPorDia)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jrbPorSemana))
-                                            .addComponent(jspNumeroSemana, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jdcElegirDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(7, 7, 7)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jrbPorDia)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrbPorMes))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jrbPorAño)
-                            .addComponent(jycElegirAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblImagen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jsPanelGraficas, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jrbPorSemana)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jrbPorMes)
+                                .addGap(7, 7, 7)
+                                .addComponent(jrbPorAño))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jdcElegirDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(7, 7, 7)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jycElegirAñoSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(12, 12, 12)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jmcElegirMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jycElegirAñoMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(7, 7, 7)
+                                    .addComponent(jycElegirAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblImagen)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jsPanelGraficas, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -389,8 +366,8 @@ public class VerReportes extends javax.swing.JPanel {
         jmcElegirMes.setEnabled(false);
         jycElegirAñoMes.setEnabled(false);
         jycElegirAño.setEnabled(false);
-        
-        
+
+
     }//GEN-LAST:event_jrbPorSemanaActionPerformed
 
     private void jrbPorDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorDiaActionPerformed
@@ -402,7 +379,6 @@ public class VerReportes extends javax.swing.JPanel {
         jmcElegirMes.setEnabled(false);
         jycElegirAñoMes.setEnabled(false);
         jycElegirAño.setEnabled(false);
-        
     }//GEN-LAST:event_jrbPorDiaActionPerformed
 
     private void jrbPorMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorMesActionPerformed
@@ -430,45 +406,42 @@ public class VerReportes extends javax.swing.JPanel {
     private void jycElegirAñoSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoSemanaPropertyChange
         // TODO add your handling code here:
         setWeeksofMonth();
-        graficar();
     }//GEN-LAST:event_jycElegirAñoSemanaPropertyChange
 
     private void jmcElegirMesSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesSemanaPropertyChange
         // TODO add your handling code here:
         setWeeksofMonth();
-        graficar();
     }//GEN-LAST:event_jmcElegirMesSemanaPropertyChange
 
     private void jdcElegirDiaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcElegirDiaPropertyChange
         // TODO add your handling code here:
-        graficar();
+        DateFormat df = DateFormat.getDateInstance();
+        if (jdcElegirDia.getDate() != null) {
+            date = jdcElegirDia.getDate();
+        }
+        String fecha = df.format(date);
+        String sp="{ call sp_mostrarEstadisticaPorDia('" + fecha + "') }";
+        graficar(sp);
     }//GEN-LAST:event_jdcElegirDiaPropertyChange
 
     private void jspNumeroSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jspNumeroSemanaPropertyChange
         // TODO add your handling code here:
-        graficar();
     }//GEN-LAST:event_jspNumeroSemanaPropertyChange
 
     private void jycElegirAñoMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoMesPropertyChange
         // TODO add your handling code here:
-        graficar();
     }//GEN-LAST:event_jycElegirAñoMesPropertyChange
 
     private void jmcElegirMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesPropertyChange
         // TODO add your handling code here:
-        jdcElegirDia.getCalendar();
-        jdcElegirDia.setCalendar(null);
-        graficar();
     }//GEN-LAST:event_jmcElegirMesPropertyChange
 
     private void jycElegirAñoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoPropertyChange
         // TODO add your handling code here:
-        graficar();
     }//GEN-LAST:event_jycElegirAñoPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgFiltros;
-    private javax.swing.JPanel jPanelDatos;
     private javax.swing.JPanel jPanelDatosGraf;
     private javax.swing.JPanel jPanelGraficas;
     private javax.swing.JScrollPane jScrollPane2;
