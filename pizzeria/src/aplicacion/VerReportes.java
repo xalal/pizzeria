@@ -430,21 +430,19 @@ public class VerReportes extends javax.swing.JPanel {
     }//GEN-LAST:event_jspNumeroSemanaPropertyChange
 
     private void jycElegirAñoMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoMesPropertyChange
-        String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+jmcElegirMes.getMonth()+") }";
+        String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+(jmcElegirMes.getMonth()+1)+") }";
         graficar(sp);
 // TODO add your handling code here:
     }//GEN-LAST:event_jycElegirAñoMesPropertyChange
 
     private void jmcElegirMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesPropertyChange
-        String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+jmcElegirMes.getMonth()+") }";
-        JOptionPane.showMessageDialog(jycElegirAñoMes, jmcElegirMes.getMonth());
+        String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+(jmcElegirMes.getMonth()+1)+") }";
         graficar(sp);
         
 // TODO add your handling code here:
     }//GEN-LAST:event_jmcElegirMesPropertyChange
 
     private void jycElegirAñoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoPropertyChange
-        
         String sp="{ call sp_mostrarEstadisticaPorAnio(" + jycElegirAño.getYear() + ") }";
         graficar(sp);
     // TODO add your handling code here:

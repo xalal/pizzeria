@@ -386,7 +386,7 @@ public class VerClientes extends javax.swing.JPanel {
                     
                     JOptionPane.showMessageDialog(this, "El telefono ya se encuentra asignado al cliente "+
                                                         jTable1.getValueAt(i, 0).toString());
-                    jTable1.getSelectionModel().setSelectionInterval(i, i+1);
+                    jTable1.getSelectionModel().setSelectionInterval(i, i);
                     i = jTable1.getRowCount() + 1;
                 }
             }
