@@ -174,20 +174,17 @@
     <Component class="javax.swing.JTextField" name="textNombre">
     </Component>
     <Component class="javax.swing.JTextField" name="textTelefono">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textTelefonoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textCalle">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCalleActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textNumero">
     </Component>
     <Component class="javax.swing.JTextField" name="textColonia">
     </Component>
     <Component class="javax.swing.JTextField" name="textMunicipio">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textMunicipioActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textEstado">
     </Component>

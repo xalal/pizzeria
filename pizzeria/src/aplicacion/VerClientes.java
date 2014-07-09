@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -21,11 +20,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Maria
  */
 public class VerClientes extends javax.swing.JPanel {
-    BD.ConexionBD con=new ConexionBD();
-    java.sql.Connection jsc=con.conectar();
+
+    BD.ConexionBD con = new ConexionBD();
+    java.sql.Connection jsc = con.conectar();
     DefaultTableModel modelo;
-    int fs=-1;
-    
+    int fs = -1;
+
     /**
      * Creates new form VerClientes
      */
@@ -34,45 +34,49 @@ public class VerClientes extends javax.swing.JPanel {
         cargarDatos();
         capturarSeleccion();
     }
-    private void capturarSeleccion(){
+
+    private void capturarSeleccion() {
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
-                if( event.getSource() == jTable1.getSelectionModel() && event.getFirstIndex() >= 0 ){
+                if (event.getSource() == jTable1.getSelectionModel() && event.getFirstIndex() >= 0) {
                     // Determine the selected item
-                    fs=jTable1.getSelectedRow();
-                    textNombre.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),0 ));
-                    textTelefono.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),1 ));
-                    textCalle.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),2 ));
-                    textNumero.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),3 ));
-                    textColonia.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),4 ));
-                    textMunicipio.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),5 ));
-                    textEstado.setText((String)modelo.getValueAt(jTable1.getSelectedRow(),6 ));
+                    fs = jTable1.getSelectedRow();
+                    textNombre.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 0));
+                    textTelefono.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 1));
+                    textTelefono.setEnabled(false);
+                    textCalle.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 2));
+                    textNumero.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 3));
+                    textColonia.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 4));
+                    textMunicipio.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 5));
+                    textEstado.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 6));
                     Agregar.setEnabled(false);
                     Actualizar.setEnabled(true);
                 }
             }
         });
     }
-    private void cargarDatos(){
-        if(jsc!=null){
-            try{
+
+    private void cargarDatos() {
+        if (jsc != null) {
+            try {
                 ResultSet rs;
                 CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_mostrarClientes() }");
                 cStmt.execute();
                 rs = cStmt.getResultSet();
-                modelo=(DefaultTableModel)jTable1.getModel();
-                while(rs.next()){
-                    modelo.addRow(new Object[]{rs.getString("nombre"),rs.getString("telefono"),
-                    rs.getString("calle"),rs.getString("numero"),rs.getString("colonia"),
-                    rs.getString("municipio"),rs.getString("estado")});
+                modelo = (DefaultTableModel) jTable1.getModel();
+                while (rs.next()) {
+                    modelo.addRow(new Object[]{rs.getString("nombre"), rs.getString("telefono"),
+                        rs.getString("calle"), rs.getString("numero"), rs.getString("colonia"),
+                        rs.getString("municipio"), rs.getString("estado")});
                 }
-            } catch(SQLException ex){
-                Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE,null,ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,15 +125,9 @@ public class VerClientes extends javax.swing.JPanel {
 
         estado.setText("Estado");
 
-        textCalle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCalleActionPerformed(evt);
-            }
-        });
-
-        textMunicipio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textMunicipioActionPerformed(evt);
+        textTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textTelefonoFocusLost(evt);
             }
         });
 
@@ -274,62 +272,98 @@ public class VerClientes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textMunicipioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textMunicipioActionPerformed
-
-    private void textCalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCalleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCalleActionPerformed
-
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
-        Object[] datos={
+        Object[] datos = {
             textNombre.getText(),
             textTelefono.getText(),
             textCalle.getText(),
             textNumero.getText(),
             textColonia.getText(),
             textMunicipio.getText(),
-            textEstado.getText(),
-        };
-        limpiarCampos();
-        modelo=(DefaultTableModel)jTable1.getModel();
-        modelo.addRow(datos);
-        jTable1.setModel(modelo);
+            textEstado.getText(),};
+        CallableStatement cStmt;
+        try {
+            cStmt = (CallableStatement) jsc.prepareCall("{ call sp_agregarCliente( ?,?,?,?,?,?,? ) }");
+            cStmt.setString("p_nombre", textNombre.getText());
+            cStmt.setString("p_telefono", textTelefono.getText());
+            cStmt.setString("p_calle", textCalle.getText());
+            cStmt.setInt("p_numero", Integer.parseInt(textNumero.getText().trim()));
+            cStmt.setString("p_colonia", textColonia.getText());
+            cStmt.setString("p_municipio", textMunicipio.getText());
+            cStmt.setString("p_estado", textEstado.getText());
+            if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
+                JOptionPane.showMessageDialog(this, "El cliente se agregó correctamente");
+                limpiarCampos();
+                modelo = (DefaultTableModel) jTable1.getModel();
+                modelo.addRow(datos);
+                jTable1.setModel(modelo);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo agregar el cliente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_AgregarActionPerformed
-   
+
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        if (fs >= 0){
-             try {
-                 if(JOptionPane.showConfirmDialog(this, 
-                                        "Esta seguro de eliminar el cliente seleccionado")==JOptionPane.YES_OPTION){
-                    String phone=(String)modelo.getValueAt(jTable1.getSelectedRow(),1 );
-                    CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_eliminarClientePorTelefono( ? ) }"); 
+        if (fs >= 0) {
+            try {
+                if (JOptionPane.showConfirmDialog(this,
+                        "Esta seguro de eliminar el cliente seleccionado") == JOptionPane.YES_OPTION) {
+                    String phone = (String) modelo.getValueAt(jTable1.getSelectedRow(), 1);
+                    CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_eliminarClientePorTelefono( ? ) }");
                     cStmt.setString(1, phone);
-                    if(cStmt.executeUpdate()!=CallableStatement.EXECUTE_FAILED){
-                        JOptionPane.showMessageDialog(this, "El cliente se elimino correctamente");
+                    if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
+                        JOptionPane.showMessageDialog(this, "El cliente se eliminó correctamente");
                         limpiarCampos();
                         modelo.removeRow(jTable1.getSelectedRow());
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(this, "No se pudo eliminar el cliente");
                     }
-                 }
-             } catch (SQLException ex) {
-                 Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
-             }
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"No ha seleccionado ningun registro");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun registro");
         }        // TODO add your handling code here:
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
         // TODO add your handling code here:
-        
+        CallableStatement cStmt;
+        try {
+            cStmt = (CallableStatement) jsc.prepareCall("{ call sp_modificarCliente( ?,?,?,?,?,?,? ) }");
+            cStmt.setString("p_nombre", textNombre.getText());
+            cStmt.setString("p_telefono", textTelefono.getText());
+            cStmt.setString("p_calle", textCalle.getText());
+            cStmt.setInt("p_numero", Integer.parseInt(textNumero.getText().trim()));
+            cStmt.setString("p_colonia", textColonia.getText());
+            cStmt.setString("p_municipio", textMunicipio.getText());
+            cStmt.setString("p_estado", textEstado.getText());
+            if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
+                JOptionPane.showMessageDialog(this, "El cliente se actualizó correctamente");
+                modelo = (DefaultTableModel) jTable1.getModel();
+                modelo.setValueAt(textNombre.getText(), fs, 0);
+                modelo.setValueAt(textTelefono.getText(), fs, 1);
+                modelo.setValueAt(textCalle.getText(), fs, 2);
+                modelo.setValueAt(textNumero.getText(), fs, 3);
+                modelo.setValueAt(textColonia.getText(), fs, 4);
+                modelo.setValueAt(textMunicipio.getText(), fs, 5);
+                modelo.setValueAt(textEstado.getText(), fs, 6);
+                jTable1.setModel(modelo);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ActualizarActionPerformed
-    private void limpiarCampos(){
+    private void limpiarCampos() {
         textNombre.setText("");
         textTelefono.setText("");
+        textTelefono.setEnabled(true);
         textCalle.setText("");
         textNumero.setText("");
         textColonia.setText("");
@@ -342,6 +376,22 @@ public class VerClientes extends javax.swing.JPanel {
         Agregar.setEnabled(true);
         Actualizar.setEnabled(false);
     }//GEN-LAST:event_Agregar1ActionPerformed
+
+    private void textTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textTelefonoFocusLost
+        // TODO add your handling code here:
+        if (!"".equals(textTelefono.getText())) {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                if (!jTable1.getValueAt(i, 0).toString().equals(textNombre.getText())
+                    && jTable1.getValueAt(i, 1).toString().equals(textTelefono.getText())) {
+                    
+                    JOptionPane.showMessageDialog(this, "El telefono ya se encuentra asignado al cliente "+
+                                                        jTable1.getValueAt(i, 0).toString());
+                    jTable1.getSelectionModel().setSelectionInterval(i, i+1);
+                    i = jTable1.getRowCount() + 1;
+                }
+            }
+        }
+    }//GEN-LAST:event_textTelefonoFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
