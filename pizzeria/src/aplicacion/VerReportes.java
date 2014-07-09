@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -429,15 +430,24 @@ public class VerReportes extends javax.swing.JPanel {
     }//GEN-LAST:event_jspNumeroSemanaPropertyChange
 
     private void jycElegirAñoMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoMesPropertyChange
-        // TODO add your handling code here:
+        String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+jmcElegirMes.getMonth()+") }";
+        graficar(sp);
+// TODO add your handling code here:
     }//GEN-LAST:event_jycElegirAñoMesPropertyChange
 
     private void jmcElegirMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesPropertyChange
-        // TODO add your handling code here:
+        String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+jmcElegirMes.getMonth()+") }";
+        JOptionPane.showMessageDialog(jycElegirAñoMes, jmcElegirMes.getMonth());
+        graficar(sp);
+        
+// TODO add your handling code here:
     }//GEN-LAST:event_jmcElegirMesPropertyChange
 
     private void jycElegirAñoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoPropertyChange
-        // TODO add your handling code here:
+        
+        String sp="{ call sp_mostrarEstadisticaPorAnio(" + jycElegirAño.getYear() + ") }";
+        graficar(sp);
+    // TODO add your handling code here:
     }//GEN-LAST:event_jycElegirAñoPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
