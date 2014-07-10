@@ -10,10 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -407,11 +404,21 @@ public class VerReportes extends javax.swing.JPanel {
     private void jycElegirAñoSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoSemanaPropertyChange
         // TODO add your handling code here:
         setWeeksofMonth();
+        int year=jycElegirAñoSemana.getYear() ;
+        int mes=jmcElegirMesSemana.getMonth()+1;
+        int semana=jspNumeroSemana.getValue();
+        String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
+        graficar(sp);
     }//GEN-LAST:event_jycElegirAñoSemanaPropertyChange
 
     private void jmcElegirMesSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesSemanaPropertyChange
         // TODO add your handling code here:
         setWeeksofMonth();
+        int year=jycElegirAñoSemana.getYear() ;
+        int mes=jmcElegirMesSemana.getMonth()+1;
+        int semana=jspNumeroSemana.getValue();
+        String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
+        graficar(sp);
     }//GEN-LAST:event_jmcElegirMesSemanaPropertyChange
 
     private void jdcElegirDiaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcElegirDiaPropertyChange
@@ -427,6 +434,11 @@ public class VerReportes extends javax.swing.JPanel {
 
     private void jspNumeroSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jspNumeroSemanaPropertyChange
         // TODO add your handling code here:
+        int year=jycElegirAñoSemana.getYear() ;
+        int mes=jmcElegirMesSemana.getMonth()+1;
+        int semana=jspNumeroSemana.getValue();
+        String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
+        graficar(sp);
     }//GEN-LAST:event_jspNumeroSemanaPropertyChange
 
     private void jycElegirAñoMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoMesPropertyChange
