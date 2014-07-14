@@ -30,7 +30,9 @@ public class ModificarSistema extends javax.swing.JPanel {
                 st = (Statement) jsc.createStatement();
                 rs = st.executeQuery("select * from catalogo");
                 while (rs.next()) {
-                    jPanel2.add(new Catalogo(rs.getString("descripcion"), rs.getString("imagen")));
+                    String descripcion=rs.getString("descripcion");
+                    String imagen =rs.getString("imagen");
+                    jPanel2.add(new Catalogo(descripcion,imagen));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ModificarSistema.class.getName()).log(Level.SEVERE, null, ex);

@@ -188,7 +188,7 @@ public class NewCatalogo extends javax.swing.JPanel {
                     try {
                         Statement st;
                         st = (Statement) jsc.createStatement();
-                        if (st.executeUpdate("insert into Catalogo(descripcion,imagen) values ('"
+                        if (st.executeUpdate("insert into catalogo(descripcion,imagen) values ('"
                                 + jTextField1.getText()
                                 + "','/Imagenes/Catalogo"
                                 + selectedFile.getName() + "') ") != 0) {
