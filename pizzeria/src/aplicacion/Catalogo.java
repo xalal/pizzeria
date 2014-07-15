@@ -5,8 +5,15 @@
  */
 package aplicacion;
 
-import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import org.imgscalr.Scalr;
 
 /**
  *
@@ -17,10 +24,12 @@ public class Catalogo extends JPanel {
     GroupLayout jPanelLayout;
     JButton jbPaquete;
     JLabel lblPaquete;
-
+    
     public Catalogo(String texto, String urlImage) {
         try {
-            jbPaquete = new JButton(new ImageIcon(getClass().getResource(urlImage)));
+            URL url = this.getClass().getResource(urlImage);
+            BufferedImage thumbnail = Scalr.resize(getBufferedImage(url), 105);
+            jbPaquete = new JButton(new ImageIcon(thumbnail));
             jPanelLayout = new GroupLayout(this);
             this.setLayout(jPanelLayout);
             lblPaquete = new JLabel(texto);
@@ -54,11 +63,28 @@ public class Catalogo extends JPanel {
                             .addComponent(lblPaquete)
                             .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
-
+    private BufferedImage getBufferedImage(URL url) {
+        BufferedImage bufferReturn=null; //this.getClass().getResource("/Imagenes/question.png");
+        if(url!=null){
+            try{
+                bufferReturn = ImageIO.read(url);
+            } catch (IOException ex) {
+                Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, "Aqui esta la falla", ex);
+            }
+        }else{
+            try{
+                bufferReturn = ImageIO.read(this.getClass().getResource("/Imagenes/question.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, "Aqui esta la falla", ex);
+            }
+        }
+        return bufferReturn;
+        
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -70,6 +96,6 @@ public class Catalogo extends JPanel {
         frame.add(new VisualizarCatalogo(lblPaquete.getText()));
         frame.setSize(849, 651);
         frame.setVisible(true);
-        frame.setResizable(false);
+        frame.setResizable(false);        
     }
 }

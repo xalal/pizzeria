@@ -5,13 +5,13 @@
 package aplicacion;
 
 import com.mysql.jdbc.Statement;
+import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import sun.security.krb5.Config;
 
 /**
  *
@@ -67,7 +67,7 @@ public class ModificarSistema extends javax.swing.JPanel {
         tituloConfigurar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         tituloConfigurar.setOpaque(true);
 
-        jPanel2.setLayout(new java.awt.GridLayout(4, 2));
+        jPanel2.setLayout(new java.awt.GridLayout(4, 3));
 
         jPanel3.setPreferredSize(new java.awt.Dimension(130, 134));
 
@@ -142,6 +142,7 @@ public class ModificarSistema extends javax.swing.JPanel {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent e){
                 refreshPantalla();
             }
@@ -149,8 +150,6 @@ public class ModificarSistema extends javax.swing.JPanel {
     }//GEN-LAST:event_jbPaquete1ActionPerformed
 
     private void refreshPantalla(){
-        this.revalidate();
-        this.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel2;
