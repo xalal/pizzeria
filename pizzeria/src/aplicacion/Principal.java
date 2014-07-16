@@ -1,10 +1,11 @@
 package aplicacion;
 
-import java.util.Calendar;
-import javax.swing.Timer;
-import java.util.Date;
+
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -21,14 +22,16 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
+        ini.setVisible(true);
+        ini.setBounds(10, 10, 860, 545);
         setTitle("Paulo's Pizza ");
         setIconImage(new ImageIcon(getClass().getResource("../Imagenes/grafCirculo.jpg")).getImage());
-        jLayeredPane1.add(ini, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.add(ini, javax.swing.JLayeredPane.DEFAULT_LAYER );
         jLayeredPane1.add(mods, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.add(tped, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.add(vcli, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.add(vrep, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        reloj();
+        reloj();       
     } 
     
     
@@ -53,6 +56,8 @@ public class Principal extends javax.swing.JFrame {
         }); 
         timer.start(); 
     } 
+    
+ 
       
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -73,6 +78,7 @@ public class Principal extends javax.swing.JFrame {
         buttonPopup4.setText("buttonPopup1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setForeground(new java.awt.Color(255, 255, 255));
 
         jcMousePanel1.setColor1(new java.awt.Color(102, 255, 255));
         jcMousePanel1.setColor2(new java.awt.Color(102, 255, 255));
@@ -155,6 +161,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(51, 51, 51))
         );
 
+        jLayeredPane1.setBackground(new java.awt.Color(255, 255, 255));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cabecera.jpg"))); // NOI18N
