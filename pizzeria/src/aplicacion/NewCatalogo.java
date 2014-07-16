@@ -6,9 +6,11 @@
 package aplicacion;
 
 import com.mysql.jdbc.Statement;
+import java.awt.HeadlessException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
@@ -31,7 +33,12 @@ public class NewCatalogo extends javax.swing.JPanel {
     public NewCatalogo() {
         initComponents();
     }
-
+    public NewCatalogo(String catalogo,File selectedFile){
+        initComponents();
+        jTextField1.setText(catalogo);
+        this.selectedFile=selectedFile;
+        jbPaquete2.setIcon(new javax.swing.ImageIcon(this.selectedFile.getPath())); // NOI18N
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +82,7 @@ public class NewCatalogo extends javax.swing.JPanel {
         });
 
         lblPaquete1.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
-        lblPaquete1.setText("Agregar nueva imagen");
+        lblPaquete1.setText("Agregar imagen:");
         lblPaquete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel1.setText(" Para agregar una nueva imagen presiona el boton con el simbolo +.");
@@ -201,8 +208,8 @@ public class NewCatalogo extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Conexion fallida");
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException | HeadlessException e) {
+                System.out.println(e.getMessage());
             }
         }else{
             JOptionPane.showMessageDialog(this, "Es necesario seleccionar una imagen y un nombre.");
