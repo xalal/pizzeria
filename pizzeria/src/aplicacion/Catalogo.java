@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -28,10 +29,10 @@ public class Catalogo extends JPanel {
     JLabel lblPaquete;
     JLabel lblDelete;
     JLabel lblEdit;
-    
+    URL url;
     public Catalogo(String texto, String urlImage) {
         try {
-            URL url = this.getClass().getResource(urlImage);
+            url = this.getClass().getResource(urlImage);
             BufferedImage thumbnail = Scalr.resize(getBufferedImage(url), 105);
             jbPaquete = new JButton(new ImageIcon(thumbnail));
             jPanelLayout = new GroupLayout(this);
@@ -57,7 +58,15 @@ public class Catalogo extends JPanel {
                 }
                 @Override
                 public void mouseExited(MouseEvent eve){
-                    mostrarOpciones(false);
+                    int px,py,mx,my;
+                    px=getSize().width;
+                    py=getSize().height;
+                    mx=eve.getX();
+                    my=eve.getY();
+                    
+                    if(mx>=px||mx<=0||my>=py||my<=0){
+                        mostrarOpciones(false);
+                    }
                 }
             });
             lblDelete.addMouseListener(new MouseAdapter() {
@@ -107,11 +116,14 @@ public class Catalogo extends JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanelLayout.createSequentialGroup()
                     .addComponent(jbPaquete)
-                    .addGap(0, 10, Short.MAX_VALUE))
+                    .addGap(10, 10, 10))
             );
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+    }
+    private void showAlert(String mensaje){
+        JOptionPane.showMessageDialog(this,mensaje);
     }
     private void eliminarCatalogo(){
         if(JOptionPane.showConfirmDialog(this, "Desea eliminar este catalogo")==JOptionPane.OK_OPTION){
@@ -120,8 +132,9 @@ public class Catalogo extends JPanel {
     }
     private void editarCatalogo(){
         // TODO add your handling code here:
+        File selectedFile= new File(url.getPath());
         JFrame frame = new JFrame("Nuevo Catalogo");
-        frame.add(new NewCatalogo());
+        frame.add(new NewCatalogo(this.lblPaquete.getText(),selectedFile));
         frame.setSize(750, 220);
         frame.setVisible(true);
         frame.setResizable(false);
@@ -135,6 +148,12 @@ public class Catalogo extends JPanel {
     private void mostrarOpciones(boolean flag){
         lblDelete.setVisible(flag);
         lblEdit.setVisible(flag);
+        if(flag){
+            setBackground(new Color(13167615));
+        }else{
+            setBackground(null);
+        }
+        
     }
     private BufferedImage getBufferedImage(URL url) {
         BufferedImage bufferReturn=null; //this.getClass().getResource("/Imagenes/question.png");
