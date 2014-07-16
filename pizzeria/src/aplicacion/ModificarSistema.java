@@ -5,7 +5,6 @@
 package aplicacion;
 
 import com.mysql.jdbc.Statement;
-import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,6 +20,9 @@ public class ModificarSistema extends javax.swing.JPanel {
 
     public ModificarSistema() {
         initComponents();
+        llenarPanel();
+    }
+    private void llenarPanel(){
         BD.ConexionBD connect = new BD.ConexionBD();
         java.sql.Connection jsc = connect.conectar();
         if (jsc != null) {
@@ -41,7 +43,32 @@ public class ModificarSistema extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Conexion fallida");
         }
     }
-
+    private void llenarPanel3(){
+        jPanel3 = new javax.swing.JPanel();
+        jPanel3.setPreferredSize(new java.awt.Dimension(130, 134));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbPaquete1)
+                .addGap(24, 24, 24)
+                .addComponent(lblPaquete1)
+                .addContainerGap(599, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lblPaquete1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jbPaquete1)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+        jPanel2.add(jPanel3);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,7 +96,7 @@ public class ModificarSistema extends javax.swing.JPanel {
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 3));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(130, 134));
+        jPanel3.setPreferredSize(new java.awt.Dimension(100, 134));
 
         lblPaquete1.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
         lblPaquete1.setLabelFor(jbPaquete1);
@@ -95,17 +122,17 @@ public class ModificarSistema extends javax.swing.JPanel {
                 .addComponent(jbPaquete1)
                 .addGap(24, 24, 24)
                 .addComponent(lblPaquete1)
-                .addContainerGap(599, Short.MAX_VALUE))
+                .addContainerGap(558, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(62, 62, 62)
                 .addComponent(lblPaquete1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jbPaquete1)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel3);
@@ -114,23 +141,18 @@ public class ModificarSistema extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(tituloConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(158, Short.MAX_VALUE)
+                .addComponent(tituloConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tituloConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,7 +171,11 @@ public class ModificarSistema extends javax.swing.JPanel {
         });
     }//GEN-LAST:event_jbPaquete1ActionPerformed
 
+    @SuppressWarnings("empty-statement")
     private void refreshPantalla(){
+        this.jPanel2.removeAll();
+        llenarPanel3();
+        llenarPanel();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel2;

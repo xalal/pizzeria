@@ -6,6 +6,8 @@
 package aplicacion;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +26,8 @@ public class Catalogo extends JPanel {
     GroupLayout jPanelLayout;
     JButton jbPaquete;
     JLabel lblPaquete;
+    JLabel lblDelete;
+    JLabel lblEdit;
     
     public Catalogo(String texto, String urlImage) {
         try {
@@ -33,11 +37,41 @@ public class Catalogo extends JPanel {
             jPanelLayout = new GroupLayout(this);
             this.setLayout(jPanelLayout);
             lblPaquete = new JLabel(texto);
-            lblPaquete.setFont(new Font("Book Antiqua", 0, 24));
+            lblPaquete.setFont(new Font("Book Antiqua", 0, 20));
             lblPaquete.setCursor(new Cursor(Cursor.HAND_CURSOR));
             jbPaquete.setBackground(new Color(255, 255, 255));
             jbPaquete.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 3, true));
             jbPaquete.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            lblEdit = new javax.swing.JLabel();
+            lblDelete = new javax.swing.JLabel();
+            lblEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edit.png"))); // NOI18N
+            lblDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete1.png"))); // NOI18N
+            lblDelete.setVisible(false);
+            lblEdit.setVisible(false);
+            lblDelete.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            lblEdit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent eve){
+                    mostrarOpciones(true);
+                }
+                @Override
+                public void mouseExited(MouseEvent eve){
+                    mostrarOpciones(false);
+                }
+            });
+            lblDelete.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent eve){
+                    eliminarCatalogo();
+                }
+            });
+            lblEdit.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent eve){
+                    editarCatalogo();
+                }
+            });
             jbPaquete.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,27 +79,62 @@ public class Catalogo extends JPanel {
                 }
             });
             jPanelLayout.setHorizontalGroup(
-                    jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jbPaquete)
-                            .addGap(18, 18, 18)
+                jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jbPaquete)
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelLayout.createSequentialGroup()
+                            .addGap(24, 24, 24)
                             .addComponent(lblPaquete)
-                            .addContainerGap(184, Short.MAX_VALUE))
+                            .addContainerGap(599, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblEdit)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblDelete)
+                            .addContainerGap())))
             );
             jPanelLayout.setVerticalGroup(
-                    jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                            .addComponent(jbPaquete)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                            .addGap(44, 44, 44)
-                            .addComponent(lblPaquete)
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblEdit)
+                        .addComponent(lblDelete))
+                    .addGap(29, 29, 29)
+                    .addComponent(lblPaquete)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelLayout.createSequentialGroup()
+                    .addComponent(jbPaquete)
+                    .addGap(0, 10, Short.MAX_VALUE))
             );
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+    }
+    private void eliminarCatalogo(){
+        if(JOptionPane.showConfirmDialog(this, "Desea eliminar este catalogo")==JOptionPane.OK_OPTION){
+            JOptionPane.showMessageDialog(this, "EL catalogo fue eliminado");
+        }
+    }
+    private void editarCatalogo(){
+        // TODO add your handling code here:
+        JFrame frame = new JFrame("Nuevo Catalogo");
+        frame.add(new NewCatalogo());
+        frame.setSize(750, 220);
+        frame.setVisible(true);
+        frame.setResizable(false);
+//        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+//            @Override
+//            public void windowClosing(java.awt.event.WindowEvent e) {
+//                refreshPantalla();
+//            }
+//        });
+    }
+    private void mostrarOpciones(boolean flag){
+        lblDelete.setVisible(flag);
+        lblEdit.setVisible(flag);
     }
     private BufferedImage getBufferedImage(URL url) {
         BufferedImage bufferReturn=null; //this.getClass().getResource("/Imagenes/question.png");
@@ -89,13 +158,11 @@ public class Catalogo extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
     }
-
     private void jbPaqueteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         JFrame frame = new JFrame(lblPaquete.getText());
         frame.add(new VisualizarCatalogo(lblPaquete.getText()));
         frame.setSize(849, 651);
         frame.setVisible(true);
-        frame.setResizable(false);        
+        frame.setResizable(false);    
     }
 }
