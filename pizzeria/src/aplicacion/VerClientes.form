@@ -23,9 +23,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="737" max="-2" attributes="0"/>
+          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="referencia1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
@@ -43,18 +52,23 @@
                                           <Component id="textNumero" alignment="0" pref="288" max="32767" attributes="0"/>
                                           <Component id="textTelefono" alignment="0" max="32767" attributes="0"/>
                                           <Component id="textMunicipio" max="32767" attributes="0"/>
+                                          <Component id="textReferencia1" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="colonia" min="-2" max="-2" attributes="0"/>
                                           <Component id="calle" min="-2" max="-2" attributes="0"/>
                                           <Component id="estado" min="-2" max="-2" attributes="0"/>
+                                          <Component id="referencia2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="textColonia" alignment="0" pref="288" max="32767" attributes="0"/>
-                                          <Component id="textCalle" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="textEstado" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="textReferencia2" pref="288" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="textColonia" alignment="0" pref="288" max="32767" attributes="0"/>
+                                              <Component id="textCalle" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="textEstado" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <Component id="textNombre" max="32767" attributes="0"/>
@@ -79,11 +93,6 @@
                       <EmptySpace pref="170" max="32767" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="737" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,7 +126,14 @@
                   <Component id="estado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="referencia1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="referencia2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textReferencia1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textReferencia2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="166" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -176,11 +192,15 @@
     <Component class="javax.swing.JTextField" name="textTelefono">
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textTelefonoFocusLost"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textTelefonoKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textCalle">
     </Component>
     <Component class="javax.swing.JTextField" name="textNumero">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textNumeroKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textColonia">
     </Component>
@@ -198,7 +218,7 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="0">
+              <Table columnCount="9" rowCount="0">
                 <Column editable="true" title="Nombre" type="java.lang.Object"/>
                 <Column editable="true" title="Telefono" type="java.lang.Object"/>
                 <Column editable="true" title="Calle" type="java.lang.Object"/>
@@ -206,6 +226,8 @@
                 <Column editable="true" title="Colonia" type="java.lang.Object"/>
                 <Column editable="true" title="Municipio" type="java.lang.Object"/>
                 <Column editable="true" title="Estado" type="java.lang.Object"/>
+                <Column editable="true" title="Referencia1" type="java.lang.Object"/>
+                <Column editable="true" title="Referencia2" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -293,6 +315,20 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Agregar1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="referencia1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Referencia 1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="referencia2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Referencia 2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textReferencia1">
+    </Component>
+    <Component class="javax.swing.JTextField" name="textReferencia2">
     </Component>
   </SubComponents>
 </Form>
