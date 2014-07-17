@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,7 +117,7 @@ public class Catalogo extends JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanelLayout.createSequentialGroup()
                     .addComponent(jbPaquete)
-                    .addGap(10, 10, 10))
+                    .addGap(10, 10, Short.MAX_VALUE))
             );
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -138,12 +139,21 @@ public class Catalogo extends JPanel {
         frame.setSize(750, 220);
         frame.setVisible(true);
         frame.setResizable(false);
-//        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-//            @Override
-//            public void windowClosing(java.awt.event.WindowEvent e) {
-//                refreshPantalla();
-//            }
-//        });
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                refreshPantalla();
+            }
+        });
+    }
+    @SuppressWarnings("empty-statement")
+    private void refreshPantalla(){
+        try {
+            JOptionPane.showMessageDialog(this, this.getParent().getParent().getClass().getName());
+            this.getParent().getParent().getClass().getMethod("refreshPantalla").invoke(this.getParent().getParent());
+        } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void mostrarOpciones(boolean flag){
         lblDelete.setVisible(flag);
@@ -161,13 +171,14 @@ public class Catalogo extends JPanel {
             try{
                 bufferReturn = ImageIO.read(url);
             } catch (IOException ex) {
-                Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, "Aqui esta la falla", ex);
+                Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, "Ruta d invalida", ex);
             }
         }else{
             try{
                 bufferReturn = ImageIO.read(this.getClass().getResource("/Imagenes/question.png"));
+                this.url = this.getClass().getResource("/Imagenes/question.png");
             } catch (IOException ex) {
-                Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, "Aqui esta la falla", ex);
+                Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, "Ruta invalida", ex);
             }
         }
         return bufferReturn;

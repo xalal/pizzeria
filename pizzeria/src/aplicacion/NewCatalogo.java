@@ -30,6 +30,8 @@ public class NewCatalogo extends javax.swing.JPanel {
     /**
      * Creates new form NewCatalogo
      */
+    boolean isNew=true;
+    String nombreCatalogo="";
     public NewCatalogo() {
         initComponents();
     }
@@ -38,6 +40,8 @@ public class NewCatalogo extends javax.swing.JPanel {
         jTextField1.setText(catalogo);
         this.selectedFile=selectedFile;
         jbPaquete2.setIcon(new javax.swing.ImageIcon(this.selectedFile.getPath())); // NOI18N
+        isNew=false;
+        nombreCatalogo=catalogo;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,11 +199,21 @@ public class NewCatalogo extends javax.swing.JPanel {
                     try {
                         Statement st;
                         st = (Statement) jsc.createStatement();
-                        if (st.executeUpdate("insert into catalogo(descripcion,imagen) values ('"
-                                + jTextField1.getText()
-                                + "','/Imagenes/Catalogo"
-                                + selectedFile.getName() + "') ") != 0) {
-                            JOptionPane.showMessageDialog(this, "El nuevo Catalogo se creó con exito.");
+                        if(isNew){
+                            if (st.executeUpdate("insert into catalogo(descripcion,imagen) values ('"
+                                    + jTextField1.getText()
+                                    + "','/Imagenes/Catalogo"
+                                    + selectedFile.getName() + "') ") != 0) {
+                                JOptionPane.showMessageDialog(this, "El nuevo Catalogo se creó con exito.");
+                            }
+                        }
+                        else{ 
+                            if (st.executeUpdate("update catalogo set descripcion='"
+                                    + jTextField1.getText()
+                                    + "',imagen='/Imagenes/Catalogo"
+                                    + selectedFile.getName() + "' where descripcion='"+nombreCatalogo+"' ") != 0) {
+                                JOptionPane.showMessageDialog(this, "El Catalogo se actualizó con exito.");
+                            }
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(ModificarSistema.class.getName()).log(Level.SEVERE, null, ex);
