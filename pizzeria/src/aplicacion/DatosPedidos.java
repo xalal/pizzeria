@@ -63,85 +63,73 @@ BtnFinalizar.setBorderPainted(false);
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoInicio.png"))); // NOI18N
+        panelImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/notas.png"))); // NOI18N
         panelImage1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JHora.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        JHora.setForeground(new java.awt.Color(255, 255, 255));
         JHora.setText("12:00");
-        panelImage1.add(JHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 200, -1));
+        panelImage1.add(JHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 21, 200, 30));
 
         JDescripcion.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        JDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         JDescripcion.setText("1:00 ");
-        panelImage1.add(JDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 70, -1));
+        panelImage1.add(JDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 51, 70, 30));
 
         JCliente.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        JCliente.setForeground(new java.awt.Color(255, 255, 255));
         JCliente.setText("lusito Perez");
-        panelImage1.add(JCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 250, -1));
+        panelImage1.add(JCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 81, 250, 30));
 
         JTelefono.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        JTelefono.setForeground(new java.awt.Color(255, 255, 255));
         JTelefono.setText("044-55-12-34-56-78");
-        panelImage1.add(JTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 250, -1));
+        panelImage1.add(JTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 250, 30));
 
         JDireccion.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        JDireccion.setForeground(new java.awt.Color(255, 255, 255));
         JDireccion.setText("Avenida siempre viva 123 ");
-        panelImage1.add(JDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 400, -1));
+        panelImage1.add(JDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 400, -1));
 
         EtiDireccion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        EtiDireccion.setForeground(new java.awt.Color(255, 255, 255));
         EtiDireccion.setText("Direccion:");
-        panelImage1.add(EtiDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 70, -1));
+        panelImage1.add(EtiDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 70, -1));
 
         EtiTelefono.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        EtiTelefono.setForeground(new java.awt.Color(255, 255, 255));
         EtiTelefono.setText("Telefono:");
-        panelImage1.add(EtiTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 70, -1));
+        panelImage1.add(EtiTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 70, 30));
 
         EtiCliente.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        EtiCliente.setForeground(new java.awt.Color(255, 255, 255));
         EtiCliente.setText("Cliente:");
-        panelImage1.add(EtiCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 70, -1));
+        panelImage1.add(EtiCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 81, 70, 30));
 
         EtiDescripcion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        EtiDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         EtiDescripcion.setText("Hora de Entrega:");
-        panelImage1.add(EtiDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 120, -1));
+        panelImage1.add(EtiDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 51, 120, 30));
 
         EtiHora.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        EtiHora.setForeground(new java.awt.Color(255, 255, 255));
         EtiHora.setText("Fecha y Hora:");
-        panelImage1.add(EtiHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 100, -1));
+        panelImage1.add(EtiHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 21, 100, 30));
 
         Pedido.setText("Pedido # X");
-        panelImage1.add(Pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 179, 21));
+        panelImage1.add(Pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 179, 21));
 
         btnCancelar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.setOpaque(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        panelImage1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 150, 34));
+        panelImage1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 150, 34));
 
         BtnFinalizar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         BtnFinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OK.png"))); // NOI18N
         BtnFinalizar.setText("Finalizar");
         BtnFinalizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BtnFinalizar.setOpaque(false);
         BtnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnFinalizarActionPerformed(evt);
             }
         });
-        panelImage1.add(BtnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 150, 30));
+        panelImage1.add(BtnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 150, 30));
         panelImage1.add(idPed, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 11, 36, 12));
 
         add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 260));
