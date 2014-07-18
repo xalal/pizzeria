@@ -182,12 +182,11 @@ public class VerClientes extends javax.swing.JPanel {
             }
         });
 
-        tituloCatalogo.setBackground(new java.awt.Color(51, 51, 255));
-        tituloCatalogo.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
-        tituloCatalogo.setForeground(new java.awt.Color(204, 255, 204));
+        tituloCatalogo.setBackground(new java.awt.Color(204, 102, 0));
+        tituloCatalogo.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        tituloCatalogo.setForeground(new java.awt.Color(255, 255, 255));
         tituloCatalogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloCatalogo.setText("Clientes");
-        tituloCatalogo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         tituloCatalogo.setOpaque(true);
 
         Agregar1.setText("Limpiar");
@@ -245,10 +244,7 @@ public class VerClientes extends javax.swing.JPanel {
                                                 .addComponent(textColonia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                                                 .addComponent(textCalle, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(textEstado))))
-                                    .addComponent(textNombre)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(tituloCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(textNombre))))
                         .addGap(73, 73, 73))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(99, 99, 99)
@@ -260,6 +256,7 @@ public class VerClientes extends javax.swing.JPanel {
                         .addGap(128, 128, 128)
                         .addComponent(Eliminar)
                         .addContainerGap(170, Short.MAX_VALUE))))
+            .addComponent(tituloCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

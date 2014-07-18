@@ -43,12 +43,11 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(851, 549));
 
-        tituloCatalogo.setBackground(new java.awt.Color(51, 51, 255));
-        tituloCatalogo.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
-        tituloCatalogo.setForeground(new java.awt.Color(204, 255, 204));
+        tituloCatalogo.setBackground(new java.awt.Color(204, 102, 0));
+        tituloCatalogo.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        tituloCatalogo.setForeground(new java.awt.Color(255, 255, 255));
         tituloCatalogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloCatalogo.setText("XXXXXXXX");
-        tituloCatalogo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         tituloCatalogo.setOpaque(true);
 
         jLabel1.setText("Nombre");
@@ -81,10 +80,9 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
+                        .addGap(275, 275, 275)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
@@ -94,9 +92,8 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                             .addComponent(textPreio, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(tituloCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(200, 200, 200)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonAgregar)
@@ -104,7 +101,8 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                                 .addComponent(botonModificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonEliminar)))))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
+            .addComponent(tituloCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +128,7 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEliminar)
                     .addComponent(botonModificar))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

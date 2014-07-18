@@ -86,12 +86,11 @@ public class ModificarSistema extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(851, 549));
 
-        tituloConfigurar.setBackground(new java.awt.Color(51, 51, 255));
-        tituloConfigurar.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
-        tituloConfigurar.setForeground(new java.awt.Color(204, 255, 204));
+        tituloConfigurar.setBackground(new java.awt.Color(204, 102, 0));
+        tituloConfigurar.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        tituloConfigurar.setForeground(new java.awt.Color(255, 255, 255));
         tituloConfigurar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloConfigurar.setText("Modificar Sistema");
-        tituloConfigurar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         tituloConfigurar.setOpaque(true);
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 3));
@@ -141,11 +140,8 @@ public class ModificarSistema extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
-                .addComponent(tituloConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
+            .addComponent(tituloConfigurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

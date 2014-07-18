@@ -132,7 +132,7 @@ BtnFinalizar.setBorderPainted(false);
         panelImage1.add(BtnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 150, 30));
         panelImage1.add(idPed, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 11, 36, 12));
 
-        add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 260));
+        add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 260));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinalizarActionPerformed

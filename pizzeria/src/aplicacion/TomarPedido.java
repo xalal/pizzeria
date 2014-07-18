@@ -207,11 +207,11 @@ public class TomarPedido extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(882, 567));
         setPreferredSize(new java.awt.Dimension(882, 567));
 
-        tituloCatalogo.setBackground(new java.awt.Color(0, 102, 255));
-        tituloCatalogo.setFont(new java.awt.Font("Futura Bk BT", 0, 24)); // NOI18N
+        tituloCatalogo.setBackground(new java.awt.Color(204, 102, 0));
+        tituloCatalogo.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
         tituloCatalogo.setForeground(new java.awt.Color(255, 255, 255));
         tituloCatalogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloCatalogo.setText("TOMAR PEDIDO");
+        tituloCatalogo.setText("Tomar Pedido");
         tituloCatalogo.setOpaque(true);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Cliente"));
