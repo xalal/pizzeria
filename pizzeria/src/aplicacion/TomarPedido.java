@@ -29,6 +29,7 @@ public class TomarPedido extends javax.swing.JPanel {
         //lbl_fechaActual.setText(fecha());
         //lbl_horaInicio.setText(hora());
         inhabilitar();
+        txt_telefonobuscar.requestFocus();
     }
 
     public String fecha() {
@@ -61,7 +62,7 @@ public class TomarPedido extends javax.swing.JPanel {
 
     void inhabilitar() {
         txt_idcliente.setVisible(false);
-        //txt_idPedido.setVisible(true);
+        txt_idpedido.setVisible(false);
 
         txt_nombre.setEnabled(false);
         txt_telefono.setEnabled(false);
@@ -79,7 +80,7 @@ public class TomarPedido extends javax.swing.JPanel {
 
     void habilitar() {
         txt_idcliente.setVisible(false);
-        //txt_idPedido.setVisible(true);
+        txt_idpedido.setVisible(false);
 
         txt_nombre.setEnabled(true);
         txt_telefono.setEnabled(true);
@@ -140,7 +141,7 @@ public class TomarPedido extends javax.swing.JPanel {
                 btn_guardar.setText("Guardar");
                 accion = "guardar";
 
-               txt_telefono.setText(txt_telefonobuscar.getText());
+                txt_telefono.setText(txt_telefonobuscar.getText());
 
             }
 
@@ -148,7 +149,6 @@ public class TomarPedido extends javax.swing.JPanel {
         }
 
        // txt_telefono.setText(telefono);
-
     }
 
     /**
@@ -215,6 +215,7 @@ public class TomarPedido extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txt_telefonobuscar = new javax.swing.JTextField();
         btn_buscaCliente = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -327,6 +328,7 @@ public class TomarPedido extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Futura Bk BT", 0, 11))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Futura Bk BT", 0, 12)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico16_usuario.png"))); // NOI18N
         jLabel3.setText("Nombre:");
 
         txt_nombre.setFont(new java.awt.Font("Futura Bk BT", 0, 11)); // NOI18N
@@ -346,6 +348,7 @@ public class TomarPedido extends javax.swing.JPanel {
         });
 
         jLabel5.setFont(new java.awt.Font("Futura Bk BT", 0, 12)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico16_direccion.png"))); // NOI18N
         jLabel5.setText("Calle:");
 
         jLabel7.setFont(new java.awt.Font("Futura Bk BT", 0, 12)); // NOI18N
@@ -486,9 +489,10 @@ public class TomarPedido extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tablacliente);
 
-        btn_guardar.setBackground(new java.awt.Color(0, 102, 204));
+        btn_guardar.setBackground(new java.awt.Color(51, 153, 255));
         btn_guardar.setFont(new java.awt.Font("Futura Bk BT", 0, 11)); // NOI18N
         btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico16_guardar.png"))); // NOI18N
         btn_guardar.setText("Guardar");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,6 +501,7 @@ public class TomarPedido extends javax.swing.JPanel {
         });
 
         jLabel8.setFont(new java.awt.Font("Futura Bk BT", 0, 12)); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico16_telefono.png"))); // NOI18N
         jLabel8.setText("Teléfono:");
 
         txt_telefono.setFont(new java.awt.Font("Futura Bk BT", 0, 11)); // NOI18N
@@ -519,12 +524,12 @@ public class TomarPedido extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                        .addComponent(txt_nombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_idcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_guardar)))
@@ -542,7 +547,7 @@ public class TomarPedido extends javax.swing.JPanel {
                         .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txt_idcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -582,7 +587,7 @@ public class TomarPedido extends javax.swing.JPanel {
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -609,6 +614,7 @@ public class TomarPedido extends javax.swing.JPanel {
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel1.setFont(new java.awt.Font("Futura Bk BT", 0, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico24_telefono.png"))); // NOI18N
         jLabel1.setText("Buscar Teléfono:");
 
         txt_telefonobuscar.setFont(new java.awt.Font("Futura Bk BT", 0, 24)); // NOI18N
@@ -618,11 +624,14 @@ public class TomarPedido extends javax.swing.JPanel {
             }
         });
 
+        btn_buscaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico24_lupa.png"))); // NOI18N
         btn_buscaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscaClienteActionPerformed(evt);
             }
         });
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico128_carrito.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -632,26 +641,34 @@ public class TomarPedido extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txt_telefonobuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                        .addComponent(txt_telefonobuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(193, 193, 193)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 10, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addComponent(jLabel2)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_telefonobuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_buscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -660,6 +677,8 @@ public class TomarPedido extends javax.swing.JPanel {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "MENÚ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Futura Bk BT", 0, 11))); // NOI18N
 
+        jButton1.setBackground(new java.awt.Color(204, 255, 153));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico24_agregarPedido.png"))); // NOI18N
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -667,10 +686,14 @@ public class TomarPedido extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico2$_eliminarPedido.png"))); // NOI18N
         jButton2.setText("Quitar");
 
+        jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setText("Cancelar Todo");
 
+        jButton4.setBackground(new java.awt.Color(0, 204, 0));
         jButton4.setText("Confirmar Pedido");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -867,13 +890,13 @@ public class TomarPedido extends javax.swing.JPanel {
         // TODO add your handling code here:
         ModificarSistema form = new ModificarSistema();
         JFrame frame = new JFrame("Catalogo");
-        
+
         frame.add(form);
         frame.setSize(849, 651);
         frame.setVisible(true);
-        frame.setResizable(false);   
+        frame.setResizable(false);
 
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -894,6 +917,7 @@ public class TomarPedido extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
