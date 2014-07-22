@@ -4,19 +4,65 @@
  */
 package aplicacion;
 
+import BD.ConexionBD;
+import com.mysql.jdbc.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Maria
  */
 public class VisualizarCatalogo extends javax.swing.JPanel {
-
+    DefaultTableModel modelo;
+    BD.ConexionBD con = new ConexionBD();
+    java.sql.Connection jsc = con.conectar();
+    int fs = -1;
     /**
      * Creates new form VisualizarCatalogo
+     *
      * @param title
      */
     public VisualizarCatalogo(String title) {
         initComponents();
         tituloCatalogo.setText(title);
+        cargarDatos();
+        capturarSeleccion();
+    }
+    private void cargarDatos(){
+        if (jsc != null) {
+            try {
+                ResultSet rs;
+                CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_mostrarProductos('"+tituloCatalogo.getText()+"') }");
+                cStmt.execute();
+                rs = cStmt.getResultSet();
+                modelo = (DefaultTableModel) tablaCatalogo.getModel();
+                while (rs.next()) {
+                    modelo.addRow(new Object[]{rs.getString("nombre"), rs.getString("descripcion"),rs.getString("precio")});
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+    private void capturarSeleccion() {
+        tablaCatalogo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (event.getSource() == tablaCatalogo.getSelectionModel() && event.getFirstIndex() >= 0) {
+                    // Determine the selected item
+                    fs = tablaCatalogo.getSelectedRow();
+                    jtNombre.setText((String) modelo.getValueAt(tablaCatalogo.getSelectedRow(), 0));
+                }
+            }
+        });
     }
 
     /**
@@ -32,14 +78,15 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        textDescripcion = new javax.swing.JTextField();
-        textPreio = new javax.swing.JTextField();
+        jtNombre = new javax.swing.JTextField();
+        jtDescripcion = new javax.swing.JTextField();
+        jtPrecio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCatalogo = new javax.swing.JTable();
         botonAgregar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
+        botonLimpiar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(851, 549));
 
@@ -56,94 +103,174 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
 
         jLabel3.setText("Precio");
 
+        jtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtPrecioKeyTyped(evt);
+            }
+        });
+
         tablaCatalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Descripción", "Precio"
             }
         ));
         jScrollPane1.setViewportView(tablaCatalogo);
 
         botonAgregar.setText("Agregar");
+        botonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarActionPerformed(evt);
+            }
+        });
 
         botonEliminar.setText("Eliminar");
 
         botonModificar.setText("Modificar");
+        botonModificar.setEnabled(false);
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonLimpiar.setText("Limpiar");
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tituloCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(41, 41, 41)
+                        .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(textPreio, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonAgregar)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(botonModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonEliminar)))))
-                .addContainerGap(197, Short.MAX_VALUE))
-            .addComponent(tituloCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(222, 222, 222)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(botonModificar)
+                        .addGap(128, 128, 128)
+                        .addComponent(botonEliminar)
+                        .addGap(129, 129, 129)
+                        .addComponent(botonLimpiar)))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tituloCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textPreio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(botonAgregar)
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEliminar)
-                    .addComponent(botonModificar))
-                .addContainerGap(107, Short.MAX_VALUE))
+                    .addComponent(botonModificar)
+                    .addComponent(botonLimpiar))
+                .addGap(35, 35, 35))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_botonModificarActionPerformed
+
+    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
+        // TODO add your handling code here:
+        if (!validaVacios()) {//Guarda El registro en la base
+            Object[] datos = {
+            jtNombre.getText(),
+            jtDescripcion.getText(),
+            jtPrecio.getText()};
+            CallableStatement cStmt;
+            try{
+                cStmt = (CallableStatement) jsc.prepareCall("{ call sp_agregarProducto( ?,?,?,? ) }");
+                cStmt.setString("p_catalogo", tituloCatalogo.getText());
+                cStmt.setString("p_nombre", jtNombre.getText());
+                cStmt.setString("p_descripcion", jtDescripcion.getText());
+                cStmt.setDouble("p_precio", Double.parseDouble(jtPrecio.getText().trim()));
+                if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
+                    JOptionPane.showMessageDialog(this, "El producto se agregó correctamente");
+                    limpiarCampos();
+                    modelo = (DefaultTableModel) tablaCatalogo.getModel();
+                    modelo.addRow(datos);
+                    tablaCatalogo.setModel(modelo);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo agregar el producto");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VisualizarCatalogo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios");
+        }
+    }//GEN-LAST:event_botonAgregarActionPerformed
+    private void jtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecioKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtPrecioKeyTyped
+
+    private void limpiarCampos(){
+        jtNombre.setText("");
+        jtDescripcion.setText("");
+        jtPrecio.setText("");
+    }
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_botonLimpiarActionPerformed
+    public boolean validaVacios() {
+        return jtNombre.getText().isEmpty() || jtDescripcion.getText().isEmpty() || jtPrecio.getText().isEmpty();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregar;
     private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton botonLimpiar;
     private javax.swing.JButton botonModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtDescripcion;
+    private javax.swing.JTextField jtNombre;
+    private javax.swing.JTextField jtPrecio;
     private javax.swing.JTable tablaCatalogo;
-    private javax.swing.JTextField textDescripcion;
-    private javax.swing.JTextField textPreio;
     private javax.swing.JLabel tituloCatalogo;
     // End of variables declaration//GEN-END:variables
 }
