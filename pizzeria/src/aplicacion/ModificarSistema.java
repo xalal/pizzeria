@@ -168,7 +168,7 @@ public class ModificarSistema extends javax.swing.JPanel {
     }//GEN-LAST:event_jbPaquete1ActionPerformed
 
     @SuppressWarnings("empty-statement")
-    private void refreshPantalla(){
+    public void refreshPantalla(){
         this.jPanel2.removeAll();
         llenarPanel3();
         llenarPanel();

@@ -128,6 +128,7 @@ public class Catalogo extends JPanel {
     }
     private void eliminarCatalogo(){
         if(JOptionPane.showConfirmDialog(this, "Desea eliminar este catalogo")==JOptionPane.OK_OPTION){
+            
             JOptionPane.showMessageDialog(this, "EL catalogo fue eliminado");
         }
     }
@@ -149,7 +150,6 @@ public class Catalogo extends JPanel {
     @SuppressWarnings("empty-statement")
     private void refreshPantalla(){
         try {
-            JOptionPane.showMessageDialog(this, this.getParent().getParent().getClass().getName());
             this.getParent().getParent().getClass().getMethod("refreshPantalla").invoke(this.getParent().getParent());
         } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
