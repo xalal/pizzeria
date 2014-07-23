@@ -6,6 +6,7 @@ package aplicacion;
 
 import aplicacion.Pedido.FCliente;
 import aplicacion.Pedido.TCliente;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -30,6 +31,10 @@ public class TomarPedido extends javax.swing.JPanel {
         //lbl_horaInicio.setText(hora());
         inhabilitar();
         txt_telefonobuscar.requestFocus();
+        ArrayList catalogos=producto.getCatalogos();
+        for(Object item:catalogos){
+            jcCatalogo.addItem(item);
+        }
     }
 
     public String fecha() {
@@ -166,11 +171,7 @@ public class TomarPedido extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txt_idorden = new javax.swing.JTextField();
-        txt_idcatalogo = new javax.swing.JTextField();
-        txt_nombrecatalogo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txt_idproducto = new javax.swing.JTextField();
-        txt_nombreproducto = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txt_precioproducto = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -179,6 +180,8 @@ public class TomarPedido extends javax.swing.JPanel {
         txt_cantidad = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        jcCatalogo = new javax.swing.JComboBox();
+        jcProducto = new javax.swing.JComboBox();
         tituloCatalogo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -234,13 +237,43 @@ public class TomarPedido extends javax.swing.JPanel {
 
         jLabel12.setText("Precio U:");
 
+        txt_precioproducto.setText("0");
+
         jLabel14.setText("Cantidad:");
 
         btn_cancelarOrden.setText("Cancelar");
 
         btn_aceptarorden.setText("Aceptar");
 
+        txt_cantidad.setText("1");
+        txt_cantidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_cantidadFocusLost(evt);
+            }
+        });
+        txt_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_cantidadKeyTyped(evt);
+            }
+        });
+
+        jTextField1.setText("0.00");
+
         jLabel17.setText("Total $");
+
+        jcCatalogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un Catalogo", "----" }));
+        jcCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcCatalogoActionPerformed(evt);
+            }
+        });
+
+        jcProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un Producto" }));
+        jcProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcProductoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -258,19 +291,9 @@ public class TomarPedido extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(txt_idorden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_nombrecatalogo)
-                            .addComponent(txt_nombreproducto)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_idcatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jLabel4)
+                                .addGap(0, 143, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -280,25 +303,27 @@ public class TomarPedido extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_precioproducto)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txt_cantidad))))))
+                                    .addComponent(txt_cantidad)))
+                            .addComponent(jcCatalogo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(txt_idorden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_idcatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_nombrecatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_nombreproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -311,7 +336,7 @@ public class TomarPedido extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_aceptarorden)
                     .addComponent(btn_cancelarOrden))
@@ -890,7 +915,6 @@ public class TomarPedido extends javax.swing.JPanel {
         // TODO add your handling code here:
         ModificarSistema form = new ModificarSistema();
         JFrame frame = new JFrame("Catalogo");
-
         frame.add(form);
         frame.setSize(849, 651);
         frame.setVisible(true);
@@ -899,6 +923,42 @@ public class TomarPedido extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jcCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCatalogoActionPerformed
+        // TODO add your handling code here:
+        if(!"Seleccione un Catalogo".equals(jcCatalogo.getSelectedItem().toString())){
+            ArrayList productos=producto.getProductos(jcCatalogo.getSelectedItem().toString());
+            jcProducto.removeAllItems();
+            jcProducto.addItem("Seleccione un Producto");
+            for(Object item:productos){
+                jcProducto.addItem(item);
+            }
+        }
+    }//GEN-LAST:event_jcCatalogoActionPerformed
+    private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
+        // TODO add your handling code here:
+        if(jcProducto.getItemCount()>0){
+            String c=jcCatalogo.getSelectedItem().toString();
+            String p=jcProducto.getSelectedItem().toString();
+            if(!"Seleccione un Producto".equals(p)){
+                precio=producto.getPrecioProducto(c,p);
+                txt_precioproducto.setText(Double.toString(precio));
+                jTextField1.setText(Double.toString( precio * Integer.parseInt(txt_cantidad.getText() )));
+            }
+        }
+    }//GEN-LAST:event_jcProductoActionPerformed
+
+    private void txt_cantidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cantidadFocusLost
+        // TODO add your handling code here:
+        jTextField1.setText(Double.toString( precio * Integer.parseInt(txt_cantidad.getText() )));
+    }//GEN-LAST:event_txt_cantidadFocusLost
+
+    private void txt_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cantidadKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(c<'0' || c>'9' ) evt.consume();
+    }//GEN-LAST:event_txt_cantidadKeyTyped
+    aplicacion.Pedido.Producto producto=new aplicacion.Pedido.Producto();
+    double precio=0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_aceptarorden;
     private javax.swing.JButton btn_buscaCliente;
@@ -938,21 +998,19 @@ public class TomarPedido extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox jcCatalogo;
+    private javax.swing.JComboBox jcProducto;
     private javax.swing.JTable tablacliente;
     private javax.swing.JLabel tituloCatalogo;
     private javax.swing.JTextField txt_calle;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_colonia;
     private javax.swing.JTextField txt_estado;
-    private javax.swing.JTextField txt_idcatalogo;
     private javax.swing.JTextField txt_idcliente;
     private javax.swing.JTextField txt_idorden;
     private javax.swing.JTextField txt_idpedido;
-    private javax.swing.JTextField txt_idproducto;
     private javax.swing.JTextField txt_municipio;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_nombrecatalogo;
-    private javax.swing.JTextField txt_nombreproducto;
     private javax.swing.JTextField txt_numero;
     private javax.swing.JTextField txt_precioproducto;
     private javax.swing.JTextField txt_referencia1;
