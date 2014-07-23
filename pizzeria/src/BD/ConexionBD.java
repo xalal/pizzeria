@@ -32,7 +32,7 @@ public class ConexionBD {
                 throw new SQLException();
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error con la conexion del servidor:/n "+ e.getMessage());
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Se produjo el siguiente error: " + e.getMessage());
         } catch (NullPointerException e) {
