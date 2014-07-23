@@ -33,6 +33,12 @@ public class VerClientes extends javax.swing.JPanel {
         initComponents();
         cargarDatos();
         capturarSeleccion();
+        municipio.setVisible(false);
+        textMunicipio.setVisible(false);
+        estado.setVisible(false);
+        textEstado.setVisible(false);
+        textMunicipio.setText("Nicolas Romero");
+        textEstado.setText("Mexico");
     }
 
     private void capturarSeleccion() {
@@ -48,10 +54,8 @@ public class VerClientes extends javax.swing.JPanel {
                     textCalle.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 2));
                     textNumero.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 3));
                     textColonia.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 4));
-                    textMunicipio.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 5));
-                    textEstado.setText((String) modelo.getValueAt(jTable1.getSelectedRow(), 6));
-                    textReferencia1.setText((String) modelo.getValueAt(jTable1.getSelectedRow(),7));
-                    textReferencia2.setText((String) modelo.getValueAt(jTable1.getSelectedRow(),8));
+                    textReferencia1.setText((String) modelo.getValueAt(jTable1.getSelectedRow(),5));
+                    textReferencia2.setText((String) modelo.getValueAt(jTable1.getSelectedRow(),6));
                     Agregar.setEnabled(false);
                     Actualizar.setEnabled(true);
                 }
@@ -70,8 +74,7 @@ public class VerClientes extends javax.swing.JPanel {
                 while (rs.next()) {
                     modelo.addRow(new Object[]{rs.getString("nombre"), rs.getString("telefono"),
                         rs.getString("calle"), rs.getString("numero"), rs.getString("colonia"),
-                        rs.getString("municipio"), rs.getString("estado"), rs.getString("referencia1"), 
-                        rs.getString("referencia2")});
+                        rs.getString("referencia1"),  rs.getString("referencia2")});
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,7 +157,7 @@ public class VerClientes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nombre", "Telefono", "Calle", "Numero", "Colonia", "Municipio", "Estado", "Referencia1", "Referencia2"
+                "Nombre", "Telefono", "Calle", "Numero", "Colonia", "Referencia1", "Referencia2"
             }
         ));
         jTable1.setShowHorizontalLines(false);
@@ -204,93 +207,92 @@ public class VerClientes extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(737, 737, 737))
+            .addComponent(tituloCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(737, 737, 737))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(referencia1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telefono)
+                            .addComponent(numero)
+                            .addComponent(referencia1)
+                            .addComponent(municipio)
+                            .addComponent(nombre))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombre)
-                                    .addComponent(telefono)
-                                    .addComponent(numero)
-                                    .addComponent(municipio))
-                                .addGap(18, 18, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(textTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                        .addComponent(textNumero))
+                                    .addComponent(textReferencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(76, 76, 76)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(calle)
+                                    .addComponent(colonia)
+                                    .addComponent(referencia2)
+                                    .addComponent(estado))
+                                .addGap(40, 40, 40)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(textNumero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                                            .addComponent(textTelefono, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textMunicipio)
-                                            .addComponent(textReferencia1, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(68, 68, 68)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(colonia)
-                                            .addComponent(calle)
-                                            .addComponent(estado)
-                                            .addComponent(referencia2))
-                                        .addGap(32, 32, 32)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textReferencia2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(textColonia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                                                .addComponent(textCalle, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(textEstado))))
-                                    .addComponent(textNombre))))
-                        .addGap(73, 73, 73))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(Agregar)
-                        .addGap(126, 126, 126)
-                        .addComponent(Actualizar)
-                        .addGap(127, 127, 127)
-                        .addComponent(Agregar1)
-                        .addGap(128, 128, 128)
-                        .addComponent(Eliminar)
-                        .addContainerGap(170, Short.MAX_VALUE))))
-            .addComponent(tituloCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(textCalle, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                                    .addComponent(textColonia)
+                                    .addComponent(textReferencia2)
+                                    .addComponent(textEstado)))
+                            .addComponent(textNombre))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(Agregar)
+                .addGap(120, 120, 120)
+                .addComponent(Actualizar)
+                .addGap(121, 121, 121)
+                .addComponent(Agregar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(Eliminar)
+                .addGap(98, 98, 98))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(tituloCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre)
                     .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefono)
                     .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calle))
-                .addGap(21, 21, 21)
+                    .addComponent(calle)
+                    .addComponent(textCalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numero)
                     .addComponent(textNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(colonia)
                     .addComponent(textColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(referencia1)
+                    .addComponent(textReferencia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(referencia2)
+                    .addComponent(textReferencia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(municipio)
                     .addComponent(textMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(estado)
                     .addComponent(textEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(referencia1)
-                    .addComponent(referencia2)
-                    .addComponent(textReferencia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textReferencia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -407,8 +409,8 @@ public class VerClientes extends javax.swing.JPanel {
         textCalle.setText("");
         textNumero.setText("");
         textColonia.setText("");
-        textMunicipio.setText("");
-        textEstado.setText("");
+//        textMunicipio.setText("");
+//        textEstado.setText("");
         textReferencia1.setText("");
         textReferencia2.setText("");
     }

@@ -23,114 +23,111 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="737" max="-2" attributes="0"/>
+          <Component id="tituloCatalogo" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="referencia1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="737" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="telefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="numero" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="referencia1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="municipio" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telefono" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="numero" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="municipio" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="textNumero" alignment="0" pref="288" max="32767" attributes="0"/>
-                                          <Component id="textTelefono" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="textMunicipio" max="32767" attributes="0"/>
-                                          <Component id="textReferencia1" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="colonia" min="-2" max="-2" attributes="0"/>
-                                          <Component id="calle" min="-2" max="-2" attributes="0"/>
-                                          <Component id="estado" min="-2" max="-2" attributes="0"/>
-                                          <Component id="referencia2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="textReferencia2" pref="288" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="textColonia" alignment="0" pref="288" max="32767" attributes="0"/>
-                                              <Component id="textCalle" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="textEstado" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="textTelefono" pref="241" max="32767" attributes="0"/>
+                                      <Component id="textNumero" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="textNombre" max="32767" attributes="0"/>
+                                  <Component id="textReferencia1" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
+                                  <Component id="textMunicipio" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="calle" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="colonia" min="-2" max="-2" attributes="0"/>
+                                  <Component id="referencia2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="estado" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="textCalle" pref="254" max="32767" attributes="0"/>
+                                  <Component id="textColonia" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="textReferencia2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="textEstado" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="textNombre" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="Agregar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
-                      <Component id="Actualizar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
-                      <Component id="Agregar1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                      <Component id="Eliminar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
-          <Component id="tituloCatalogo" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+              <Component id="Agregar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+              <Component id="Actualizar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+              <Component id="Agregar1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="119" max="32767" attributes="0"/>
+              <Component id="Eliminar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="tituloCatalogo" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nombre" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textNombre" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="telefono" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textCalle" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="calle" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textCalle" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="numero" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="colonia" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textColonia" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="referencia1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textReferencia1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="referencia2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textReferencia2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="municipio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="estado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="referencia1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="referencia2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textReferencia1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textReferencia2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="166" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -215,14 +212,12 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="0">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="true" title="Nombre" type="java.lang.Object"/>
                 <Column editable="true" title="Telefono" type="java.lang.Object"/>
                 <Column editable="true" title="Calle" type="java.lang.Object"/>
                 <Column editable="true" title="Numero" type="java.lang.Object"/>
                 <Column editable="true" title="Colonia" type="java.lang.Object"/>
-                <Column editable="true" title="Municipio" type="java.lang.Object"/>
-                <Column editable="true" title="Estado" type="java.lang.Object"/>
                 <Column editable="true" title="Referencia1" type="java.lang.Object"/>
                 <Column editable="true" title="Referencia2" type="java.lang.Object"/>
               </Table>

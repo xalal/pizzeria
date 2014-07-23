@@ -37,11 +37,9 @@ public class Aplicacion {
                     if(a!=0 && !b.equals("NombreXalalSoftware") && !c.equals("CompañiaXalalSoftware")){
                        Principal obj = new Principal();
                        obj.setVisible(true);
-                       con.desconectar();
                     }else{
                         Validacion val = new Validacion();
-                        val.setVisible(true); 
-                        con.desconectar();
+                        val.setVisible(true);
                     }  
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error en la conexion."+ex, "ERROR", JOptionPane.WARNING_MESSAGE);

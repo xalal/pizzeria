@@ -68,8 +68,8 @@ public class ConexionBD {
         return flag;
     }
 //metodo que para desconectarse de la base de datos
-    public void desconectar() {
-        conn = null;
-        System.out.println("Desconexion a base de datos listo...");
-    }
+//    public void desconectar() {
+//        conn = null;
+//        System.out.println("Desconexion a base de datos listo...");
+//    }
 }

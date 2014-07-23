@@ -3,43 +3,41 @@ package aplicacion;
 import BD.ConexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class DatosPedidos extends javax.swing.JPanel {
-    
+
     public DatosPedidos() {
         initComponents();
-       idPed.setVisible(false);
-       
-btnCancelar.setOpaque(false);
-btnCancelar.setContentAreaFilled(false);
-btnCancelar.setBorderPainted(false);
+        idPed.setVisible(false);
 
-BtnFinalizar.setOpaque(false);
-BtnFinalizar.setContentAreaFilled(false);
-BtnFinalizar.setBorderPainted(false);
-       
+        btnCancelar.setOpaque(false);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setBorderPainted(false);
+
+        BtnFinalizar.setOpaque(false);
+        BtnFinalizar.setContentAreaFilled(false);
+        BtnFinalizar.setBorderPainted(false);
+
     }
-    
-    public void Datos(String Cliente,String Telefono,String Calle,String Numero,String Colonia,String Municipio,String Estado,String Fecha,String HrPed,String HrEnt,int contador,String idPedido){
+
+    public void Datos(String Cliente, String Telefono, String Calle, String Numero, String Colonia, String Municipio, String Estado, String Fecha, String HrPed, String HrEnt, int contador, String idPedido) {
 
         JCliente.setText(Cliente);
         JDescripcion.setText(HrEnt);
-        JDireccion.setText("<html><body>Calle: "+Calle+"<br>Numero: "
-                +Numero+"<br>Colonia: "
-                +Colonia+"<br>Municipio: "
-                +Municipio+"<br>Estado: "
-                +Estado+"</body></html>");
-        JHora.setText(Fecha+" "+HrPed);
+        JDireccion.setText("<html><body>Calle: " + Calle + "<br>Numero: "
+                + Numero + "<br>Colonia: "
+                + Colonia + "<br>Municipio: "
+                + Municipio + "<br>Estado: "
+                + Estado + "</body></html>");
+        JHora.setText(Fecha + " " + HrPed);
         JTelefono.setText(Telefono);
-        Pedido.setText("Pedido #"+contador);
+        Pedido.setText("Pedido #" + contador);
         idPed.setText(idPedido);
     }
-            
+
     @SuppressWarnings("unchecked")
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -140,16 +138,16 @@ BtnFinalizar.setBorderPainted(false);
         Connection cn = con.conectar();
         int valor = 1; //el valor 1 indica q se concluyo el pedido exitosamente
         try {
-        PreparedStatement pst = cn.prepareStatement("UPDATE pedido SET estatus='"+valor+"' WHERE idPedido='"+idPed.getText()+"'");
-        pst.executeUpdate();
-        JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
-        this.removeAll();
-        
+            PreparedStatement pst = cn.prepareStatement("UPDATE pedido SET estatus='" + valor + "' WHERE idPedido='" + idPed.getText() + "'");
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente");
+            this.removeAll();
+
         } catch (Exception e) {
-        System.out.print(e.getMessage());
-        JOptionPane.showMessageDialog(null, "Error Datos No Guardados ", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error Datos No Guardados ", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_BtnFinalizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -157,18 +155,18 @@ BtnFinalizar.setBorderPainted(false);
         Connection cn = con.conectar();
         int valor = 2;//el valor 2 indica que se concluyo el pedido pero no exitosamente (orden cancelada,no se encontro la direccion, fue una broma)
         try {
-        PreparedStatement pst = cn.prepareStatement("UPDATE pedido SET estatus='"+valor+"' WHERE idPedido='"+idPed.getText()+"'");
-        pst.executeUpdate();
-        this.removeAll();
-        
-        JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+            PreparedStatement pst = cn.prepareStatement("UPDATE pedido SET estatus='" + valor + "' WHERE idPedido='" + idPed.getText() + "'");
+            pst.executeUpdate();
+            this.removeAll();
+
+            JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente");
         } catch (Exception e) {
-        System.out.print(e.getMessage());
-        JOptionPane.showMessageDialog(null, "Error Datos No Guardados ", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error Datos No Guardados ", "Error", JOptionPane.ERROR_MESSAGE);
         }
-     
+
     }//GEN-LAST:event_btnCancelarActionPerformed
-       
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnFinalizar;
     private javax.swing.JLabel EtiCliente;
