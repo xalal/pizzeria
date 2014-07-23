@@ -278,7 +278,6 @@ public class Validacion extends javax.swing.JFrame {
                 CS.setString(4,macadd.toUpperCase());
                 CS.setString(5,serial.toUpperCase());
                 CS.execute();
-                Aplicacion.con.desconectar();
             } catch (SQLException ex) {
                 System.out.println("esta aplicacion ya fue ejecutada anteriormente");   
             }

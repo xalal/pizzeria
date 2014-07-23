@@ -41,7 +41,6 @@ public class Aplicacion {
                     }else{
                         Validacion val = new Validacion();
                         val.setVisible(true); 
-                        con.desconectar();
                     }  
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error en la conexion."+ex, "ERROR", JOptionPane.WARNING_MESSAGE);
