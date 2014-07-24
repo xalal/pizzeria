@@ -5,13 +5,17 @@
  */
 package aplicacion;
 
+import aplicacion.Pedido.Cliente;
 import aplicacion.Pedido.FCatalogo;
+import aplicacion.Pedido.FCliente;
 import aplicacion.Pedido.FOrden;
 import aplicacion.Pedido.FPedido;
 import aplicacion.Pedido.FProducto;
 import aplicacion.Pedido.Orden;
 import aplicacion.Pedido.Pedido;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 
 /**
  *
@@ -20,6 +24,19 @@ import java.sql.SQLException;
 public class Test_Roque {
 
     public static void main(String[] args) throws SQLException {
+        
+        //funciones principales
+        FPedido fpedido = new FPedido();
+        FCliente fcliente = new FCliente();
+        FOrden forden = new FOrden();
+        FCatalogo fcatalogo = new FCatalogo();
+        FProducto fproducto = new FProducto();
+        //objetos
+        Pedido pedido = new Pedido();
+                
+        
+  
+        
         /*
          //imprime nombre de clientes
          FCliente funcc = new FCliente();
@@ -55,6 +72,8 @@ public class Test_Roque {
         
         
          */
+        
+        /*
         //imprimir un pedido con sus ordenes
         FPedido funcp = new FPedido();
         Pedido pedido = funcp.buscarPedido(3);
@@ -77,6 +96,9 @@ public class Test_Roque {
 
         }
 
+        */
+        
+        
         /*
          //insertar una orden
         
@@ -95,6 +117,26 @@ public class Test_Roque {
          funco.insertarOrden(orden);
 
          */
+        
+        
+        
+        
+        //insertar pedido
+        
+        /*
+        
+        
+        int estatus = 0;
+        pedido.setEstatus(estatus);
+        pedido.setCliente(fcliente.buscarCliente(2));
+        pedido.setFechaPedido(new Date(2014,7,24));
+        pedido.setHrpedido(new Time(00, 00, 00));
+        pedido.setHrEntrega(new Time(00, 00, 00));
+        
+        pedido.setIdpedido(fpedido.insertarPedido(pedido));
+        
+        System.out.println("id pedido: " + pedido.getIdpedido());
+        */
     }
 
 }
