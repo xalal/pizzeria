@@ -261,7 +261,7 @@ public class TomarPedido extends javax.swing.JPanel {
 
         jLabel17.setText("Total $");
 
-        jcCatalogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un Catalogo", "----" }));
+        jcCatalogo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un Catalogo" }));
         jcCatalogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcCatalogoActionPerformed(evt);
@@ -927,22 +927,32 @@ public class TomarPedido extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(!"Seleccione un Catalogo".equals(jcCatalogo.getSelectedItem().toString())){
             ArrayList productos=producto.getProductos(jcCatalogo.getSelectedItem().toString());
+            ids=new int[productos.size()/2];
             jcProducto.removeAllItems();
             jcProducto.addItem("Seleccione un Producto");
+            int i =0;
             for(Object item:productos){
-                jcProducto.addItem(item);
+                try{
+                    ids[i]=Integer.parseInt(item.toString());
+                    i++;
+                }catch(NumberFormatException nfe){
+                    jcProducto.addItem(item);
+                }
             }
         }
     }//GEN-LAST:event_jcCatalogoActionPerformed
     private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
         // TODO add your handling code here:
         if(jcProducto.getItemCount()>0){
-            String c=jcCatalogo.getSelectedItem().toString();
-            String p=jcProducto.getSelectedItem().toString();
-            if(!"Seleccione un Producto".equals(p)){
-                precio=producto.getPrecioProducto(c,p);
-                txt_precioproducto.setText(Double.toString(precio));
-                jTextField1.setText(Double.toString( precio * Integer.parseInt(txt_cantidad.getText() )));
+            String catal=jcCatalogo.getSelectedItem().toString();
+            int index= jcProducto.getSelectedIndex();
+            if(index>0){
+                int produc=ids[index-1];
+                if(!"Seleccione un Producto".equals(jcProducto.getSelectedItem().toString())){
+                    precio=producto.getPrecioProducto(catal,produc);
+                    txt_precioproducto.setText(Double.toString(precio));
+                    jTextField1.setText(Double.toString( precio * Integer.parseInt(txt_cantidad.getText() )));
+                }
             }
         }
     }//GEN-LAST:event_jcProductoActionPerformed
@@ -959,6 +969,7 @@ public class TomarPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_cantidadKeyTyped
     aplicacion.Pedido.Producto producto=new aplicacion.Pedido.Producto();
     double precio=0;
+    int ids[];
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_aceptarorden;
     private javax.swing.JButton btn_buscaCliente;
