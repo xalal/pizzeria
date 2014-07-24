@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Imprenta Laurita
+ * @author Roque
  */
 public class FCliente {
 
@@ -25,6 +25,7 @@ public class FCliente {
     public Integer totalregistros;
 
     public DefaultTableModel mostrar(String buscar) {
+        
         DefaultTableModel modelo;
 
         String[] titulos = {"ID", "Nombre", "Teléfono", "Calle", "Número", "Referencia 1", "Referencia 2", "Colonia", "Municipio", "Estado"};

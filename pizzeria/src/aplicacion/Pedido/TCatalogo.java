@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package aplicacion.Pedido;
 
 /**
@@ -11,7 +5,7 @@ package aplicacion.Pedido;
  * @author Imprenta Laurita
  */
 public class TCatalogo {
-    
+
     private int idcatalogo;
     private String descripcion;
     private String imagen;
@@ -48,7 +42,5 @@ public class TCatalogo {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    
-    
+
 }

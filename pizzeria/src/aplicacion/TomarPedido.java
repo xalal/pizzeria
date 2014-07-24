@@ -267,7 +267,7 @@ public class TomarPedido extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btn_confirmar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setMinimumSize(new java.awt.Dimension(882, 567));
@@ -771,8 +771,13 @@ public class TomarPedido extends javax.swing.JPanel {
         jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setText("Cancelar Todo");
 
-        jButton4.setBackground(new java.awt.Color(0, 204, 0));
-        jButton4.setText("Confirmar Pedido");
+        btn_confirmar.setBackground(new java.awt.Color(0, 204, 0));
+        btn_confirmar.setText("Confirmar Pedido");
+        btn_confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -780,7 +785,7 @@ public class TomarPedido extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_confirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator1)
         );
         jPanel6Layout.setVerticalGroup(
@@ -793,7 +798,7 @@ public class TomarPedido extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btn_confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1020,16 +1025,28 @@ public class TomarPedido extends javax.swing.JPanel {
         calcularTotal();
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btn_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmarActionPerformed
+        // TODO add your handling code here:
+        //confirmar que cliente ok
+        //confirmar que haya articulos
+        //confirmar ventana 
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btn_confirmarActionPerformed
     aplicacion.Pedido.Producto producto = new aplicacion.Pedido.Producto();
     double precio = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_aceptarorden;
     private javax.swing.JButton btn_buscaCliente;
     private javax.swing.JButton btn_cancelarOrden;
+    private javax.swing.JButton btn_confirmar;
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

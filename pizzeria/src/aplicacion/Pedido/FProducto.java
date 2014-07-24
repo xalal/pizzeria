@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Imprenta Laurita
+ * @author Roque
  */
 public class FProducto {
 
@@ -42,6 +42,7 @@ public class FProducto {
     }
 
     public Double damePrecio(String catalogo, String producto) {
+        
         Double precio = 0.0;
         sSQL = "SELECT precio FROM " + catalogo + " WHERE nombre='" + producto + "'";
         System.out.println("producto dameprecio: " + sSQL);

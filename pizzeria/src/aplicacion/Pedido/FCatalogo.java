@@ -24,6 +24,7 @@ public class FCatalogo {
 
     public ArrayList buscarLista() {
 
+        
         ArrayList lista = new ArrayList();
         sSQL = "SELECT * FROM catalogo";
 
