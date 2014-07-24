@@ -7,7 +7,7 @@ package aplicacion;
 import aplicacion.Pedido.FCatalogo;
 import aplicacion.Pedido.FCliente;
 import aplicacion.Pedido.FProducto;
-import aplicacion.Pedido.TCliente;
+import aplicacion.Pedido.Cliente;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -130,7 +130,7 @@ public class TomarPedido extends javax.swing.JPanel {
             DefaultTableModel modelo;
 
             FCliente func = new FCliente();
-            TCliente datos = new TCliente();
+            Cliente datos = new Cliente();
 
             datos.setTelefono(telefono);
 
@@ -909,7 +909,7 @@ public class TomarPedido extends javax.swing.JPanel {
             return;
         }
 
-        TCliente datos = new TCliente();
+        Cliente datos = new Cliente();
         FCliente funcion = new FCliente();
 
         datos.setNombre(txt_nombre.getText());
@@ -1066,7 +1066,7 @@ public class TomarPedido extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btn_confirmarActionPerformed
-    aplicacion.Pedido.Producto producto = new aplicacion.Pedido.Producto();
+    aplicacion.Pedido.AbiProducto producto = new aplicacion.Pedido.AbiProducto();
     double precio = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_aceptarorden;

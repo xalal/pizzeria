@@ -1,33 +1,74 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package aplicacion.Pedido;
-
-import java.util.ArrayList;
 
 /**
  *
- * @author Abimael
+ * @author Imprenta Laurita
  */
 public class Producto {
+    private String tabla;
 
-    public ArrayList getCatalogos() {
-        FCatalogo func = new FCatalogo();
-        ArrayList catalogos = func.buscarLista();
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private Double precio;
 
-        return catalogos;
+    public Producto() {
     }
 
-    public ArrayList getProductos(String catalogo) {
-        FProducto func = new FProducto();
-        ArrayList productos = func.buscarLista(catalogo);
-
-        return productos;
+    public Producto(String tabla, int id, String nombre, String descripcion, Double precio) {
+        this.tabla = tabla;
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
     }
 
-    public double getPrecioProducto(String catalogo, String producto) {
-        double precio = 0.0;
+    public String getTabla() {
+        return tabla;
+    }
 
-        FProducto func = new FProducto();
-        precio = func.damePrecio(catalogo, producto);
+    public void setTabla(String tabla) {
+        this.tabla = tabla;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Double getPrecio() {
         return precio;
     }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+    
+    
+    
+
 }
