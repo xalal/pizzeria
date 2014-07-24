@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
@@ -240,10 +242,10 @@ public class VerReportes extends javax.swing.JPanel {
             jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelGraficasLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
-                    .addComponent(lblTituloPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+                    .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelGraficasLayout.setVerticalGroup(
             jPanelGraficasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,8 +253,8 @@ public class VerReportes extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(lblTituloPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jPanelDatosGraf, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jsPanelGraficas.setViewportView(jPanelGraficas);
@@ -297,13 +299,13 @@ public class VerReportes extends javax.swing.JPanel {
                                 .addComponent(jmcElegirMesSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jspNumeroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(30, 30, 30))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lblSubtitulo)
-                        .addGap(18, 18, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                        .addGap(18, 248, Short.MAX_VALUE))))
             .addComponent(tituloReportes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -325,7 +327,7 @@ public class VerReportes extends javax.swing.JPanel {
                                 .addGap(7, 7, 7)
                                 .addComponent(jrbPorAño))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jdcElegirDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(7, 7, 7)
@@ -343,19 +345,28 @@ public class VerReportes extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblImagen)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jsPanelGraficas, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jsPanelGraficas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbPorSemanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorSemanaActionPerformed
         // TODO add your handling code here:
-        jdcElegirDia.setEnabled(false);
+        if(jdcElegirDia.isEnabled()){
+            jdcElegirDia.setEnabled(false);
+        }
         jycElegirAñoSemana.setEnabled(true);
         jmcElegirMesSemana.setEnabled(true);
         jspNumeroSemana.setEnabled(true);
-        jmcElegirMes.setEnabled(false);
-        jycElegirAñoMes.setEnabled(false);
-        jycElegirAño.setEnabled(false);
+        if(jmcElegirMes.isEnabled()){
+            jmcElegirMes.setEnabled(false);
+        }
+        if(jycElegirAñoMes.isEnabled()){
+            jycElegirAñoMes.setEnabled(false);
+        }
+        if(jycElegirAño.isEnabled()){
+            jycElegirAño.setEnabled(false);
+        }
 
 
     }//GEN-LAST:event_jrbPorSemanaActionPerformed
@@ -363,74 +374,116 @@ public class VerReportes extends javax.swing.JPanel {
     private void jrbPorDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorDiaActionPerformed
         // TODO add your handling code here:
         jdcElegirDia.setEnabled(true);
-        jycElegirAñoSemana.setEnabled(false);
-        jmcElegirMesSemana.setEnabled(false);
-        jspNumeroSemana.setEnabled(false);
-        jmcElegirMes.setEnabled(false);
-        jycElegirAñoMes.setEnabled(false);
-        jycElegirAño.setEnabled(false);
+        if(jycElegirAñoSemana.isEnabled()){
+            jycElegirAñoSemana.setEnabled(false);
+        }
+        if(jmcElegirMesSemana.isEnabled()){
+            jmcElegirMesSemana.setEnabled(false);
+        }
+        if(jspNumeroSemana.isEnabled()){
+            jspNumeroSemana.setEnabled(false);
+        }
+        if(jmcElegirMes.isEnabled()){
+            jmcElegirMes.setEnabled(false);
+        }
+        if(jycElegirAñoMes.isEnabled()){
+            jycElegirAñoMes.setEnabled(false);
+        }
+        if(jycElegirAño.isEnabled()){
+            jycElegirAño.setEnabled(false);
+        }
     }//GEN-LAST:event_jrbPorDiaActionPerformed
 
     private void jrbPorMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorMesActionPerformed
         // TODO add your handling code here:
-        jdcElegirDia.setEnabled(false);
-        jycElegirAñoSemana.setEnabled(false);
-        jmcElegirMesSemana.setEnabled(false);
-        jspNumeroSemana.setEnabled(false);
+        if(jdcElegirDia.isEnabled()){
+            jdcElegirDia.setEnabled(false);
+        }
+        if(jycElegirAñoSemana.isEnabled()){
+            jycElegirAñoSemana.setEnabled(false);
+        }
+        if(jmcElegirMesSemana.isEnabled()){
+            jmcElegirMesSemana.setEnabled(false);
+        }
+        if(jspNumeroSemana.isEnabled()){
+            jspNumeroSemana.setEnabled(false);
+        }
         jmcElegirMes.setEnabled(true);
         jycElegirAñoMes.setEnabled(true);
-        jycElegirAño.setEnabled(false);
+        if(jycElegirAño.isEnabled()){
+            jycElegirAño.setEnabled(false);
+        }
     }//GEN-LAST:event_jrbPorMesActionPerformed
 
     private void jrbPorAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorAñoActionPerformed
         // TODO add your handling code here:
-        jdcElegirDia.setEnabled(false);
-        jycElegirAñoSemana.setEnabled(false);
-        jmcElegirMesSemana.setEnabled(false);
-        jspNumeroSemana.setEnabled(false);
-        jmcElegirMes.setEnabled(false);
-        jycElegirAñoMes.setEnabled(false);
+        if(jdcElegirDia.isEnabled()){
+            jdcElegirDia.setEnabled(false);
+        }
+        if(jycElegirAñoSemana.isEnabled()){
+            jycElegirAñoSemana.setEnabled(false);
+        }
+        if(jmcElegirMesSemana.isEnabled()){
+            jmcElegirMesSemana.setEnabled(false);
+        }
+        if(jspNumeroSemana.isEnabled()){
+            jspNumeroSemana.setEnabled(false);
+        }
+        if(jmcElegirMes.isEnabled()){
+            jmcElegirMes.setEnabled(false);
+        }
+        if(jycElegirAñoMes.isEnabled()){
+            jycElegirAñoMes.setEnabled(false);
+        }
         jycElegirAño.setEnabled(true);
     }//GEN-LAST:event_jrbPorAñoActionPerformed
 
     private void jycElegirAñoSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoSemanaPropertyChange
         // TODO add your handling code here:
-        setWeeksofMonth();
-        int year=jycElegirAñoSemana.getYear() ;
-        int mes=jmcElegirMesSemana.getMonth()+1;
-        int semana=jspNumeroSemana.getValue();
-        String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
-        graficar(sp);
+        if(jrbPorSemana.isSelected()){
+            setWeeksofMonth();
+            int year=jycElegirAñoSemana.getYear() ;
+            int mes=jmcElegirMesSemana.getMonth()+1;
+            int semana=jspNumeroSemana.getValue();
+            String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
+            graficar(sp);
+        }
     }//GEN-LAST:event_jycElegirAñoSemanaPropertyChange
 
     private void jmcElegirMesSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesSemanaPropertyChange
         // TODO add your handling code here:
-        setWeeksofMonth();
-        int year=jycElegirAñoSemana.getYear() ;
-        int mes=jmcElegirMesSemana.getMonth()+1;
-        int semana=jspNumeroSemana.getValue();
-        String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
-        graficar(sp);
+        if(jrbPorSemana.isSelected()){
+            setWeeksofMonth();
+            int year=jycElegirAñoSemana.getYear() ;
+            int mes=jmcElegirMesSemana.getMonth()+1;
+            int semana=jspNumeroSemana.getValue();
+            String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
+            graficar(sp);
+        }
     }//GEN-LAST:event_jmcElegirMesSemanaPropertyChange
 
     private void jdcElegirDiaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcElegirDiaPropertyChange
         // TODO add your handling code here:
-        DateFormat df = DateFormat.getDateInstance();
-        if (jdcElegirDia.getDate() != null) {
-            date = jdcElegirDia.getDate();
+        if(jrbPorDia.isSelected()){
+            DateFormat df = DateFormat.getDateInstance();
+            if (jdcElegirDia.getDate() != null) {
+                date = jdcElegirDia.getDate();
+            }
+            String fecha = df.format(date);
+            String sp="{ call sp_mostrarEstadisticaPorDia('" + fecha + "') }";
+            graficar(sp);
         }
-        String fecha = df.format(date);
-        String sp="{ call sp_mostrarEstadisticaPorDia('" + fecha + "') }";
-        graficar(sp);
     }//GEN-LAST:event_jdcElegirDiaPropertyChange
 
     private void jspNumeroSemanaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jspNumeroSemanaPropertyChange
         // TODO add your handling code here:
-        int year=jycElegirAñoSemana.getYear() ;
-        int mes=jmcElegirMesSemana.getMonth()+1;
-        int semana=jspNumeroSemana.getValue();
-        String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
-        graficar(sp);
+        if(jrbPorSemana.isSelected()){
+            int year=jycElegirAñoSemana.getYear() ;
+            int mes=jmcElegirMesSemana.getMonth()+1;
+            int semana=jspNumeroSemana.getValue();
+            String sp="{ call sp_mostrarEstadisticaPorSemana(" + year + ","+mes+","+semana+") }";
+            graficar(sp);
+        }
     }//GEN-LAST:event_jspNumeroSemanaPropertyChange
 
     private void jycElegirAñoMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoMesPropertyChange
@@ -440,15 +493,18 @@ public class VerReportes extends javax.swing.JPanel {
     }//GEN-LAST:event_jycElegirAñoMesPropertyChange
 
     private void jmcElegirMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmcElegirMesPropertyChange
-        String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+(jmcElegirMes.getMonth()+1)+") }";
-        graficar(sp);
-        
+        if(jrbPorMes.isSelected()){
+            String sp="{ call sp_mostrarEstadisticaPorMes(" + jycElegirAñoMes.getYear() + ","+(jmcElegirMes.getMonth()+1)+") }";
+            graficar(sp);
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jmcElegirMesPropertyChange
 
     private void jycElegirAñoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jycElegirAñoPropertyChange
-        String sp="{ call sp_mostrarEstadisticaPorAnio(" + jycElegirAño.getYear() + ") }";
-        graficar(sp);
+        if(jrbPorMes.isSelected()){
+            String sp="{ call sp_mostrarEstadisticaPorAnio(" + jycElegirAño.getYear() + ") }";
+            graficar(sp);
+        }
     // TODO add your handling code here:
     }//GEN-LAST:event_jycElegirAñoPropertyChange
 

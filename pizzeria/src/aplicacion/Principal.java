@@ -12,25 +12,21 @@ public class Principal extends javax.swing.JFrame {
     Calendar calendario; 
     int dia, mes, año, hora, minutos, segundos;
     
-    static Inicio ini = new Inicio();
-    ModificarSistema mods = new ModificarSistema();
-    TomarPedido tped = new TomarPedido();
-    VerClientes vcli = new VerClientes();
-    VerReportes vrep = new VerReportes();
-    
+    static Inicio ini;
+    ModificarSistema mods;
+    TomarPedido tped;
+    VerClientes vcli;
+    VerReportes vrep;
 
     
     public Principal() {
         initComponents();
-        ini.setVisible(true);
-        ini.setBounds(10, 10, 860, 545);
         setTitle("Paulo's Pizza ");
         setIconImage(new ImageIcon(getClass().getResource("../Imagenes/grafCirculo.jpg")).getImage());
+        ini = new Inicio();
+        ini.setVisible(true);
+        ini.setBounds(10, 10, 860, 545);
         jLayeredPane1.add(ini, javax.swing.JLayeredPane.DEFAULT_LAYER );
-        jLayeredPane1.add(mods, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.add(tped, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.add(vcli, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.add(vrep, javax.swing.JLayeredPane.DEFAULT_LAYER);
         reloj();       
     } 
     
@@ -242,55 +238,46 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSistemaActionPerformed
-        
-        ini.setVisible(false);
+        jLayeredPane1.removeAll();
+        mods = new ModificarSistema();
         mods.setVisible(true);
-        tped.setVisible(false);
-        vcli.setVisible(false);
-        vrep.setVisible(false);
         mods.setBounds(10, 10, 860, 545);
+        jLayeredPane1.add(mods, javax.swing.JLayeredPane.DEFAULT_LAYER );
         
         
     }//GEN-LAST:event_BtnSistemaActionPerformed
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-        
+        jLayeredPane1.removeAll();
+        ini = new Inicio();
         ini.setVisible(true);
-        mods.setVisible(false);
-        tped.setVisible(false);
-        vcli.setVisible(false);
-        vrep.setVisible(false);
-       ini.setBounds(10, 10, 860, 545);
+        ini.setBounds(10, 10, 860, 545);
+        jLayeredPane1.add(ini, javax.swing.JLayeredPane.DEFAULT_LAYER );
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPedidoActionPerformed
-        ini.setVisible(false);
-        mods.setVisible(false);
+        jLayeredPane1.removeAll();
+        tped = new TomarPedido();
         tped.setVisible(true);
-        vcli.setVisible(false);
-        vrep.setVisible(false);
         tped.setBounds(10, 10, 860, 545);
-        
+        jLayeredPane1.add(tped, javax.swing.JLayeredPane.DEFAULT_LAYER );
     }//GEN-LAST:event_BtnPedidoActionPerformed
 
     private void BtnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClienteActionPerformed
-        ini.setVisible(false);
-        mods.setVisible(false);
-        tped.setVisible(false);
+        jLayeredPane1.removeAll();
+        vcli = new VerClientes();
         vcli.setVisible(true);
-        vrep.setVisible(false);
         vcli.setBounds(10, 10, 860, 545);
+        jLayeredPane1.add(vcli, javax.swing.JLayeredPane.DEFAULT_LAYER );
         
     }//GEN-LAST:event_BtnClienteActionPerformed
 
     private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
-        ini.setVisible(false);
-        mods.setVisible(false);
-        tped.setVisible(false);
-        vcli.setVisible(false);
+        jLayeredPane1.removeAll();
+        vrep = new VerReportes();
         vrep.setVisible(true);
-       vrep.setBounds(10, 10, 860, 545);
-        
+        vrep.setBounds(10, 10, 860, 545);
+        jLayeredPane1.add(vrep, javax.swing.JLayeredPane.DEFAULT_LAYER );
     }//GEN-LAST:event_BtnReporteActionPerformed
 
     /**
