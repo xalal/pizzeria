@@ -7,10 +7,10 @@ package aplicacion.Pedido;
 
 import BD.ConexionBD;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -24,26 +24,93 @@ public class FPedido {
     private String sSQL = "";
     public Integer totalregistros;
 
-    public void insertarPedido(Pedido pedido) throws SQLException {
+    public int insertarPedido(Pedido pedido) throws SQLException {
+        //devuelve el id del pedido;
 
-        sSQL = "INSERT INTO cliente ("
+        int key = -1;
+        sSQL = "INSERT INTO pedido ( "
                 + "estatus,"
                 + "idcliente,"
                 + "fechapedido,"
                 + "hrpedido,"
                 + "hrentrega "
                 + ")"
-                + " values (?,?,?,?,?)";
+                + " VALUES (?,?,?,?,?)";
 
-        PreparedStatement pst = cn.prepareStatement(sSQL);
-        pst.setInt(1, pedido.getEstatus());
-        pst.setInt(2, pedido.getCliente().getIdcliente());
-        pst.setDate(3, pedido.getFechaPedido());
-        pst.setTime(4, pedido.getHrpedido());
-        pst.setTime(5, pedido.getHrEntrega());
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL, Statement.RETURN_GENERATED_KEYS);
 
-        pst.executeUpdate();
-        pst.close();
+            pst.setInt(1, pedido.getEstatus());
+            pst.setInt(2, pedido.getCliente().getIdcliente());
+            pst.setDate(3, pedido.getFechaPedido());
+            pst.setTime(4, pedido.getHrpedido());
+            pst.setTime(5, pedido.getHrEntrega());
+
+            System.out.println(sSQL);
+
+            pst.executeUpdate();
+
+            ResultSet keys = pst.getGeneratedKeys();
+            while (keys.next()) {
+                key = keys.getInt(1);
+            }
+
+            pst.close();
+
+        } catch (Exception e) {
+            System.out.println("error insert" + e);
+        }
+
+        return key;
+    }
+
+    public boolean editarPedido(Pedido pedido) throws SQLException {
+
+        sSQL = "UPDATE pedido SET "
+                + "estatus=?,"
+                + "idcliente=?,"
+                + "fechapedido=?,"
+                + "hrpedido=?,"
+                + "hrentrega=?"
+                + " WHERE idpedido=?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+
+            pst.setInt(1, pedido.getEstatus());
+            pst.setInt(2, pedido.getCliente().getIdcliente());
+            pst.setDate(3, pedido.getFechaPedido());
+            pst.setTime(4, pedido.getHrpedido());
+            pst.setTime(5, pedido.getHrEntrega());
+
+            pst.setInt(6, pedido.getIdpedido());
+
+            int rowsUpdated = pst.executeUpdate();
+            pst.close();
+
+            return rowsUpdated > 0;
+
+        } catch (Exception e) {
+            System.out.println("error update" + e);
+            return false;
+        }
+    }
+
+    public boolean eliminarPedido(int idpedido) throws SQLException {
+        sSQL = "DELETE FROM pedido WHERE idpedido=?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            pst.setInt(1, idpedido);
+
+            int rowsUpdated = pst.executeUpdate();
+            pst.close();
+
+            return rowsUpdated > 0;
+        } catch (Exception e) {
+            System.out.println("error eliminar" + e);
+            return false;
+        }
     }
 
     public Pedido buscarPedido(int idpedido) throws SQLException {

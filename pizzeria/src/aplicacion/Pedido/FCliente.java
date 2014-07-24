@@ -220,29 +220,34 @@ public class FCliente {
     public Cliente buscarCliente(int idcliente, Cliente cliente) throws SQLException {
 
         sSQL = "SELECT * FROM cliente WHERE idcliente=?";
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
 
-        PreparedStatement pst = cn.prepareStatement(sSQL);
+            pst.setInt(1, idcliente);
 
-        pst.setInt(1, idcliente);
-
-        ResultSet rs = pst.executeQuery();
-        if (rs.next()) {
-            if (cliente == null) {
-                cliente = new Cliente() {
-                };
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                if (cliente == null) {
+                    cliente = new Cliente() {
+                    };
+                }
+                cliente.setIdcliente(idcliente);
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setCalle(rs.getString("calle"));
+                cliente.setNumero(rs.getString("numero"));
+                cliente.setReferencia1(rs.getString("referencia1"));
+                cliente.setReferencia2(rs.getString("referencia2"));
+                cliente.setColonia(rs.getString("colonia"));
+                cliente.setMunicipio(rs.getString("municipio"));
+                cliente.setEstado(rs.getString("estado"));
             }
-            cliente.setIdcliente(idcliente);
-            cliente.setNombre(rs.getString("nombre"));
-            cliente.setTelefono(rs.getString("telefono"));
-            cliente.setCalle(rs.getString("calle"));
-            cliente.setNumero(rs.getString("numero"));
-            cliente.setReferencia1(rs.getString("referencia1"));
-            cliente.setReferencia2(rs.getString("referencia2"));
-            cliente.setColonia(rs.getString("colonia"));
-            cliente.setMunicipio(rs.getString("municipio"));
-            cliente.setEstado(rs.getString("estado"));
+            pst.close();
+
+        } catch (Exception e) {
+            System.out.println("error buscar" + e);
         }
-        pst.close();
+
         return cliente;
     }
 
@@ -278,8 +283,7 @@ public class FCliente {
         pst.close();
         return cliente;
     }
-    
-    
+
     public ArrayList<Cliente> mostrarCliente() throws SQLException {
 
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
@@ -287,12 +291,13 @@ public class FCliente {
         sSQL = "SELECT * FROM cliente";
 
         PreparedStatement pst = cn.prepareStatement(sSQL);
-        
+
         ResultSet rs = pst.executeQuery();
-        
+
         while (rs.next()) {
-           Cliente cliente = new Cliente() {};
-            
+            Cliente cliente = new Cliente() {
+            };
+
             cliente.setIdcliente(rs.getInt("idcliente"));
             cliente.setNombre(rs.getString("nombre"));
             cliente.setTelefono(rs.getString("telefono"));
@@ -303,10 +308,10 @@ public class FCliente {
             cliente.setColonia(rs.getString("colonia"));
             cliente.setMunicipio(rs.getString("municipio"));
             cliente.setEstado(rs.getString("estado"));
- 
+
             lista.add(cliente);
         }
- 
+
         pst.close();
         return lista;
     }
