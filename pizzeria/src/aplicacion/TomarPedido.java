@@ -59,7 +59,7 @@ public class TomarPedido extends javax.swing.JPanel {
         mes = (calendario.get(Calendar.MONTH) + 1);
         año = calendario.get(Calendar.YEAR);
 
-        String date = String.format("%02d / %02d / %02d", dia, mes, año);
+        String date = String.format("%02d-%02d-%02d", año, dia, mes);
 
         return date;
     }
@@ -72,7 +72,7 @@ public class TomarPedido extends javax.swing.JPanel {
         hora = calendario.get(Calendar.HOUR_OF_DAY);
         minutos = calendario.get(Calendar.MINUTE);
         segundos = calendario.get(Calendar.SECOND);
-        String hour = String.format("%02d : %02d : %02d", hora, minutos, segundos);
+        String hour = String.format("%02d:%02d:%02d", hora, minutos, segundos);
 
         return hour;
     }
@@ -1048,7 +1048,7 @@ public class TomarPedido extends javax.swing.JPanel {
             return;
         }
 
-        System.out.println(tabla_articulos.getRowCount());
+        //System.out.println(tabla_articulos.getRowCount());
         if (tabla_articulos.getRowCount() == 0) {
             JOptionPane.showMessageDialog(tabla_articulos, "No hay articulos seleccionados\npara venta.");
             return;
@@ -1059,6 +1059,24 @@ public class TomarPedido extends javax.swing.JPanel {
 
             // hacer las consultas a la base de datos
             //1 insertar pedido
+            //sacar datos primero
+            String fecha = fecha();
+            String hora = hora();
+            JOptionPane.showMessageDialog(null, "fecha: " + fecha);
+            JOptionPane.showMessageDialog(null, "hora: " + hora);
+
+            try {
+                FCliente fcliente = new FCliente();
+                Cliente cliente = new Cliente();
+                int idcliente = Integer.parseInt(txt_idcliente.getText());
+                cliente = fcliente.buscarCliente(idcliente);
+                
+                JOptionPane.showMessageDialog(null, "cliente: " +  cliente.getNombre());
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error cliente: " + e);
+            }
+
             //2 sacar idpedido
             //3 insertar ordenes
             //4 mostrar si quiere imprimir el ticket
