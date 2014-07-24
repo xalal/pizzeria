@@ -1028,14 +1028,43 @@ public class TomarPedido extends javax.swing.JPanel {
 
     private void btn_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmarActionPerformed
         // TODO add your handling code here:
-        //confirmar que cliente ok
-        //confirmar que haya articulos
-        //confirmar ventana 
-        
-        
-        
-        
-        
+        //confirmar que idcliente lleno
+        //confirmar que haya articulos en la tabla
+        //confirmar ventana de confirmacion de pedido
+
+        if (txt_idcliente.getText().length() == 0 && txt_telefono.getText().length() == 0) {
+            JOptionPane.showMessageDialog(btn_buscaCliente, "Falta BUSCAR cliente.");
+            txt_telefonobuscar.requestFocus();
+            return;
+        }
+        if (txt_idcliente.getText().length() != 0 && txt_telefono.getText().length() == 0) {
+            JOptionPane.showMessageDialog(txt_telefono, "Falta TELEFONO de cliente.");
+            txt_telefono.requestFocus();
+            return;
+        }
+        if (txt_idcliente.getText().length() == 0) {
+            JOptionPane.showMessageDialog(btn_guardar, "Falta GUARDAR cliente.");
+            btn_guardar.requestFocus();
+            return;
+        }
+
+        System.out.println(tabla_articulos.getRowCount());
+        if (tabla_articulos.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(tabla_articulos, "No hay articulos seleccionados\npara venta.");
+            return;
+        }
+
+        int pregunta1 = JOptionPane.showConfirmDialog(null, "Estas seguro de aceptar el pedido?");
+        if (pregunta1 == JOptionPane.YES_OPTION) {
+
+            // hacer las consultas a la base de datos
+            //1 insertar pedido
+            //2 sacar idpedido
+            //3 insertar ordenes
+            //4 mostrar si quiere imprimir el ticket
+            //5 regresar a inicio
+        }
+
     }//GEN-LAST:event_btn_confirmarActionPerformed
     aplicacion.Pedido.Producto producto = new aplicacion.Pedido.Producto();
     double precio = 0;

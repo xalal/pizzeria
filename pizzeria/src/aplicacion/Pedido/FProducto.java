@@ -45,7 +45,7 @@ public class FProducto {
         
         Double precio = 0.0;
         sSQL = "SELECT precio FROM " + catalogo + " WHERE nombre='" + producto + "'";
-        System.out.println("producto dameprecio: " + sSQL);
+        //System.out.println("producto dameprecio: " + sSQL);
 
         try {
             Statement st = cn.createStatement();
@@ -65,7 +65,7 @@ public class FProducto {
         String id = "";
         
         sSQL = "SELECT * FROM " + catalogo + " WHERE nombre='" + producto + "'";
-        System.out.println("producto busca: " + sSQL);
+        //System.out.println("producto busca: " + sSQL);
 
         try {
             Statement st = cn.createStatement();
