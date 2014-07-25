@@ -24,7 +24,7 @@ import java.sql.Time;
 public class Test_Roque {
 
     public static void main(String[] args) throws SQLException {
-        
+
         //funciones principales
         FPedido fpedido = new FPedido();
         FCliente fcliente = new FCliente();
@@ -33,10 +33,7 @@ public class Test_Roque {
         FProducto fproducto = new FProducto();
         //objetos
         Pedido pedido = new Pedido();
-                
-        
-  
-        
+
         /*
          //imprime nombre de clientes
          FCliente funcc = new FCliente();
@@ -72,33 +69,30 @@ public class Test_Roque {
         
         
          */
-        
         /*
-        //imprimir un pedido con sus ordenes
-        FPedido funcp = new FPedido();
-        Pedido pedido = funcp.buscarPedido(3);
+         //imprimir un pedido con sus ordenes
+         FPedido funcp = new FPedido();
+         Pedido pedido = funcp.buscarPedido(3);
 
-        System.out.print(pedido.getIdpedido() + ", ");              //id pedido
-        System.out.print(pedido.getEstatus() + ", ");               //estatus
-        System.out.print(pedido.getCliente().getNombre() + ", ");   //nombre cliente
-        System.out.print(pedido.getFechaPedido() + ", ");           //fecha pedido
-        System.out.print(pedido.getHrpedido() + ", ");               //hora pedido
-        System.out.println(pedido.getHrEntrega() + ", ");            //hora entrega
+         System.out.print(pedido.getIdpedido() + ", ");              //id pedido
+         System.out.print(pedido.getEstatus() + ", ");               //estatus
+         System.out.print(pedido.getCliente().getNombre() + ", ");   //nombre cliente
+         System.out.print(pedido.getFechaPedido() + ", ");           //fecha pedido
+         System.out.print(pedido.getHrpedido() + ", ");               //hora pedido
+         System.out.println(pedido.getHrEntrega() + ", ");            //hora entrega
 
-        System.out.println("ORDENES: Articulos");
-        FOrden funco = new FOrden();
-        for (Orden orden : funco.mostrarOrden(pedido.getIdpedido())) {
-            System.out.print("_____" + orden.getIdorden() + ", ");
-            System.out.print(orden.getCatalogo().getDescripcion() + ", ");
-            System.out.print(orden.getProducto().getNombre() + ", ");
-            System.out.print(orden.getCantidad() + ", ");
-            System.out.println(orden.getPrecio());
+         System.out.println("ORDENES: Articulos");
+         FOrden funco = new FOrden();
+         for (Orden orden : funco.mostrarOrden(pedido.getIdpedido())) {
+         System.out.print("_____" + orden.getIdorden() + ", ");
+         System.out.print(orden.getCatalogo().getDescripcion() + ", ");
+         System.out.print(orden.getProducto().getNombre() + ", ");
+         System.out.print(orden.getCantidad() + ", ");
+         System.out.println(orden.getPrecio());
 
-        }
+         }
 
-        */
-        
-        
+         */
         /*
          //insertar una orden
         
@@ -117,26 +111,37 @@ public class Test_Roque {
          funco.insertarOrden(orden);
 
          */
-        
-        
-        
-        
         //insertar pedido
-        
         /*
         
         
-        int estatus = 0;
-        pedido.setEstatus(estatus);
-        pedido.setCliente(fcliente.buscarCliente(2));
-        pedido.setFechaPedido(new Date(2014,7,24));
-        pedido.setHrpedido(new Time(00, 00, 00));
-        pedido.setHrEntrega(new Time(00, 00, 00));
+         int estatus = 0;
+         pedido.setEstatus(estatus);
+         pedido.setCliente(fcliente.buscarCliente(2));
+         pedido.setFechaPedido(new Date(2014,7,24));
+         pedido.setHrpedido(new Time(00, 00, 00));
+         pedido.setHrEntrega(new Time(00, 00, 00));
         
-        pedido.setIdpedido(fpedido.insertarPedido(pedido));
+         pedido.setIdpedido(fpedido.insertarPedido(pedido));
         
-        System.out.println("id pedido: " + pedido.getIdpedido());
-        */
+         System.out.println("id pedido: " + pedido.getIdpedido());
+         */
+        
+
+        java.util.Date objFecha = new java.util.Date();
+        java.text.SimpleDateFormat cortarFecha = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String fecha = cortarFecha.format(objFecha);
+
+        java.util.Date objHora = new java.util.Date();
+        java.text.SimpleDateFormat cortarHora = new java.text.SimpleDateFormat("HH:mm:ss");
+        String hora = cortarHora.format(objHora);
+        
+
+        System.out.println(fecha);
+        System.out.println(hora);
+        
+        
+        
     }
 
 }

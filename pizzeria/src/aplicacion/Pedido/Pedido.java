@@ -5,9 +5,6 @@
  */
 package aplicacion.Pedido;
 
-import java.sql.Date;
-import java.sql.Time;
-
 /**
  *
  * @author Imprenta Laurita
@@ -17,14 +14,14 @@ public class Pedido {
     private int idpedido;
     private int estatus;
     private Cliente cliente;
-    private Date fechaPedido;
-    private Time hrpedido;
-    private Time hrEntrega;
+    private String fechaPedido;
+    private String hrpedido;
+    private String hrEntrega;
 
     public Pedido() {
     }
 
-    public Pedido(int idpedido, int estatus, Cliente cliente, Date fechaPedido, Time hrpedido, Time hrEntrega) {
+    public Pedido(int idpedido, int estatus, Cliente cliente, String fechaPedido, String hrpedido, String hrEntrega) {
         this.idpedido = idpedido;
         this.estatus = estatus;
         this.cliente = cliente;
@@ -57,29 +54,28 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Date getFechaPedido() {
+    public String getFechaPedido() {
         return fechaPedido;
     }
 
-    public void setFechaPedido(Date fechaPedido) {
+    public void setFechaPedido(String fechaPedido) {
         this.fechaPedido = fechaPedido;
     }
 
-    public Time getHrpedido() {
+    public String getHrpedido() {
         return hrpedido;
     }
 
-    public void setHrpedido(Time hrpedido) {
+    public void setHrpedido(String hrpedido) {
         this.hrpedido = hrpedido;
     }
 
-    public Time getHrEntrega() {
+    public String getHrEntrega() {
         return hrEntrega;
     }
 
-    public void setHrEntrega(Time hrEntrega) {
+    public void setHrEntrega(String hrEntrega) {
         this.hrEntrega = hrEntrega;
     }
 
-    
 }

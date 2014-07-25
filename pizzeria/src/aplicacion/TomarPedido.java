@@ -4,14 +4,17 @@
  */
 package aplicacion;
 
+import aplicacion.Pedido.Cliente;
 import aplicacion.Pedido.FCatalogo;
 import aplicacion.Pedido.FCliente;
+import aplicacion.Pedido.FOrden;
+import aplicacion.Pedido.FPedido;
 import aplicacion.Pedido.FProducto;
-import aplicacion.Pedido.Cliente;
+import aplicacion.Pedido.Orden;
+import aplicacion.Pedido.Pedido;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +34,7 @@ public class TomarPedido extends javax.swing.JPanel {
         initComponents();
         //lbl_fechaActual.setText(fecha());
         //lbl_horaInicio.setText(hora());
-        inhabilitar();
+ 
         txt_telefonobuscar.requestFocus();
         ocultar_columnas();
         ArrayList catalogos = producto.getCatalogos();
@@ -50,6 +53,9 @@ public class TomarPedido extends javax.swing.JPanel {
         tabla_articulos.getColumnModel().getColumn(3).setMinWidth(0);
         tabla_articulos.getColumnModel().getColumn(3).setPreferredWidth(0);
     }
+    
+    
+   
 
     public String fecha() {
         calendario = new java.util.GregorianCalendar();
@@ -59,7 +65,7 @@ public class TomarPedido extends javax.swing.JPanel {
         mes = (calendario.get(Calendar.MONTH) + 1);
         año = calendario.get(Calendar.YEAR);
 
-        String date = String.format("%02d-%02d-%02d", año, dia, mes);
+        String date = String.format("%02d-%02d-%02d", año, mes, dia);
 
         return date;
     }
@@ -94,6 +100,13 @@ public class TomarPedido extends javax.swing.JPanel {
         txt_estado.setEnabled(false);
 
         btn_guardar.setEnabled(false);
+        
+        btn_agregar.setEnabled(false);
+        btn_quitar.setEnabled(false);
+        
+        btn_confirmar.setEnabled(false);
+        btn_cancelarTodo.setEnabled(false);
+        
 
     }
 
@@ -220,8 +233,6 @@ public class TomarPedido extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         txt_precioproducto = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        btn_cancelarOrden = new javax.swing.JButton();
-        btn_aceptarorden = new javax.swing.JButton();
         txt_cantidad = new javax.swing.JTextField();
         txt_totalproducto = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -265,10 +276,11 @@ public class TomarPedido extends javax.swing.JPanel {
         btn_buscaCliente = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_quitar = new javax.swing.JButton();
+        btn_cancelarTodo = new javax.swing.JButton();
         btn_confirmar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        btn_agregar = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(882, 567));
         setPreferredSize(new java.awt.Dimension(882, 567));
@@ -284,15 +296,6 @@ public class TomarPedido extends javax.swing.JPanel {
         txt_precioproducto.setText("0");
 
         jLabel14.setText("Cantidad:");
-
-        btn_cancelarOrden.setText("Cancelar");
-
-        btn_aceptarorden.setText("Aceptar");
-        btn_aceptarorden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_aceptarordenActionPerformed(evt);
-            }
-        });
 
         txt_cantidad.setText("1");
         txt_cantidad.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -329,34 +332,26 @@ public class TomarPedido extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_cancelarOrden, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_aceptarorden, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 143, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel12))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_precioproducto)
-                                    .addComponent(txt_totalproducto, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txt_cantidad)))
-                            .addComponent(jcCatalogo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_precioproducto)
+                            .addComponent(txt_totalproducto, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_cantidad)))
+                    .addComponent(jcCatalogo, 0, 190, Short.MAX_VALUE)
+                    .addComponent(jcProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,11 +376,7 @@ public class TomarPedido extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_totalproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_aceptarorden)
-                    .addComponent(btn_cancelarOrden))
-                .addContainerGap())
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         tituloCatalogo.setBackground(new java.awt.Color(79, 53, 32));
@@ -669,7 +660,7 @@ public class TomarPedido extends javax.swing.JPanel {
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -759,17 +750,17 @@ public class TomarPedido extends javax.swing.JPanel {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "MENÚ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Futura Bk BT", 0, 11))); // NOI18N
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 204));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico2$_eliminarPedido.png"))); // NOI18N
-        jButton2.setText("Quitar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_quitar.setBackground(new java.awt.Color(255, 204, 204));
+        btn_quitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico2$_eliminarPedido.png"))); // NOI18N
+        btn_quitar.setText("Quitar >>");
+        btn_quitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_quitarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setText("Cancelar Todo");
+        btn_cancelarTodo.setBackground(new java.awt.Color(255, 0, 0));
+        btn_cancelarTodo.setText("Cancelar Todo");
 
         btn_confirmar.setBackground(new java.awt.Color(0, 204, 0));
         btn_confirmar.setText("Confirmar Pedido");
@@ -779,24 +770,37 @@ public class TomarPedido extends javax.swing.JPanel {
             }
         });
 
+        btn_agregar.setBackground(new java.awt.Color(153, 204, 0));
+        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ico24_agregarPedido.png"))); // NOI18N
+        btn_agregar.setText("<< Agregar");
+        btn_agregar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_quitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_cancelarTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_confirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator1)
+            .addComponent(btn_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(btn_agregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_quitar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btn_cancelarTodo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -987,6 +991,8 @@ public class TomarPedido extends javax.swing.JPanel {
                 precio = producto.getPrecioProducto(c, p);
                 txt_precioproducto.setText(Double.toString(precio));
                 txt_totalproducto.setText(Double.toString(precio * Integer.parseInt(txt_cantidad.getText())));
+                
+                btn_agregar.setEnabled(true);
             }
         }
     }//GEN-LAST:event_jcProductoActionPerformed
@@ -1004,27 +1010,14 @@ public class TomarPedido extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txt_cantidadKeyTyped
 
-    private void btn_aceptarordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarordenActionPerformed
-        // TODO add your handling code here:
-        String cantidad = txt_cantidad.getText();
-        String catalogo = jcCatalogo.getSelectedItem().toString();
-        String producto = jcProducto.getSelectedItem().toString();
-        String precio = txt_precioproducto.getText();
-        String total = txt_totalproducto.getText();
-
-        setArticuloTabla(cantidad, catalogo, producto, precio, total);
-
-
-    }//GEN-LAST:event_btn_aceptarordenActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quitarActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tabla_articulos.getModel();
 
         model.removeRow(tabla_articulos.getSelectedRow());
         calcularTotal();
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_quitarActionPerformed
 
     private void btn_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmarActionPerformed
         // TODO add your handling code here:
@@ -1058,42 +1051,119 @@ public class TomarPedido extends javax.swing.JPanel {
         if (pregunta1 == JOptionPane.YES_OPTION) {
 
             // hacer las consultas a la base de datos
+            /*
+             private int idpedido;
+             private int estatus;
+             private Cliente cliente;
+             private Date fechaPedido;
+             private Time hrpedido;
+             private Time hrEntrega;
+             */
             //1 insertar pedido
             //sacar datos primero
-            String fecha = fecha();
-            String hora = hora();
-            JOptionPane.showMessageDialog(null, "fecha: " + fecha);
-            JOptionPane.showMessageDialog(null, "hora: " + hora);
+            int idpedido = 2;
+            FPedido fpedido = new FPedido();
+            FOrden forden = new FOrden();
+            FCatalogo fcatalogo = new FCatalogo();
+            FProducto fproducto = new FProducto();
 
             try {
+                Pedido pedido = new Pedido();
+
+                int estatus = 1; //activo
+                String fecha = fecha();
+                String hora = hora();
+
                 FCliente fcliente = new FCliente();
                 Cliente cliente = new Cliente();
                 int idcliente = Integer.parseInt(txt_idcliente.getText());
                 cliente = fcliente.buscarCliente(idcliente);
-                
-                JOptionPane.showMessageDialog(null, "cliente: " +  cliente.getNombre());
-                
+
+                pedido.setEstatus(estatus);
+                pedido.setCliente(cliente);
+                pedido.setFechaPedido(fecha);
+                pedido.setHrpedido(hora);
+                pedido.setHrEntrega(hora);
+
+                //insertar pedido y devolver el idpedido
+                idpedido = fpedido.insertarPedido(pedido);
+                JOptionPane.showMessageDialog(null, "idpedido: " + idpedido);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "error cliente: " + e);
+                idpedido = -1;
             }
 
-            //2 sacar idpedido
+            if (idpedido > 0) {
+                try {
+
+                    Pedido pedido = fpedido.buscarPedido(idpedido);
+
+                    //2 sacar idpedido
+                    for (int fila = 0; fila < tabla_articulos.getRowCount(); fila++) {
+
+                        // id pedido
+                        int idcatalogo = Integer.parseInt(tabla_articulos.getValueAt(fila, 1).toString());
+                        String nomCatalogo = tabla_articulos.getValueAt(fila, 2).toString();
+                        int idproducto = Integer.parseInt(tabla_articulos.getValueAt(fila, 3).toString());
+                        int cantidad = Integer.parseInt(tabla_articulos.getValueAt(fila, 0).toString());
+                        Double precio = Double.parseDouble(tabla_articulos.getValueAt(fila, 6).toString());
+
+                        Orden orden = new Orden();
+                        orden.setPedido(pedido);
+                        orden.setCatalogo(fcatalogo.buscarCatalogo(idcatalogo));
+                        orden.setProducto(fproducto.buscarProducto(nomCatalogo, idproducto));
+                        orden.setCantidad(cantidad);
+                        orden.setPrecio(precio);
+
+                        /*
+                         System.out.println(orden.getCantidad()); // cantidad
+                         System.out.println(orden.getCatalogo().getIdcatalogo()); // id catalogo 
+                         System.out.println(orden.getCatalogo().getDescripcion()); // nombre catalogo
+                         System.out.println(orden.getProducto().getId()); // id producto
+                         System.out.println(orden.getProducto().getNombre()); // nombre producto
+                         System.out.println(orden.getPrecio()); // precio u
+                         */
+                        forden.insertarOrden(orden);
+                        //JOptionPane.showMessageDialog(null, "se inserto orden en pedido: " + pedido.getIdpedido());
+
+                      
+
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "error pedido: " + e);
+                    //eliminar pedido
+                }
+
+            }
+
+            //calcularTotal();
             //3 insertar ordenes
             //4 mostrar si quiere imprimir el ticket
             //5 regresar a inicio
         }
 
     }//GEN-LAST:event_btn_confirmarActionPerformed
+
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        // TODO add your handling code here:
+        String cantidad = txt_cantidad.getText();
+        String catalogo = jcCatalogo.getSelectedItem().toString();
+        String producto = jcProducto.getSelectedItem().toString();
+        String precio = txt_precioproducto.getText();
+        String total = txt_totalproducto.getText();
+
+        setArticuloTabla(cantidad, catalogo, producto, precio, total);
+    }//GEN-LAST:event_btn_agregarActionPerformed
     aplicacion.Pedido.AbiProducto producto = new aplicacion.Pedido.AbiProducto();
     double precio = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_aceptarorden;
+    private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_buscaCliente;
-    private javax.swing.JButton btn_cancelarOrden;
+    private javax.swing.JButton btn_cancelarTodo;
     private javax.swing.JButton btn_confirmar;
     private javax.swing.JButton btn_guardar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_quitar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

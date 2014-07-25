@@ -42,9 +42,11 @@ public class FPedido {
 
             pst.setInt(1, pedido.getEstatus());
             pst.setInt(2, pedido.getCliente().getIdcliente());
-            pst.setDate(3, pedido.getFechaPedido());
-            pst.setTime(4, pedido.getHrpedido());
-            pst.setTime(5, pedido.getHrEntrega());
+            pst.setString(3, pedido.getFechaPedido());
+            pst.setString(4, pedido.getHrpedido());
+            pst.setString(5, pedido.getHrEntrega());
+            
+            
 
             System.out.println(sSQL);
 
@@ -79,9 +81,9 @@ public class FPedido {
 
             pst.setInt(1, pedido.getEstatus());
             pst.setInt(2, pedido.getCliente().getIdcliente());
-            pst.setDate(3, pedido.getFechaPedido());
-            pst.setTime(4, pedido.getHrpedido());
-            pst.setTime(5, pedido.getHrEntrega());
+            pst.setString(3, pedido.getFechaPedido());
+            pst.setString(4, pedido.getHrpedido());
+            pst.setString(5, pedido.getHrEntrega());
 
             pst.setInt(6, pedido.getIdpedido());
 
@@ -131,9 +133,9 @@ public class FPedido {
             pedido.setEstatus(rs.getInt("estatus"));
             FCliente cliente = new FCliente();
             pedido.setCliente(cliente.buscarCliente(rs.getInt("idcliente")));
-            pedido.setFechaPedido((java.sql.Date) rs.getDate("fechapedido"));
-            pedido.setHrpedido((java.sql.Time) rs.getTime("hrpedido"));
-            pedido.setHrEntrega((java.sql.Time) rs.getTime("hrentrega"));
+            pedido.setFechaPedido(rs.getString("fechapedido"));
+            pedido.setHrpedido(rs.getString("hrpedido"));
+            pedido.setHrEntrega(rs.getString("hrentrega"));
         }
 
         pst.close();
@@ -158,9 +160,9 @@ public class FPedido {
             pedido.setEstatus(rs.getInt("estatus"));
             FCliente cliente = new FCliente();
             pedido.setCliente(cliente.buscarCliente(rs.getInt("idcliente")));
-            pedido.setFechaPedido((java.sql.Date) rs.getDate("fechapedido"));
-            pedido.setHrpedido((java.sql.Time) rs.getTime("hrpedido"));
-            pedido.setHrEntrega((java.sql.Time) rs.getTime("hrentrega"));
+            pedido.setFechaPedido(rs.getString("fechapedido"));
+            pedido.setHrpedido(rs.getString("hrpedido"));
+            pedido.setHrEntrega(rs.getString("hrentrega"));
 
             lista.add(pedido);
         }
@@ -189,9 +191,9 @@ public class FPedido {
             pedido.setEstatus(rs.getInt("estatus"));
             FCliente cliente = new FCliente();
             pedido.setCliente(cliente.buscarCliente(rs.getInt("idcliente")));
-            pedido.setFechaPedido((java.sql.Date) rs.getDate("fechapedido"));
-            pedido.setHrpedido((java.sql.Time) rs.getTime("hrpedido"));
-            pedido.setHrEntrega((java.sql.Time) rs.getTime("hrentrega"));
+            pedido.setFechaPedido(rs.getString("fechapedido"));
+            pedido.setHrpedido(rs.getString("hrpedido"));
+            pedido.setHrEntrega(rs.getString("hrentrega"));
 
             lista.add(pedido);
         }
