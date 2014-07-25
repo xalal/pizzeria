@@ -32,6 +32,7 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
     public VisualizarCatalogo(String title) {
         initComponents();
         tituloCatalogo.setText(title);
+        lblIdProducto.setVisible(false);
         cargarDatos();
         capturarSeleccion();
     }
@@ -44,7 +45,7 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                 rs = cStmt.getResultSet();
                 modelo = (DefaultTableModel) tablaCatalogo.getModel();
                 while (rs.next()) {
-                    modelo.addRow(new Object[]{rs.getString("nombre"), rs.getString("descripcion"),rs.getString("precio")});
+                    modelo.addRow(new Object[]{rs.getString("id"),rs.getString("nombre"), rs.getString("descripcion"),rs.getString("precio")});
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,7 +60,12 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                 if (event.getSource() == tablaCatalogo.getSelectionModel() && event.getFirstIndex() >= 0) {
                     // Determine the selected item
                     fs = tablaCatalogo.getSelectedRow();
-                    jtNombre.setText((String) modelo.getValueAt(tablaCatalogo.getSelectedRow(), 0));
+                    lblIdProducto.setText((String) modelo.getValueAt(tablaCatalogo.getSelectedRow(), 0));
+                    jtNombre.setText((String) modelo.getValueAt(tablaCatalogo.getSelectedRow(), 1));
+                    jtDescripcion.setText((String) modelo.getValueAt(tablaCatalogo.getSelectedRow(), 2));
+                    jtPrecio.setText((String) modelo.getValueAt(tablaCatalogo.getSelectedRow(), 3));
+                    botonAgregar.setEnabled(false);
+                    botonModificar.setEnabled(true);
                 }
             }
         });
@@ -87,6 +93,7 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
         botonEliminar = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
         botonLimpiar = new javax.swing.JButton();
+        lblIdProducto = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(851, 549));
 
@@ -114,7 +121,7 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nombre", "Descripción", "Precio"
+                "Id", "Nombre", "Descripción", "Precio"
             }
         ));
         jScrollPane1.setViewportView(tablaCatalogo);
@@ -127,6 +134,11 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
         });
 
         botonEliminar.setText("Eliminar");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
 
         botonModificar.setText("Modificar");
         botonModificar.setEnabled(false);
@@ -142,6 +154,8 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                 botonLimpiarActionPerformed(evt);
             }
         });
+
+        lblIdProducto.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -173,6 +187,10 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                         .addGap(129, 129, 129)
                         .addComponent(botonLimpiar)))
                 .addContainerGap(114, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblIdProducto)
+                .addGap(404, 404, 404))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,13 +217,44 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                     .addComponent(botonEliminar)
                     .addComponent(botonModificar)
                     .addComponent(botonLimpiar))
-                .addGap(35, 35, 35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblIdProducto)
+                .addGap(10, 10, 10))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         // TODO add your handling code here:
-
+        if (!validaVacios()) {//Guarda El registro en la base
+            Object[] datos = {
+            jtNombre.getText(),
+            jtDescripcion.getText(),
+            jtPrecio.getText()};
+            CallableStatement cStmt;
+            try{
+                cStmt = (CallableStatement) jsc.prepareCall("{ call sp_actualizarProductos( ?,?,?,? ,?) }");
+                cStmt.setString("p_catalogo", tituloCatalogo.getText());
+                cStmt.setInt("p_idProducto", Integer.parseInt(lblIdProducto.getText()));
+                cStmt.setString("p_nombre", jtNombre.getText());
+                cStmt.setString("p_descripcion", jtDescripcion.getText());
+                cStmt.setDouble("p_precio", Double.parseDouble(jtPrecio.getText().trim()));
+                if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
+                    JOptionPane.showMessageDialog(this, "El producto se actualizo correctamente");
+                    limpiarCampos();
+                    modelo = (DefaultTableModel) tablaCatalogo.getModel();
+                    modelo.setValueAt(datos[0], tablaCatalogo.getSelectedRow(), 1);
+                    modelo.setValueAt(datos[2], tablaCatalogo.getSelectedRow(), 2);
+                    modelo.setValueAt(datos[1], tablaCatalogo.getSelectedRow(), 3);
+                    tablaCatalogo.setModel(modelo);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo actualizar el producto");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VisualizarCatalogo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios");
+        }
     }//GEN-LAST:event_botonModificarActionPerformed
 
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
@@ -250,11 +299,34 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
         jtNombre.setText("");
         jtDescripcion.setText("");
         jtPrecio.setText("");
+        botonAgregar.setEnabled(true);
+        botonModificar.setEnabled(false);
     }
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
         // TODO add your handling code here:
         limpiarCampos();
     }//GEN-LAST:event_botonLimpiarActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        // TODO add your handling code here:
+        CallableStatement cStmt;
+        try{
+            cStmt = (CallableStatement) jsc.prepareCall("{ call sp_eliminarProductos( ?,?) }");
+            cStmt.setString("p_catalogo", tituloCatalogo.getText());
+            cStmt.setInt("p_idProducto", Integer.parseInt(lblIdProducto.getText()));
+            if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
+                JOptionPane.showMessageDialog(this, "El producto se elimino correctamente");
+                limpiarCampos();
+                modelo = (DefaultTableModel) tablaCatalogo.getModel();
+                modelo.removeRow(tablaCatalogo.getSelectedRow());
+                tablaCatalogo.setModel(modelo);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el producto");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualizarCatalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
     public boolean validaVacios() {
         return jtNombre.getText().isEmpty() || jtDescripcion.getText().isEmpty() || jtPrecio.getText().isEmpty();
     }
@@ -270,6 +342,7 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
     private javax.swing.JTextField jtDescripcion;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtPrecio;
+    private javax.swing.JLabel lblIdProducto;
     private javax.swing.JTable tablaCatalogo;
     private javax.swing.JLabel tituloCatalogo;
     // End of variables declaration//GEN-END:variables
