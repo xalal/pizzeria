@@ -1,10 +1,10 @@
 package aplicacion;
 
-import javax.swing.*;
 import BD.ConexionBD;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import javax.swing.*;
 
 public class Inicio extends javax.swing.JPanel {
 
@@ -16,39 +16,36 @@ public class Inicio extends javax.swing.JPanel {
     public void CargarBD() {
         ConexionBD con = new ConexionBD();
         Connection cn = con.conectar();
-        String[] registros = new String[11];
-        String sql = "select cliente.*,pedido.fechaPedido,hrPedido,hrEntrega,idPedido "
-                + "from cliente,pedido "
-                + "where cliente.idCliente = pedido.idCliente "
-                + "and pedido.estatus = '0'"
-                + "ORDER BY pedido.hrPedido ASC";
+        java.sql.Connection jsc = con.conectar();
+        if (jsc != null) {
+            try {
+                int contador = 0;
+                ResultSet rs;
+                CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_mostrarPedidos() }");
+                cStmt.execute();
+                rs = cStmt.getResultSet();
+                while (rs.next()) {
+                    String nombre =  rs.getString("nombreCliente"); //se obtiene la hora
+                    String telefono =  rs.getString("telefonoCliente");//se obtiene el cliente
+                    String calle = rs.getString("calleCliente");//se obtiene la direccion
+                    String numero =  rs.getString("numeroCliente"); //se obtiene la descripcion
+                    String colonia = rs.getString("coloniaCliente");//se obtiene otro dato
+                    String municipio = rs.getString("municipioCliente");//se obtiene otro dato
+                    String estado =  rs.getString("estadoCliente");//se obtiene otro dato
+                    String fechaPedido = rs.getString("fechaPedido");//se obtiene otro dato
+                    String hrPedido = rs.getString("hrPedido");//se obtiene otro dato
+                    String hrEntrega = rs.getString("hrEntrega");
+                    String ped = rs.getString("idPedido");
+                    DatosPedidos form = new DatosPedidos();
+                    contador++;
+                    form.Datos(nombre, telefono, calle, numero, colonia, municipio, estado, fechaPedido, hrPedido, hrEntrega, contador, ped);
+                    jPanel1.add(form);
 
-        try {
-            int contador = 0;
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+                }
 
-            while (rs.next()) {
-                String nombre = registros[0] = rs.getString("cliente.nombre"); //se obtiene la hora
-                String telefono = registros[1] = rs.getString("cliente.telefono");//se obtiene el cliente
-                String calle = registros[2] = rs.getString("cliente.calle");//se obtiene la direccion
-                String numero = registros[3] = rs.getString("cliente.numero"); //se obtiene la descripcion
-                String colonia = registros[4] = rs.getString("cliente.colonia");//se obtiene otro dato
-                String municipio = registros[5] = rs.getString("cliente.municipio");//se obtiene otro dato
-                String estado = registros[6] = rs.getString("cliente.estado");//se obtiene otro dato
-                String fechaPedido = registros[7] = rs.getString("pedido.fechaPedido");//se obtiene otro dato
-                String hrPedido = registros[8] = rs.getString("pedido.hrPedido");//se obtiene otro dato
-                String hrEntrega = registros[9] = rs.getString("pedido.hrEntrega");
-                String ped = registros[10] = rs.getString("pedido.idPedido");
-                DatosPedidos form = new DatosPedidos();
-                contador++;
-                form.Datos(nombre, telefono, calle, numero, colonia, municipio, estado, fechaPedido, hrPedido, hrEntrega, contador, ped);
-                jPanel1.add(form);
-
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en la conexion ", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error en la conexion ", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

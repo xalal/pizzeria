@@ -4,6 +4,7 @@
  */
 package aplicacion;
 
+import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,10 +28,10 @@ public class ModificarSistema extends javax.swing.JPanel {
         java.sql.Connection jsc = connect.conectar();
         if (jsc != null) {
             try {
-                Statement st;
                 ResultSet rs;
-                st = (Statement) jsc.createStatement();
-                rs = st.executeQuery("select * from catalogo");
+                CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_mostrarCatalogos() }");
+                cStmt.execute();
+                rs = cStmt.getResultSet();
                 while (rs.next()) {
                     String descripcion=rs.getString("descripcion");
                     String imagen =rs.getString("imagen");

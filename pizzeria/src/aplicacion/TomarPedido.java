@@ -1087,7 +1087,7 @@ public class TomarPedido extends javax.swing.JPanel {
 
                 //insertar pedido y devolver el idpedido
                 idpedido = fpedido.insertarPedido(pedido);
-                JOptionPane.showMessageDialog(null, "idpedido: " + idpedido);
+                //JOptionPane.showMessageDialog(null, "idpedido: " + idpedido);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "error cliente: " + e);
                 idpedido = -1;

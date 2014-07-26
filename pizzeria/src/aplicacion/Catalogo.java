@@ -5,6 +5,7 @@
  */
 package aplicacion;
 
+import com.mysql.jdbc.CallableStatement;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,10 +14,13 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import org.imgscalr.Scalr;
 
 /**
@@ -128,7 +132,17 @@ public class Catalogo extends JPanel {
     }
     private void eliminarCatalogo(){
         if(JOptionPane.showConfirmDialog(this, "Desea eliminar este catalogo")==JOptionPane.OK_OPTION){
-            
+            BD.ConexionBD con = new BD.ConexionBD();
+            java.sql.Connection jsc = con.conectar();
+            if (jsc != null) {
+            try {
+                    CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_eliminarCatalogoPorId('" + 
+                                        lblPaquete.getText() + "') }");
+                    cStmt.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             JOptionPane.showMessageDialog(this, "EL catalogo fue eliminado");
         }
     }
@@ -148,7 +162,7 @@ public class Catalogo extends JPanel {
         });
     }
     @SuppressWarnings("empty-statement")
-    private void refreshPantalla(){
+    void refreshPantalla(){
         try {
             this.getParent().getParent().getClass().getMethod("refreshPantalla").invoke(this.getParent().getParent());
         } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
