@@ -136,7 +136,7 @@ public class DatosPedidos extends javax.swing.JPanel {
     private void BtnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinalizarActionPerformed
         ConexionBD con = new ConexionBD();
         Connection cn = con.conectar();
-        int valor = 1; //el valor 1 indica q se concluyo el pedido exitosamente
+        int valor = 4; //el valor 4 indica q se concluyo el pedido exitosamente
         try {
             PreparedStatement pst = cn.prepareStatement("UPDATE pedido SET estatus='" + valor + "' WHERE idPedido='" + idPed.getText() + "'");
             pst.executeUpdate();
@@ -164,7 +164,6 @@ public class DatosPedidos extends javax.swing.JPanel {
             System.out.print(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error Datos No Guardados ", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
