@@ -16,7 +16,7 @@ public class Principal extends javax.swing.JFrame {
     ModificarSistema mods;
     TomarPedido tped;
     VerClientes vcli;
-    VerReportes vrep;
+    VerReportes vrep=null;
 
     
     public Principal() {
@@ -274,9 +274,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
         jLayeredPane1.removeAll();
-        vrep = new VerReportes();
-        vrep.setVisible(true);
-        vrep.setBounds(10, 10, 860, 545);
+        if(vrep==null){
+            vrep = new VerReportes();
+            vrep.setVisible(true);
+            vrep.setBounds(10, 10, 860, 545);
+        }
         jLayeredPane1.add(vrep, javax.swing.JLayeredPane.DEFAULT_LAYER );
     }//GEN-LAST:event_BtnReporteActionPerformed
 
