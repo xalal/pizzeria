@@ -260,10 +260,6 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         // TODO add your handling code here:
         if (!validaVacios()) {//Guarda El registro en la base
-            Object[] datos = {
-            jtNombre.getText(),
-            jtDescripcion.getText(),
-            jtPrecio.getText()};
             CallableStatement cStmt;
             try{
                 cStmt = (CallableStatement) jsc.prepareCall("{ call sp_agregarProducto( ?,?,?,? ) }");
@@ -273,10 +269,30 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
                 cStmt.setDouble("p_precio", Double.parseDouble(jtPrecio.getText().trim()));
                 if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
                     JOptionPane.showMessageDialog(this, "El producto se agregó correctamente");
-                    limpiarCampos();
+                    CallableStatement cStmt0;
+                    ResultSet rs;
+                    int id=0;
+                    try {
+                        cStmt0 = (CallableStatement) jsc.prepareCall("{ call sp_mostrarUltimoIdProducto( ? ) }");
+                        cStmt0.setString("p_catalogo", tituloCatalogo.getText());
+                        cStmt0.execute();
+                        rs = cStmt0.getResultSet();
+                        while (rs.next()) {
+                            id=rs.getInt("id");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VisualizarCatalogo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Object[] datos = {
+                        id,
+                        jtNombre.getText(),
+                        jtDescripcion.getText(),
+                        jtPrecio.getText()
+                    };
                     modelo = (DefaultTableModel) tablaCatalogo.getModel();
                     modelo.addRow(datos);
                     tablaCatalogo.setModel(modelo);
+                    limpiarCampos();
                 } else {
                     JOptionPane.showMessageDialog(this, "No se pudo agregar el producto");
                 }
@@ -317,9 +333,11 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
             if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
                 JOptionPane.showMessageDialog(this, "El producto se elimino correctamente");
                 limpiarCampos();
-                modelo = (DefaultTableModel) tablaCatalogo.getModel();
-                modelo.removeRow(tablaCatalogo.getSelectedRow());
-                tablaCatalogo.setModel(modelo);
+                tablaCatalogo.repaint();
+                tablaCatalogo.revalidate();
+                if(tablaCatalogo.getSelectedRow()>0){
+                    ((DefaultTableModel)tablaCatalogo.getModel()).removeRow(tablaCatalogo.getSelectedRow());
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo eliminar el producto");
             }

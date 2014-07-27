@@ -33,6 +33,7 @@ public class VerClientes extends javax.swing.JPanel {
         initComponents();
         cargarDatos();
         capturarSeleccion();
+//        ((DefaultTableModel)jTable1.getModel())
         municipio.setVisible(false);
         textMunicipio.setVisible(false);
         estado.setVisible(false);
@@ -353,9 +354,13 @@ public class VerClientes extends javax.swing.JPanel {
                     CallableStatement cStmt = (CallableStatement) jsc.prepareCall("{ call sp_eliminarClientePorTelefono( ? ) }");
                     cStmt.setString(1, phone);
                     if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
-                        JOptionPane.showMessageDialog(this, "El cliente se eliminó correctamente");
+                        JOptionPane.showMessageDialog(this, "El cliente se eliminó correctamente ");
                         limpiarCampos();
-                        modelo.removeRow(jTable1.getSelectedRow());
+                        jTable1.repaint();
+                        jTable1.revalidate();
+                        if(jTable1.getSelectedRow()>0){
+                            ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());
+                        }
                     } else {
                         JOptionPane.showMessageDialog(this, "No se pudo eliminar el cliente");
                     }
@@ -390,10 +395,10 @@ public class VerClientes extends javax.swing.JPanel {
                 modelo.setValueAt(textCalle.getText(), fs, 2);
                 modelo.setValueAt(textNumero.getText(), fs, 3);
                 modelo.setValueAt(textColonia.getText(), fs, 4);
-                modelo.setValueAt(textMunicipio.getText(), fs, 5);
-                modelo.setValueAt(textEstado.getText(), fs, 6);
-                modelo.setValueAt(textReferencia1.getText(), fs, 7);
-                modelo.setValueAt(textReferencia2.getText(), fs, 8);
+//                modelo.setValueAt(textMunicipio.getText(), fs, 5);
+//                modelo.setValueAt(textEstado.getText(), fs, 6);
+                modelo.setValueAt(textReferencia1.getText(), fs, 5);
+                modelo.setValueAt(textReferencia2.getText(), fs, 6);
                 jTable1.setModel(modelo);
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente");
@@ -413,6 +418,7 @@ public class VerClientes extends javax.swing.JPanel {
 //        textEstado.setText("");
         textReferencia1.setText("");
         textReferencia2.setText("");
+        Agregar.setEnabled(true);
     }
     private void Agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar1ActionPerformed
         // TODO add your handling code here:
