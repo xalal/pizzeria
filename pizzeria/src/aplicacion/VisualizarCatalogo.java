@@ -97,8 +97,8 @@ public class VisualizarCatalogo extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(851, 549));
 
-        tituloCatalogo.setBackground(new java.awt.Color(204, 102, 0));
-        tituloCatalogo.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        tituloCatalogo.setBackground(new java.awt.Color(79, 53, 32));
+        tituloCatalogo.setFont(new java.awt.Font("Futura Bk BT", 0, 24)); // NOI18N
         tituloCatalogo.setForeground(new java.awt.Color(255, 255, 255));
         tituloCatalogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloCatalogo.setText("XXXXXXXX");

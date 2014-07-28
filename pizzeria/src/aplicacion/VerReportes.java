@@ -114,11 +114,11 @@ public class VerReportes extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        tituloReportes.setBackground(new java.awt.Color(204, 102, 0));
-        tituloReportes.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        tituloReportes.setBackground(new java.awt.Color(79, 53, 32));
+        tituloReportes.setFont(new java.awt.Font("Futura Bk BT", 0, 24)); // NOI18N
         tituloReportes.setForeground(new java.awt.Color(255, 255, 255));
         tituloReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloReportes.setText("Reportes de Ventas");
+        tituloReportes.setText("REPORTES DE VENTAS");
         tituloReportes.setOpaque(true);
 
         jrbPorDia.setBackground(new java.awt.Color(255, 255, 255));
@@ -225,11 +225,11 @@ public class VerReportes extends javax.swing.JPanel {
         jPanelGraficas.setBackground(new java.awt.Color(255, 255, 255));
         jPanelGraficas.setPreferredSize(new java.awt.Dimension(829, 350));
 
-        lblTituloPedidos.setBackground(new java.awt.Color(204, 102, 0));
-        lblTituloPedidos.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        lblTituloPedidos.setBackground(new java.awt.Color(79, 53, 32));
+        lblTituloPedidos.setFont(new java.awt.Font("Futura Bk BT", 0, 24)); // NOI18N
         lblTituloPedidos.setForeground(new java.awt.Color(255, 255, 255));
         lblTituloPedidos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTituloPedidos.setText("Pedidos realizados en el periodo");
+        lblTituloPedidos.setText("VENTAS REALIZADAS EN EL PERIODO");
         lblTituloPedidos.setOpaque(true);
 
         jPanelDatosGraf.setBackground(new java.awt.Color(255, 255, 255));

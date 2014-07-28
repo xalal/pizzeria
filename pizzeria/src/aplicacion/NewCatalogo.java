@@ -85,18 +85,21 @@ public class NewCatalogo extends javax.swing.JPanel {
             }
         });
 
-        lblPaquete1.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
+        lblPaquete1.setFont(new java.awt.Font("Futura Bk BT", 0, 18)); // NOI18N
         lblPaquete1.setText("Agregar imagen:");
         lblPaquete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jLabel1.setFont(new java.awt.Font("Futura Bk BT", 0, 10)); // NOI18N
         jLabel1.setText(" Para agregar una nueva imagen presiona el boton con el simbolo +.");
 
-        lblPaquete2.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
+        lblPaquete2.setFont(new java.awt.Font("Futura Bk BT", 0, 18)); // NOI18N
         lblPaquete2.setText("Nombre:");
         lblPaquete2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jLabel2.setFont(new java.awt.Font("Futura Bk BT", 0, 10)); // NOI18N
         jLabel2.setText(" Para guardar los cambios presiona el icono con el disquete.");
 
+        jLabel3.setFont(new java.awt.Font("Futura Bk BT", 0, 10)); // NOI18N
         jLabel3.setText(" Si la imagen seleccionada no es la deseada, haz click de nuevo en la imagen.");
 
         jbPaquete2.setBackground(new java.awt.Color(255, 255, 255));

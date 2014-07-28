@@ -87,18 +87,18 @@ public class ModificarSistema extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(851, 549));
 
-        tituloConfigurar.setBackground(new java.awt.Color(204, 102, 0));
-        tituloConfigurar.setFont(new java.awt.Font("Bookman Old Style", 0, 24)); // NOI18N
+        tituloConfigurar.setBackground(new java.awt.Color(79, 53, 32));
+        tituloConfigurar.setFont(new java.awt.Font("Futura Bk BT", 0, 24)); // NOI18N
         tituloConfigurar.setForeground(new java.awt.Color(255, 255, 255));
         tituloConfigurar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloConfigurar.setText("Modificar Sistema");
+        tituloConfigurar.setText("MODIFICAR SISTEMA");
         tituloConfigurar.setOpaque(true);
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 3));
 
         jPanel3.setPreferredSize(new java.awt.Dimension(100, 134));
 
-        lblPaquete1.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
+        lblPaquete1.setFont(new java.awt.Font("Futura Bk BT", 0, 24)); // NOI18N
         lblPaquete1.setLabelFor(jbPaquete1);
         lblPaquete1.setText("Agregar");
         lblPaquete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -122,7 +122,7 @@ public class ModificarSistema extends javax.swing.JPanel {
                 .addComponent(jbPaquete1)
                 .addGap(24, 24, 24)
                 .addComponent(lblPaquete1)
-                .addContainerGap(558, Short.MAX_VALUE))
+                .addContainerGap(621, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
