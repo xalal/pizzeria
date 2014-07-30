@@ -29,7 +29,7 @@ public class TomarPedidoCopia extends javax.swing.JPanel {
         initComponents();
         //lbl_fechaActual.setText(fecha());
         //lbl_horaInicio.setText(hora());
- 
+ btn_agregar.setVisible(false);
         txt_telefonobuscar.requestFocus();
         ocultar_columnas();
         ArrayList catalogos = producto.getCatalogos();
