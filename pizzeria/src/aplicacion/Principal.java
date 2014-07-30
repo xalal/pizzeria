@@ -14,7 +14,7 @@ public class Principal extends javax.swing.JFrame {
     
     static Inicio ini;
     ModificarSistema mods;
-    TomarPedido tped;
+    TomarPedidoCopia tped;
     VerClientes vcli;
     VerReportes vrep=null;
 
@@ -23,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         setTitle("Paulo's Pizza ");
         setIconImage(new ImageIcon(getClass().getResource("../Imagenes/grafCirculo.jpg")).getImage());
+        setLocationRelativeTo(null);
         ini = new Inicio();
         ini.setVisible(true);
         ini.setBounds(10, 10, 860, 545);
@@ -270,7 +271,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPedidoActionPerformed
         jLayeredPane1.removeAll();
-        tped = new TomarPedido();
+        tped = TomarPedidoCopia.getInstance();
         tped.setVisible(true);
         tped.setBounds(10, 10, 860, 545);
         jLayeredPane1.add(tped, javax.swing.JLayeredPane.DEFAULT_LAYER );
