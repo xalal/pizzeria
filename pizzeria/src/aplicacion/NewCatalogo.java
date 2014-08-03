@@ -5,6 +5,7 @@
  */
 package aplicacion;
 
+import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.Statement;
 import java.awt.HeadlessException;
 import java.io.File;
@@ -203,10 +204,11 @@ public class NewCatalogo extends javax.swing.JPanel {
                         Statement st;
                         st = (Statement) jsc.createStatement();
                         if(isNew){
-                            if (st.executeUpdate("insert into catalogo(descripcion,imagen) values ('"
-                                    + jTextField1.getText()
-                                    + "','/Imagenes/Catalogo"
-                                    + selectedFile.getName() + "') ") != 0) {
+                            CallableStatement cStmt;
+                            cStmt = (CallableStatement) jsc.prepareCall("{ call sp_agregarCatalogo( ?,? ) }");
+                            cStmt.setString("p_descripcion", jTextField1.getText());
+                            cStmt.setString("p_imagen", "/Imagenes/Catalogo"+selectedFile.getName());
+                            if (cStmt.executeUpdate() != CallableStatement.EXECUTE_FAILED) {
                                 JOptionPane.showMessageDialog(this, "El nuevo Catalogo se creó con exito.");
                             }
                         }
