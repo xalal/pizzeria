@@ -19,6 +19,7 @@ public class Pedido extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
         llenarPanel();
     }
 
@@ -57,6 +58,7 @@ public class Pedido extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         tituloConfigurar = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -68,15 +70,17 @@ public class Pedido extends javax.swing.JDialog {
         tituloConfigurar.setText("MENU");
         tituloConfigurar.setOpaque(true);
 
-        jPanel2.setLayout(new java.awt.GridLayout(4, 3));
-        jPanel2.setBounds(0, 0, 770, 490);
-        jLayeredPane1.add(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jPanel2.setLayout(new java.awt.GridLayout(0, 2));
+        jScrollPane1.setViewportView(jPanel2);
+
+        jScrollPane1.setBounds(0, 0, 860, 490);
+        jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tituloConfigurar, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+            .addComponent(tituloConfigurar, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
             .addComponent(jLayeredPane1)
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,6 +150,7 @@ public class Pedido extends javax.swing.JDialog {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel tituloConfigurar;
     // End of variables declaration//GEN-END:variables
 }

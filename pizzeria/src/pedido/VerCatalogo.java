@@ -1,7 +1,7 @@
 package pedido;
 
 import BD.ConexionBD;
-import aplicacion.TomarPedidoCopia;
+import aplicacion.TomarPedido;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -13,7 +13,7 @@ import javax.swing.table.JTableHeader;
 
 public class VerCatalogo extends javax.swing.JDialog {
     DefaultTableModel modelo;
-    String nombre,descripcion, precio, precioTem,cantidad,total;
+    String id,nombre,precio, precioTem,cantidad,total,catalogo;
     double valor;
     BD.ConexionBD con = new ConexionBD();
     java.sql.Connection jsc = con.conectar();
@@ -27,11 +27,14 @@ public class VerCatalogo extends javax.swing.JDialog {
 
     }
     
+    private void cerrar(){
+        if (JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(this, "desea cerrar el ejemplo"))
+            System.exit(0);
+    }
+    
     public void Ver(String title) {
         tituloCatalogo.setText(title);
         cargarDatos();
-
-
     }
 
     
@@ -45,7 +48,7 @@ public class VerCatalogo extends javax.swing.JDialog {
                 modelo = (DefaultTableModel) tablaCatalogo.getModel();
                     
                 while (rs.next()) {
-                    modelo.addRow(new Object[]{rs.getString("nombre"), rs.getString("descripcion"),rs.getString("precio")});
+                    modelo.addRow(new Object[]{rs.getString("id"),rs.getString("nombre"), rs.getString("descripcion"),rs.getString("precio")});
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(VerCatalogo.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,15 +58,17 @@ public class VerCatalogo extends javax.swing.JDialog {
     }
     
     public void dimencionTabla(){  
-        
-    tablaCatalogo.getColumnModel().getColumn(0).setPreferredWidth(100);
-    tablaCatalogo.getColumnModel().getColumn(1).setPreferredWidth(540);
-    tablaCatalogo.getColumnModel().getColumn(2).setPreferredWidth(10);
+    
+    tablaCatalogo.getColumnModel().getColumn(0).setPreferredWidth(0);    
+    tablaCatalogo.getColumnModel().getColumn(1).setPreferredWidth(100);
+    tablaCatalogo.getColumnModel().getColumn(2).setPreferredWidth(540);
+    tablaCatalogo.getColumnModel().getColumn(3).setPreferredWidth(10);
     tablaCatalogo.setRowHeight(30);
     tablaCatalogo.setGridColor(new java.awt.Color(214, 213, 208));
     JTableHeader jtableHeader = tablaCatalogo.getTableHeader();
     jtableHeader.setDefaultRenderer(new HeaderCellRenderer());
     tablaCatalogo.setTableHeader(  jtableHeader );
+    tablaCatalogo.getTableHeader().setReorderingAllowed(false);
 
 
    }
@@ -105,11 +110,20 @@ public class VerCatalogo extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nombre", "Descripción", "Precio"
+                "id", "Nombre", "Descripción", "Precio"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tablaCatalogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tablaCatalogo.setSelectionBackground(new java.awt.Color(0, 0, 153));
+        tablaCatalogo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tablaCatalogo);
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 3, 18)); // NOI18N
@@ -120,6 +134,11 @@ public class VerCatalogo extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 3, 18))); // NOI18N
 
         jToggleButton2.setText("salir");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
 
         jToggleButton1.setText("Agregar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +149,11 @@ public class VerCatalogo extends javax.swing.JDialog {
 
         txtCantidad.setFont(new java.awt.Font("Comic Sans MS", 3, 18)); // NOI18N
         txtCantidad.setText("1");
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 3, 18)); // NOI18N
         jLabel5.setText("Cantidad:");
@@ -226,27 +250,52 @@ public class VerCatalogo extends javax.swing.JDialog {
         int fila = tablaCatalogo.getSelectedRow();     
             try{
                 modelo = (DefaultTableModel) tablaCatalogo.getModel();
-            
+            if(txtCantidad.getText().length()!=0){
                 if (fila >= 0) {
-                    nombre=tablaCatalogo.getValueAt(fila, 0).toString();
-                    descripcion=tablaCatalogo.getValueAt(fila, 1).toString();
-                    precio=tablaCatalogo.getValueAt(fila, 2).toString();
                     cantidad=txtCantidad.getText();
+                    catalogo=tituloCatalogo.getText();
+                    id=tablaCatalogo.getValueAt(fila, 0).toString();
+                    nombre=tablaCatalogo.getValueAt(fila, 1).toString();
+                    precio=tablaCatalogo.getValueAt(fila, 3).toString();
+                    
                     valor = (Double.parseDouble(precio)*Integer.parseInt(cantidad));
                     total = String.valueOf(valor);
+                    
                                                
-                    TomarPedidoCopia obj = TomarPedidoCopia.getInstance();
-                    obj.setArticuloTabla1(cantidad, nombre, precio, total, cantidad);
+                    TomarPedido obj = TomarPedido.getInstance();
+                    obj.setArticuloTabla(cantidad, catalogo, id, nombre, precio,total);
                                        
                    JOptionPane.showMessageDialog(null, "Producto Añadido","Mensaje",JOptionPane.INFORMATION_MESSAGE);         
                 } else {
                     JOptionPane.showMessageDialog(null, "Debes seleccionar un producto","Advetencia",JOptionPane.WARNING_MESSAGE);
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debes ingresar una cantidad","Advetencia",JOptionPane.WARNING_MESSAGE);
+                }
             }
             catch(Exception e){
             }
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+            this.dispose();
+
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+
+       char car = evt.getKeyChar();
+        if (txtCantidad.getText().length() >= 4) {
+            evt.consume();
+        }
+        if ((car < '0' || car > '9')) {
+            evt.consume();
+        }
+        if (" ".equals(txtCantidad.getText())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
 
     
 
