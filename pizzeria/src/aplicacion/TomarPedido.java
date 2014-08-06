@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -545,6 +546,7 @@ public class TomarPedido extends javax.swing.JPanel {
         txt_total.setForeground(new java.awt.Color(255, 255, 255));
         txt_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txt_total.setText("00.00");
+        txt_total.setEnabled(false);
 
         jLabel16.setFont(new java.awt.Font("Futura Bk BT", 0, 18)); // NOI18N
         jLabel16.setText("Total:");
@@ -869,6 +871,26 @@ public class TomarPedido extends javax.swing.JPanel {
                     }
     }//GEN-LAST:event_btn_quitarActionPerformed
 
+    public void reporte(){
+        ConexionBD con = new ConexionBD();
+        Connection cn = con.conectar();
+        
+        String n = "C:/Users/Maria/Desktop/pizzeria/pizzeria/src/Reportes/report1.jasper";
+
+        JasperReport jr = null;
+        try {
+            jr = (JasperReport) JRLoader.loadObject(n);
+            JasperPrint print = JasperFillManager.fillReport(jr,null,cn);
+            JasperViewer jv = new JasperViewer(print);
+            jv.setVisible(true);
+            jv.setTitle("vista de impresion");
+        } catch (JRException ex) {
+            Logger.getLogger(ejemploReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    
     private void btn_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmarActionPerformed
         // TODO add your handling code here:
         //confirmar que idcliente lleno
@@ -1011,24 +1033,29 @@ public class TomarPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void btn_cancelarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarTodoActionPerformed
-       ConexionBD con = new ConexionBD();
-        Connection cn = con.conectar();
-        
-        String n = "C:/Users/Maria/Desktop/pizzeria/pizzeria/src/Reportes/report1.jasper";
-
-        JasperReport jr = null;
-        try {
-            jr = (JasperReport) JRLoader.loadObject(n);
-            JasperPrint print = JasperFillManager.fillReport(jr,null,cn);
-            JasperViewer jv = new JasperViewer(print);
-            jv.setVisible(true);
-            jv.setTitle("vista de impresion");
-        } catch (JRException ex) {
-            Logger.getLogger(ejemploReport.class.getName()).log(Level.SEVERE, null, ex);
+        int fila = tabla_articulos.getRowCount();
+        DefaultTableModel temp;
+        if(fila!=0){
+        try{
+           temp = (DefaultTableModel) tabla_articulos.getModel();
+           int a =temp.getRowCount();
+           for(int i=0; i<a; i++)
+               temp.removeRow(0);
+           txt_total.setText("00.00");
+            }catch(Exception e){
+           System.out.println(e);
+            }
+        }else{
+        JOptionPane.showMessageDialog(null, "tabla vacia","Mensaje",JOptionPane.INFORMATION_MESSAGE);
         }
-        
-        // TODO add your handling code here:
+                
+                    
+//                    tabla_articulos.remove(this);
+//                    //.rowsRemoved((TableModelEvent) tabla_articulos.getModel());
+//                    JOptionPane.showMessageDialog(null, "Producto eliminado","Mensaje",JOptionPane.INFORMATION_MESSAGE);         
+//                      
     }//GEN-LAST:event_btn_cancelarTodoActionPerformed
+    
     aplicacion.Pedido.AbiProducto producto = new aplicacion.Pedido.AbiProducto();
     double precio = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables

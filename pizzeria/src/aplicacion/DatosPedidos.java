@@ -66,11 +66,11 @@ public class DatosPedidos extends javax.swing.JPanel {
 
         JHora.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         JHora.setText("12:00");
-        panelImage1.add(JHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 21, 200, 30));
+        panelImage1.add(JHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 200, 30));
 
         JDescripcion.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         JDescripcion.setText("1:00 ");
-        panelImage1.add(JDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 51, 70, 30));
+        panelImage1.add(JDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 70, 30));
 
         JCliente.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         JCliente.setText("lusito Perez");
@@ -98,11 +98,11 @@ public class DatosPedidos extends javax.swing.JPanel {
 
         EtiDescripcion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         EtiDescripcion.setText("Hora de Entrega:");
-        panelImage1.add(EtiDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 51, 120, 30));
+        panelImage1.add(EtiDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 51, 140, 30));
 
         EtiHora.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         EtiHora.setText("Fecha y Hora:");
-        panelImage1.add(EtiHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 21, 100, 30));
+        panelImage1.add(EtiHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 21, 130, 30));
 
         Pedido.setText("Pedido # X");
         panelImage1.add(Pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 179, 21));
@@ -116,7 +116,7 @@ public class DatosPedidos extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-        panelImage1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 150, 34));
+        panelImage1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 150, 34));
 
         BtnFinalizar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         BtnFinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OK.png"))); // NOI18N
@@ -130,7 +130,7 @@ public class DatosPedidos extends javax.swing.JPanel {
         panelImage1.add(BtnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 150, 30));
         panelImage1.add(idPed, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 11, 36, 12));
 
-        add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 260));
+        add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 260));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinalizarActionPerformed

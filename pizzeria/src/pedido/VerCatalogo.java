@@ -58,8 +58,8 @@ public class VerCatalogo extends javax.swing.JDialog {
     }
     
     public void dimencionTabla(){  
-    
-    tablaCatalogo.getColumnModel().getColumn(0).setPreferredWidth(0);    
+    //tablaCatalogo.getColumnModel().getColumn(0).setMaxWidth(2);
+    tablaCatalogo.getColumnModel().getColumn(0).setPreferredWidth(4);    
     tablaCatalogo.getColumnModel().getColumn(1).setPreferredWidth(100);
     tablaCatalogo.getColumnModel().getColumn(2).setPreferredWidth(540);
     tablaCatalogo.getColumnModel().getColumn(3).setPreferredWidth(10);
